@@ -1,0 +1,7 @@
+graphic design (skills): windows, colors, events, fill shapes, ...
+-Ray-casting
+----------------
+parsing :
+    -Your program must be able to set the floor and ceiling colors
+         to two different ones.
+    
