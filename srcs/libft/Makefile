@@ -6,7 +6,7 @@
 #    By: akouame <akouame@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/06 12:40:23 by akouame           #+#    #+#              #
-#    Updated: 2022/11/20 10:27:13 by akouame          ###   ########.fr        #
+#    Updated: 2022/11/22 09:57:26 by akouame          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,15 +51,17 @@ OBJS = $(SRCS:.c=.o)
 all:$(NAME)
 
 %.o :%.c libft.h
-	@/bin/echo -n "░░"
+	@/bin/echo -n "█"
 	@$(CC) $(CFLAGS) -c -o $@ $< -I libft.h
 
 $(NAME):$(OBJS)
 	@ar -rc $(NAME) $(OBJS)
 clean:
-	rm -rf $(OBJS)
+	@rm -rf $(OBJS)
+	@/bin/echo -n "."
 fclean:clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
+	@/bin/echo -n "."
 
 re:fclean all
 .PHONY: all clean fclean re

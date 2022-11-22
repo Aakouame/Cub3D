@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 09:24:55 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/20 13:34:58 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/22 15:24:36 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,66 @@ char	*ft_read(char *file)
 	return (all);
 }
 
-int	ft_check(char *file)
+int	ft_check_exist(char *line, char *find, char **txtr)
+{
+	char	*tmp;
+	
+	tmp = ft_strtrim(line, " \t");
+	if (!strncmp(tmp, find, 3))
+	{
+			tmp = tmp + 3;
+			tmp = ft_strtrim(line, " \t");
+			*txtr = ft_strdup(tmp);
+			free(tmp);
+			return (0);
+	}
+	free(tmp);
+	return (1);
+}
+
+int ft_check_textures(char **splited, t_data *data)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	i = 0;
+	if (!splited)
+		return (1);
+	while (splited[i])
+	{
+		if (!ft_check_exist(splited[i], "NO ", &data->txtrs.no))
+			j++;
+		else if (!ft_check_exist(splited[i], "SO ", &data->txtrs.so))
+			j++;
+		else if (!ft_check_exist(splited[i], "WE ", &data->txtrs.we))
+			j++;
+		else if (!ft_check_exist(splited[i], "EA ", &data->txtrs.ea))
+			j++;
+		i++;
+	}
+	if (j == 4)
+		return (0);
+	return (1);
+}
+
+int	ft_check(char *file, t_data *data)
 {
 	int		i;
 	char	*all;
+	char	**all_splited;
 	
 	i = 0;
 	if (ft_check_file(file))
 		return (1);
-	all = ft_read(file);
-	free(all);
+	all = ft_read(file); // read all the file 
+	all_splited = ft_split(all, '\n');  // leaks !
+	if (ft_check_textures(all_splited, data))
+	{
+		free(all);
+		return (1);
+	}
+
+		free(all);
 	return (0);
 }

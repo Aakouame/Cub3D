@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/20 13:33:22 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/22 14:25:00 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int main(int ac, char **av)
 {
+	t_data	data;
 	if (ac == 2)
 	{
-		if (!ft_check(av[1]))
+		if (!ft_check(av[1], &data))
 		{
 			printf("good parsing ");
 		}

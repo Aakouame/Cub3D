@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akouame <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 20:54:03 by akouame           #+#    #+#             */
-/*   Updated: 2021/11/27 11:42:52 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/22 14:02:56 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (ft_verif(s1[ls1 - 1], set) && s1[ls1 - 1])
 		ls1--;
 	cpy = malloc(ft_strlen(s1)-(ft_strlen(s1) - ls1) - i + 1);
-	if (cpy == NULL)
+	if (!cpy)
 		return (NULL);
 	k = 0;
 	while (i < ls1)
