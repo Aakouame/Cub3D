@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/20 11:49:03 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/20 13:06:05 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <mlx.h>
 #include "../srcs/libft/libft.h"
 #include "../srcs/gnl/get_next_line.h"
+// #include <sys/stat.h>
+#include <fcntl.h>
 
 typedef struct s_cord
 {

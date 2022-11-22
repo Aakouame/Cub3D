@@ -4,4 +4,9 @@ graphic design (skills): windows, colors, events, fill shapes, ...
 parsing :
     -Your program must be able to set the floor and ceiling colors
          to two different ones.
-    
+Need :
+	-Colors existing + Texture (NO-SO-WE-EA)
+	-map closed with '1'
+
+N = fo9
+S = ta7t

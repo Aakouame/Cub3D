@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 09:24:55 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/20 11:57:06 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/20 13:34:58 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,42 @@ int	ft_check_file(char *name)
 	return (0);
 }
 
-
+char	*ft_read(char *file)
+{
+	int		fd;
+	char	*all;
+	char	*line;
+	
+	fd = open(file, O_RDONLY);
+	all = NULL;
+	if (fd < 0)
+	{
+		ft_putstr_fd("Error: open file !", 2);
+		exit(2);
+	}
+	line = get_next_line(fd);
+	free(line);
+	all = ft_strdup(line);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break;
+		all = ft_strjoin(all, line);
+		free(line);
+	}
+	return (all);
+}
 
 int	ft_check(char *file)
 {
 	int		i;
-	char	*map;
+	char	*all;
 	
 	i = 0;
 	if (ft_check_file(file))
 		return (1);
-	map = ft_read;
+	all = ft_read(file);
+	free(all);
 	return (0);
 }
