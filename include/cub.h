@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/28 19:05:11 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/28 21:13:44 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ int 	check_color(char **splited, t_data *data);
 int		h_m_repeated(char	*str, int c);
 int		is_number(char *str);
 int		check_map(char	**splited, t_data *data);
+int 	ft_search_indice(char  **str, char *s, int size);
+int 	ft_indix_start(t_data *data);
 
 #endif
