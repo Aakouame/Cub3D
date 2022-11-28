@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:59:42 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/28 16:03:44 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/28 16:58:42 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,20 @@ int check_color(char **splited, t_data *data)
 	return 0;
 }
 
-int	check_map(char	**splited, t_data *data)
-{
-	int	i;
-	int	j;
+// int	check_map(char	**splited, t_data *data)
+// {
+// 	int	i;
+// 	int	j;
 	
-	i = ft_indix_map(splited);
-	data.
-	while (splited[i])
-	{
-		j = 0;
-		while (splited[i][j])
-		{
+// 	i = ft_indix_map(splited);
+// 	data.
+// 	while (splited[i])
+// 	{
+// 		j = 0;
+// 		while (splited[i][j])
+// 		{
 			
 
-		}	
-	}
-}
+// 		}	
+// 	}
+// }
