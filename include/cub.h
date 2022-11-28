@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/28 18:22:59 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/28 19:05:11 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_data
 	t_color		color;
 	char		*all;
 	char        **all_splited;
+	char        **all_split;
 	char        *msg;
 	t_exist		check;
 	t_map		map;
