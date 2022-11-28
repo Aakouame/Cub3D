@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/28 16:04:38 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/28 18:22:59 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_map
 	int		p;
 	char	position;
 	t_cord	indx;
-	char		**map_splited;
+	char	**map_splited;
 }	t_map;
 
 typedef struct s_data
@@ -82,7 +82,6 @@ void    ft_er_msg(char *msg);
 int 	check_color(char **splited, t_data *data);
 int		h_m_repeated(char	*str, int c);
 int		is_number(char *str);
-int	ft_indix_map(char	**splited);
-
+int		check_map(char	**splited, t_data *data);
 
 #endif

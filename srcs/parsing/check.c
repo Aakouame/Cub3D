@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 09:24:55 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/28 15:56:21 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/28 18:11:14 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,10 @@ int	ft_check(char *file, t_data *data)
 	// 	printf("%s\n",data->all_splited[i]);
 	// 	i++;
 	// }
-	// if (check_map(data->all_splited, data))
-	// {
-	// 	data->msg = "Check Map !";
-	// 	return (1);
-	// }
+	if (check_map(data->all_splited, data))
+	{
+		data->msg = "Check Map !";
+		return (1);
+	}
 	return (0);
 }

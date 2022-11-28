@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:59:42 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/28 16:58:42 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/28 18:28:20 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,52 @@ int check_color(char **splited, t_data *data)
 	return 0;
 }
 
-// int	check_map(char	**splited, t_data *data)
-// {
-// 	int	i;
-// 	int	j;
+int	check_exist_map(char **splited, t_data *data)
+{
+	int	i;
+	int	j;
 	
-// 	i = ft_indix_map(splited);
-// 	data.
-// 	while (splited[i])
-// 	{
-// 		j = 0;
-// 		while (splited[i][j])
-// 		{
-			
+	i = 6;
+	data->map.fr_space = 0;
+	data->map.wall = 0;
+	data->map.p = 0;
+	while (splited[i])
+	{
+		j = 0;
+		while (splited[i][j])
+		{
+			if (splited[i][j] == '1')
+				data->map.wall++;
+			else if (splited[i][j] == 'N' || splited[i][j] == 'S'\
+					|| splited[i][j] == 'W' || splited[i][j] == 'E')
+				data->map.p++;
+			j++;
+		}	
+		i++;
+	}
+	if ((data->map.wall > 0) && (data->map.p == 1))
+		return (0);
+	return (1);
+}
 
-// 		}	
-// 	}
-// }
+int	check_map(char **splited, t_data *data)
+{
+	int	i;
+	int	j;
+	
+	if (check_exist_map(splited, data))
+		return (1);
+	i = 6;
+	while (splited[i])
+	{
+		j = 0;
+		while (splited[i][j])
+		{
+			if (ft_search("01NSEW \n", splited[i][j]))
+				return (1);
+			j++;
+		}	
+		i++;
+	}
+	return (0);
+}
