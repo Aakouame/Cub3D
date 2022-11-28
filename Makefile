@@ -6,7 +6,7 @@
 #    By: akouame <akouame@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 04:25:39 by akouame           #+#    #+#              #
-#    Updated: 2022/11/22 15:20:20 by akouame          ###   ########.fr        #
+#    Updated: 2022/11/28 12:33:46 by akouame          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ HEADER = include/cub.h
 CFLAGS = -Wextra -Wall -Werror
 LIB = srcs/libft/libft.a
 SRCS = $(addprefix srcs/, main.c parsing/check.c gnl/get_next_line_utils.c\
-		gnl/get_next_line.c)
+		gnl/get_next_line.c outils/outil_1.c parsing/check_h_1.c \
+		outils/outil_2.c)
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

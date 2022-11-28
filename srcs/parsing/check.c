@@ -6,13 +6,13 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 09:24:55 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/22 15:24:36 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/28 15:56:21 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
 
-int	ft_check_file(char *name)
+int	check_file(char *name)
 {
 	int	i;
 
@@ -41,6 +41,8 @@ char	*ft_read(char *file)
 		exit(2);
 	}
 	line = get_next_line(fd);
+	if (!line)
+		return (NULL);
 	free(line);
 	all = ft_strdup(line);
 	while (1)
@@ -54,15 +56,15 @@ char	*ft_read(char *file)
 	return (all);
 }
 
-int	ft_check_exist(char *line, char *find, char **txtr)
+int	ft_check_exist(char *line, char *find, char **txtr, int size)
 {
 	char	*tmp;
 	
 	tmp = ft_strtrim(line, " \t");
-	if (!strncmp(tmp, find, 3))
+	if (!strncmp(tmp, find, size))
 	{
-			tmp = tmp + 3;
-			tmp = ft_strtrim(line, " \t");
+			tmp = tmp + size;
+			tmp = ft_strtrim(tmp, " ");
 			*txtr = ft_strdup(tmp);
 			free(tmp);
 			return (0);
@@ -71,49 +73,71 @@ int	ft_check_exist(char *line, char *find, char **txtr)
 	return (1);
 }
 
-int ft_check_textures(char **splited, t_data *data)
+int check_textures(char **splited, t_data *data)
 {
-	int	i;
-	int	j;
-
-	j = 0;
+	int		i;
+	
 	i = 0;
+	data->check.ea = 0;
+	data->check.no = 0;
+	data->check.so = 0;
+	data->check.we = 0;
 	if (!splited)
 		return (1);
 	while (splited[i])
 	{
-		if (!ft_check_exist(splited[i], "NO ", &data->txtrs.no))
-			j++;
-		else if (!ft_check_exist(splited[i], "SO ", &data->txtrs.so))
-			j++;
-		else if (!ft_check_exist(splited[i], "WE ", &data->txtrs.we))
-			j++;
-		else if (!ft_check_exist(splited[i], "EA ", &data->txtrs.ea))
-			j++;
+		if (!ft_check_exist(splited[i], "NO ", &data->txtrs.no, 3))
+			data->check.no++;
+		else if (!ft_check_exist(splited[i], "SO ", &data->txtrs.so, 3))
+			data->check.so++;
+		else if (!ft_check_exist(splited[i], "WE ", &data->txtrs.we, 3))
+			data->check.we++;
+		else if (!ft_check_exist(splited[i], "EA ", &data->txtrs.ea, 3))
+			data->check.ea++;
 		i++;
 	}
-	if (j == 4)
-		return (0);
-	return (1);
+	if (data->check.no != 1 || data->check.so != 1 || data->check.we != 1\
+			|| data->check.ea != 1)
+		return (1);
+	return (0);
 }
 
 int	ft_check(char *file, t_data *data)
 {
 	int		i;
-	char	*all;
-	char	**all_splited;
-	
+
 	i = 0;
-	if (ft_check_file(file))
-		return (1);
-	all = ft_read(file); // read all the file 
-	all_splited = ft_split(all, '\n');  // leaks !
-	if (ft_check_textures(all_splited, data))
+	if (check_file(file))
 	{
-		free(all);
+		data->msg = "Check ur file name !";
 		return (1);
 	}
-
-		free(all);
+	data->all = ft_read(file); // read all the file 
+	if (!data->all)
+	{
+		data->msg = "Empty File !";
+		return (1);
+	}
+	data->all_splited = ft_split(data->all, '\n'); // leaks !
+	if (check_textures(data->all_splited, data))
+	{
+		data->msg = "Check Textures !";
+		return (1);
+	}
+	if (check_color(data->all_splited, data))
+	{
+		data->msg = "Check Colors !";
+		return (1);
+	}
+	// while (data->all_splited[i])
+	// {
+	// 	printf("%s\n",data->all_splited[i]);
+	// 	i++;
+	// }
+	// if (check_map(data->all_splited, data))
+	// {
+	// 	data->msg = "Check Map !";
+	// 	return (1);
+	// }
 	return (0);
 }

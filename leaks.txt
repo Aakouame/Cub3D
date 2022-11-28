@@ -1,3 +1,5 @@
 1- check.c (int ft_check) all
 2- check.c (int ft_check) all_split
 3- data.textures
+4- data.all
+5- data.all_splited
