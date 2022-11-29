@@ -51,10 +51,10 @@ int	ft_check_map(t_data *data)
 					ft_search("01NSEW",t[indx.y - 1][indx.x]))
 					return (1);
 			}
-			if (check_empty_line(t[indx.y]))
-				return (1);
 			indx.x++;
 		}
+			if (check_empty_line(t[indx.y]))
+				return (1);
 			indx.y++;
 	}
 	return (0);	
