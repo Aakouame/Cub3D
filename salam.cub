@@ -1,16 +1,23 @@
-NO        ./path_to_the_north_texture           
+
+
+NO        ./path_to_the_north_texture   
+
 SO          ./path_to_the_south_texture
+
+
+
+
 WE 5555  
+
 EA dsadasd
+
 F   220,255,166
+
 C        225,255,0              
-
  1
-101
-1N1
- 1
-
-1111
-1001
- 11
-  
+1E1
+111             1
+ 101           101
+  1             1
+ 101
+  1
