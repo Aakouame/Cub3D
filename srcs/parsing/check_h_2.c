@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:13:30 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/29 13:57:06 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:58:52 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ int	ft_check_map(t_data *data)
 {
 	t_cord	indx;
 	char	**t;
-	int i = 0;
+	
 	ft_add_spc(data->all_split);
-	printf("\n");
 	t = data->all_split;
 	indx.y = ft_indix_start(data) + 1;
 	data->map.indx.y = ft_indix_start(data)+ 1;
