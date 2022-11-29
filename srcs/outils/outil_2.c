@@ -82,3 +82,4 @@ void	ft_add_spc(char **str)
 	}
 	str[i+1] = NULL;
 }
+
