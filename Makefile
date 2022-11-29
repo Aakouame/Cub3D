@@ -17,7 +17,7 @@ CFLAGS = -Wextra -Wall -Werror
 LIB = srcs/libft/libft.a
 SRCS = $(addprefix srcs/, main.c parsing/check.c gnl/get_next_line_utils.c\
 		gnl/get_next_line.c outils/outil_1.c parsing/check_h_1.c \
-		outils/outil_2.c parsing/check_h_2.c)
+		outils/outil_2.c parsing/check_h_2.c fill.c)
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
