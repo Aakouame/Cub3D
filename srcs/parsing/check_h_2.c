@@ -12,6 +12,20 @@
 
 #include "../../include/cub.h"
 
+int check_empty_line(char *line)
+{
+	int i;
+
+	i = 0;
+	while(line[i])
+	{
+		if (line[i] != ' ')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	ft_check_map(t_data *data)
 {
 	t_cord	indx;
@@ -21,6 +35,8 @@ int	ft_check_map(t_data *data)
 	t = data->all_split;
 	indx.y = ft_indix_start(data) + 1;
 	data->map.indx.y = ft_indix_start(data)+ 1;
+	while(check_empty_line(t[indx.y]))
+		indx.y++;
 	while (t[indx.y])
 	{
 		indx.x = 0;
@@ -35,6 +51,8 @@ int	ft_check_map(t_data *data)
 					ft_search("01NSEW",t[indx.y - 1][indx.x]))
 					return (1);
 			}
+			if (check_empty_line(t[indx.y]))
+				return (1);
 			indx.x++;
 		}
 			indx.y++;
