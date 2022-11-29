@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:11:52 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/29 11:20:40 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/29 15:04:50 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int ft_indix_start(t_data *data)
     r = i[0];
     while (j < 6)
     {
-        // printf("i[%d] = %d | ", j, i[j]);
         if (r < i[j])
             r = i[j];
         j++;
