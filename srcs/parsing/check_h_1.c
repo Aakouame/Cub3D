@@ -80,24 +80,24 @@ int	check_exist_map(char **splited, t_data *data)
 	int	j;
 	
 	i = 6;
-	data->map.fr_space = 0;
-	data->map.wall = 0;
-	data->map.p = 0;
+	data->my_map.fr_space = 0;
+	data->my_map.wall = 0;
+	data->my_map.p = 0;
 	while (splited[i])
 	{
 		j = 0;
 		while (splited[i][j])
 		{
 			if (splited[i][j] == '1')
-				data->map.wall++;
+				data->my_map.wall++;
 			else if (splited[i][j] == 'N' || splited[i][j] == 'S'\
 					|| splited[i][j] == 'W' || splited[i][j] == 'E')
-				data->map.p++;
+				data->my_map.p++;
 			j++;
 		}	
 		i++;
 	}
-	if ((data->map.wall > 0) && (data->map.p == 1))
+	if ((data->my_map.wall > 0) && (data->my_map.p == 1))
 		return (0);
 	return (1);
 }

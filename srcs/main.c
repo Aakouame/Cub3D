@@ -20,7 +20,13 @@ int main(int ac, char **av)
 	{
 		if (!ft_check(av[1], &data))
 		{
-			printf("good parsing \n");
+			fill_map(&data);
+			int i = 0;
+			while(data.my_map.map_splited[i])
+			{
+				printf("%s\n",data.my_map.map_splited[i]);
+				i++;
+			}
 		}
 		else
 		{

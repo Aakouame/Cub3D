@@ -34,7 +34,7 @@ int	ft_check_map(t_data *data)
 	ft_add_spc(data->all_split);
 	t = data->all_split;
 	indx.y = ft_indix_start(data) + 1;
-	data->map.indx.y = ft_indix_start(data)+ 1;
+	data->my_map.indx.y = ft_indix_start(data)+ 1;
 	while(check_empty_line(t[indx.y]))
 		indx.y++;
 	while (t[indx.y])
