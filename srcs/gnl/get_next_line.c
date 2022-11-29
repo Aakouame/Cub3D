@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akouame <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 05:04:15 by akouame           #+#    #+#             */
-/*   Updated: 2022/01/13 16:02:51 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:02:41 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,17 @@ char	*ft_add(char *str, int fd)
 		r = read(fd, buff, BUFFER_SIZE);
 		if (r < 0)
 		{
-			ft_free(&buff);
-			return (ft_free(&str));
+			ft_frees(&buff);
+			return (ft_frees(&str));
 		}
 		if (!r)
 			break ;
 		buff[r] = '\0';
-		str = ft_strjoin(str, buff);
+		str = ft_strjoins(str, buff);
 		if (ft_indice(str, '\n') != 0)
 			break ;
 	}
-	ft_free (&buff);
+	ft_frees(&buff);
 	return (str);
 }
 
@@ -81,18 +81,18 @@ char	*get_next_line(int fd)
 	if (ft_indice(str, '\n') == 0)
 		str = ft_add(str, fd);
 	if (ft_indice(str, '\n'))
-		line = ft_substr(str, 0, ft_indice(str, '\n'));
+		line = ft_substrs(str, 0, ft_indice(str, '\n'));
 	else if (str)
-		line = ft_strdup(str);
+		line = ft_strdups(str);
 	else if (!str)
 		line = NULL;
 	ptr = str;
 	if (ft_next(str, '\n'))
 	{
-		str = ft_strdup(ft_next(str, '\n'));
-		ft_free(&ptr);
+		str = ft_strdups(ft_next(str, '\n'));
+		ft_frees(&ptr);
 	}
 	else
-		ft_free(&str);
+		ft_frees(&str);
 	return (line);
 }
