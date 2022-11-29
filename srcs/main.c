@@ -31,17 +31,13 @@ int main(int ac, char **av)
 		else
 		{
 			ft_er_msg(data.msg);
-			// system("leaks cub3D");
 			return (2);
 		}
 	}
 	else
 	{
 		ft_putstr_fd("Check ur number of arguments !\n", 2);
-	// system("leaks cub3D");
 		return (1);
 	}
-	
-	
 	return 0;
 }

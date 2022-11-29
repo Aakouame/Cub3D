@@ -68,7 +68,7 @@ void	ft_add_spc(char **str)
 			{
 				while (str[i][j])
 					j++;
-				str[i] = ft_strjoin(str[i], ft_strdup(" "));
+				str[i] = ft_strjoin(str[i], " ");
 				j++;
 			}
 		}
@@ -77,7 +77,7 @@ void	ft_add_spc(char **str)
 	j = 0;
 	while (j < l)
 	{
-		str[i] = ft_strjoin(str[i], ft_strdup(" "));
+		str[i] = ft_strjoin(str[i], " ");
 		j++;
 	}
 	str[i+1] = NULL;

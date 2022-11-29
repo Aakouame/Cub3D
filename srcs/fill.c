@@ -19,3 +19,33 @@ void fill_map(t_data *data)
 	}
 	data->my_map.map_splited[i] = NULL;
 }
+
+void free_data(t_data *data)
+{
+	int i;
+
+	i = 0;
+	while(data->all_split[i])
+		free(data->all_split[i++]);
+	i = 0;
+	while(data->all_splited[i])
+		free(data->all_splited[i++]);
+	free(data->all);
+}
+
+void    free_all(char **str)
+{
+    int    i;
+    int    l;
+
+    l = 0;
+    while (str[l])
+        l++;
+    i = 0;
+    while (i < l)
+    {
+        free(str[i]);
+        i++;
+    }
+    free(str);
+}
