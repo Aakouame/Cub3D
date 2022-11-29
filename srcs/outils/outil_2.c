@@ -44,19 +44,3 @@ int	is_number(char *str)
 	return (0);
 }
 
-void	ft_add_spc(char **str)
-{
-	int i;
-	int	l;
-
-	i = 0;
-	l = ft_strlen(str[i]);
-	while (str[i])
-	{
-		if(ft_strlen(str[i] > l))
-			l = ft_strlen(str[i]);
-		i++;
-	}
-	i = 0;
-	while ()
-}
