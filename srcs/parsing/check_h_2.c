@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:13:30 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/28 21:22:29 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/29 11:11:12 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,27 @@
 
 int	ft_check_map(t_data *data)
 {
-	int		i;
 	t_cord	indx;
+	char	**t;
 	
-	indx.y = ft_indix_start(data);
-	data->map.indx.y = ft_indix_start(data);
-	while (data->all_split[indx.y])
+	t = data->all_split;
+	indx.y = ft_indix_start(data) + 1;
+	data->map.indx.y = ft_indix_start(data)+ 1;
+	while (t[indx.y])
 	{
-		data->map.indx.x = 0;
-		while (data->all_split[data->map.indx.y][data->map.indx.x])
+		indx.x = 0;
+		while (t[indx.y][indx.x])
+		{
+			if (!ft_search("0NSEW", t[indx.y][indx.x]))
+			{
+				if (ft_search("01NSEW",t[indx.y][indx.x + 1]) || ft_search("01NSEW",t[indx.y][indx.x - 1]))
+					return (1);
+				if (ft_search("01NSEW",t[indx.y + 1][indx.x]) || ft_search("01NSEW",t[indx.y - 1][indx.x]))
+					return (1);
+			}
+			indx.x++;
+		}
+			indx.y++;
 	}
-	
+	return (0);	
 }

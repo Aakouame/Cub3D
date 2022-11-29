@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:59:42 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/28 21:12:48 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/29 11:48:03 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_range_color(char *color, int *tb)
 	j = 0;
 	if (!color)
 		return (1);
-	if (h_m_repeated(color, ',') >= 3)
+	if (h_m_repeated(color, ',') != 2)
 		return (1);
 	clr_splited = ft_split(color, ',');
 	if (!clr_splited)
@@ -29,7 +29,7 @@ int	check_range_color(char *color, int *tb)
 	i = 0;
 	while (clr_splited[i])
 		i++;
-	if (i > 3)
+	if (i != 3)
 	{
 		ft_frees(clr_splited);
 		return (1);

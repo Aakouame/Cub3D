@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 09:24:55 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/28 19:08:36 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/29 11:47:22 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ char	*ft_read(char *file, t_data *data)
 	line = get_next_line(fd);
 	if (!line)
 		return (NULL);
-	free(line);
 	data->all = ft_strdup(line);
 	data->all_split[i++] = ft_substr(line, 0, (ft_strlen(line) - 1));
+	free(line);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -56,6 +56,7 @@ char	*ft_read(char *file, t_data *data)
 		data->all = ft_strjoin(data->all, line);
 		free(line);
 	}
+	data->all_split[i] = NULL;
 	return (data->all);
 }
 
@@ -131,11 +132,6 @@ int	ft_check(char *file, t_data *data)
 	{
 		data->msg = "Check Colors !";
 		return (1);
-	}
-	while (data->all_splited[i])
-	{
-		printf("%s\n",data->all_split[i]);
-		i++;
 	}
 	if (check_map(data->all_splited, data))
 	{

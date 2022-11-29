@@ -3,3 +3,17 @@ printf("%s\n%s\n%s\n%s\n", data->txtrs.ea, data->txtrs.no, data->txtrs.so, data-
 printf("\n%s\n------\n%s\n", data->color.f, data->color.c);
 
 printf("color splited = %s\n", clr_splited[i]);
+
+printf("c = %d,%d,%d\n", data.color.tab_c[0],data.color.tab_c[1],data.color.tab_c[2]);
+
+printf("f = %d,%d,%d\n", data.color.tab_f[0],data.color.tab_f[1],data.color.tab_f[2]);
+
+printf("%s\n%s\n%s\n%s\n", data.txtrs.ea, data.txtrs.no, data.txtrs.so, data.txtrs.we);
+
+	while (data->all_split[i])
+	{
+		printf("i = %d %s\n",i, data->all_split[i]);
+		i++;
+	}
+
+	// printf("%s\n", data->all);

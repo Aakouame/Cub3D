@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:11:52 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/28 20:34:30 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/29 11:20:40 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	ft_er_msg(char *msg)
 
 int ft_indix_start(t_data *data)
 {
-    int     i[5];
+    int     i[6];
     int     r;
     int     j;
 
-    j = 1;
+    j = 0;
     i[0] = ft_search_indice(data->all_split, "C ", 2);
     i[1] = ft_search_indice(data->all_split, "F ", 2);
     i[2] = ft_search_indice(data->all_split, "EA ", 3);
@@ -51,6 +51,7 @@ int ft_indix_start(t_data *data)
     r = i[0];
     while (j < 6)
     {
+        // printf("i[%d] = %d | ", j, i[j]);
         if (r < i[j])
             r = i[j];
         j++;
