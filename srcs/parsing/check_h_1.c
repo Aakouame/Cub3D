@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:59:42 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/29 14:10:19 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/29 18:59:22 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_range_color(char *color, int *tb)
 		i++;
 	if (i != 3)
 	{
-		ft_frees(clr_splited);
+		free_all(clr_splited);
 		return (1);
 	}
 	i = 0;
@@ -44,7 +44,7 @@ int	check_range_color(char *color, int *tb)
 			j = 1;	
 		i++;
 	}
-	ft_frees(clr_splited);
+	free_all(clr_splited);
 	return (j);
 }
 

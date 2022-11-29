@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:13:30 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/29 17:33:22 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/29 17:51:23 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	ft_check_map(t_data *data)
 	t_cord	indx;
 	char	**t;
 	
+	ft_add_spc(data->all_split);
 	t = data->all_split;
 	indx.y = ft_indix_start(data) + 1;
 	data->map.indx.y = ft_indix_start(data)+ 1;
@@ -39,12 +40,8 @@ int	ft_check_map(t_data *data)
 	while (t[indx.y])
 	{
 		indx.x = 0;
-		while (ft_search("0NSEW", t[indx.y][indx.x]))
-			indx.y++;
 		while (t[indx.y][indx.x])
 		{
-			if (check_empty_line(t[indx.y]))
-				return (1);
 			if (!ft_search("0NSEW", t[indx.y][indx.x]))
 			{
 				if (ft_search("01NSEW",t[indx.y][indx.x + 1]) ||\
@@ -56,6 +53,8 @@ int	ft_check_map(t_data *data)
 			}
 			indx.x++;
 		}
+			if (check_empty_line(t[indx.y]))
+				return (1);
 			indx.y++;
 	}
 	return (0);	

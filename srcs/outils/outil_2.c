@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:27:31 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/29 13:43:11 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/29 18:56:57 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ft_add_spc(char **str)
 			{
 				while (str[i][j])
 					j++;
-				str[i] = ft_strjoin(str[i], ft_strdup(" "));
+				str[i] = ft_strjoin(str[i], " ");
 				j++;
 			}
 		}
@@ -77,7 +77,7 @@ void	ft_add_spc(char **str)
 	j = 0;
 	while (j < l)
 	{
-		str[i] = ft_strjoin(str[i], ft_strdup(" "));
+		str[i] = ft_strjoin(str[i], " ");
 		j++;
 	}
 	str[i+1] = NULL;
