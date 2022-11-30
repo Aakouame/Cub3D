@@ -6,12 +6,12 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 17:42:54 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/11/30 17:46:59 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
-int my_cubs_len = 50;
+int my_cubs_len = 30;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -107,6 +107,8 @@ void draw2d(t_data *data)
 				drawcub(data,x,y,0x124A2A);
 			if (data->my_map.map_splited[y][x] == '0')
 				drawcub(data,x,y,0x475E6B);
+			if (!ft_search("WSNE",data->my_map.map_splited[y][x]))
+				drawcub(data,x,y,0xFF439F);
 			x++;
 		}
 		y++;
