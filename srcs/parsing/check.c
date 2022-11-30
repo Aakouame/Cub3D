@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 09:24:55 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 11:52:50 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/30 14:37:44 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	*ft_read(char *file, t_data *data)
 		data->all = ft_strjoin(data->all, line);
 		free(line);
 	}
-		free(line);
 	return (data->all);
 }
 

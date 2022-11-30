@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 11:33:24 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/30 14:09:37 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_data
 	char        **all_split;
 	char        *msg;
 	t_exist		check;
+	t_cord		max;
 	t_map		my_map;
 }	t_data;
 
@@ -87,7 +88,7 @@ int		check_map(char	**splited, t_data *data);
 int 	ft_search_indice(char  **str, char *s, int size);
 int 	ft_indix_start(t_data *data);
 int		ft_check_map(t_data *data);
-void	ft_add_spc(char **str);
+void	ft_add_spc(char **str, t_data *data);
 void 	fill_map(t_data *data);
 void    free_all(char **str);
 void 	free_data(t_data *data);

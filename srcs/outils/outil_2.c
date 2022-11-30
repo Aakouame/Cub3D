@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:27:31 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 11:55:22 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/30 14:11:26 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	is_number(char *str)
 	return (0);
 }
 
-void	ft_add_spc(char **str)
+void	ft_add_spc(char **str, t_data *data)
 {
 	int i;
 	int	l;
@@ -58,6 +58,7 @@ void	ft_add_spc(char **str)
 			l = ft_strlen(str[i]);
 		i++;
 	}
+	data->max.x = l;
 	i = 0;
 	while (str[i])
 	{

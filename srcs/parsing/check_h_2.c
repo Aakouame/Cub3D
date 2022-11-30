@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:13:30 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/29 17:51:23 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/30 14:19:29 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int	ft_check_map(t_data *data)
 	t_cord	indx;
 	char	**t;
 	
-	ft_add_spc(data->all_split);
+	ft_add_spc(data->all_split, data);
 	t = data->all_split;
 	indx.y = ft_indix_start(data) + 1;
+	data->max.y = length_tab(t);
 	data->my_map.indx.y = ft_indix_start(data)+ 1;
 	while(check_empty_line(t[indx.y]))
 		indx.y++;
@@ -44,12 +45,14 @@ int	ft_check_map(t_data *data)
 		{
 			if (!ft_search("0NSEW", t[indx.y][indx.x]))
 			{
-				if (ft_search("01NSEW",t[indx.y][indx.x + 1]) ||\
-					ft_search("01NSEW",t[indx.y][indx.x - 1]))
-					return (1);
-				if (ft_search("01NSEW",t[indx.y + 1][indx.x]) ||\
-					ft_search("01NSEW",t[indx.y - 1][indx.x]))
-					return (1);
+				if ((indx.x < data->max.x) && (indx.x > 0))
+					if (ft_search("01NSEW",t[indx.y][indx.x + 1]) ||\
+						ft_search("01NSEW",t[indx.y][indx.x - 1]))
+						return (1);
+				if ((indx.y < data->max.y))
+					if (ft_search("01NSEW",t[indx.y + 1][indx.x]) ||\
+						ft_search("01NSEW",t[indx.y - 1][indx.x]))
+						return (1);
 			}
 			indx.x++;
 		}
