@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 16:40:56 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/11/30 17:37:45 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int main(int ac, char **av)
 			//printf("good parsing\n");
 			fill_map(&data);
 			draw2d(&data);
-			//mlx_loop(data.my_map.init);
+			mlx_put_image_to_window(data.my_map.init, data.my_map.win, data.my_map.img, 0, 0);
+			mlx_loop(data.my_map.init);
 			// execution(&data)
 			// system("leaks cub3D");
 		}

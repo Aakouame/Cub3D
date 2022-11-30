@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 16:44:44 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/11/30 17:42:54 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 void  init_mlx(t_data *data)
 {
 	data->my_map.init = mlx_init();
-	data->my_map.win = mlx_new_window ( data->my_map.init, 700, 700, "cub3d");
-	data->my_map.img = mlx_new_image(data->my_map.init,700,700);
+	data->my_map.win = mlx_new_window ( data->my_map.init, 2560, 1440, "cub3d");
+	data->my_map.img = mlx_new_image(data->my_map.init,2560,1440);
 	data->my_map.addr = mlx_get_data_addr(data->my_map.img, &data->my_map.bits_per_pixel, &data->my_map.line_length,&data->my_map.endian);
 }
 
 
-void dda(int X0, int Y0, int X1, int Y1,t_data *data)
+void dda(int X0, int Y0, int X1, int Y1,t_data *data,int color)
 {
     // calculate dx & dy
     int dx = X1 - X0;
@@ -46,7 +46,7 @@ void dda(int X0, int Y0, int X1, int Y1,t_data *data)
     float X = X0;
     float Y = Y0;
     for (int i = 0; i <= steps; i++) {
-        my_mlx_pixel_put(data,round(X), round(Y),0xff00ff); // put pixel at (X,Y)
+        my_mlx_pixel_put(data,round(X), round(Y),color); // put pixel at (X,Y)
         X += Xinc; // increment in x at each step
         Y += Yinc; // increment in y at each step
     }
@@ -76,27 +76,39 @@ int get_weight(char **str)
 	return (big_len);
 }
 
+void drawcub(t_data *data , int x , int y,unsigned int color)
+{
+	int x0 = x * my_cubs_len;
+	int x1 = (x + 1) * my_cubs_len;
+	int y0 = y * my_cubs_len;
+	int y1 = (y + 1) * my_cubs_len;
+	while(y0 < y1)
+	{
+		dda(x0,y0,x1,y0,data,color);
+		y0++;
+	}
+}
 void draw2d(t_data *data)
 {
 	int y;
 	int x; 
-
+	init_mlx(data);
 	data->max.y = get_height(data->my_map.map_splited);
 	data->max.x = get_weight(data->my_map.map_splited);
 	y = 0;
-	//printf("y %d  x %d\n",data->max.y,data->max.x);
 	while(y < data->max.y)
 	{
 		x = 0;
 		while(x < data->max.x)
 		{
-			if (x != data->max.x)
-				dda(x,x + 1,y,y,data);
-			if (y != data->max.y)
-				dda(x,x,y,y +1,data);
+			if (data->my_map.map_splited[y][x] == ' ')
+				drawcub(data,x,y,0x000000);
+			if (data->my_map.map_splited[y][x] == '1')
+				drawcub(data,x,y,0x124A2A);
+			if (data->my_map.map_splited[y][x] == '0')
+				drawcub(data,x,y,0x475E6B);
 			x++;
 		}
-		printf("\n");
 		y++;
 	}
 }
