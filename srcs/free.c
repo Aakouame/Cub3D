@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 11:50:29 by akouame          ###   ########.fr       */
+/*   Created: 2022/11/30 10:55:48 by akouame           #+#    #+#             */
+/*   Updated: 2022/11/30 11:54:02 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
 
-int main(int ac, char **av)
+void free_data(t_data *data)
 {
-	t_data	data;
-	
-	if (ac == 2)
-	{
-		if (!ft_check(av[1], &data))
-		{
-			printf("good parsing\n");
-			// fill_map(&data);
-			// execution(&data)
-			system("leaks cub3D");
-		}
-		else
-		{
-			ft_er_msg(data.msg);
-			system("leaks cub3D");
-			return (2);
-		}
-	}
-	else
-	{
-		ft_putstr_fd("Check ur number of arguments !\n", 2);
-			system("leaks cub3D");
-		return (1);
-	}
-			// system("leaks cub3D");
-	return 0;
+	int i;
+
+	i = 0;
+	while(data->all_split[i])
+		free(data->all_split[i++]);
+	i = 0;
+	while(data->all_splited[i])
+		free(data->all_splited[i++]);
+	free(data->all);
+}
+
+void    free_all(char **str)
+{
+    int    i;
+    int    l;
+
+    l = length_tab(str);
+    i = 0;
+    if (!str)
+        return ;
+    while (i < l)
+    {
+        free(str[i]);
+        i++;
+    }
+    free(str);
 }

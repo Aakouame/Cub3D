@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/29 20:13:10 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/30 11:33:24 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,7 @@ void	ft_add_spc(char **str);
 void 	fill_map(t_data *data);
 void    free_all(char **str);
 void 	free_data(t_data *data);
+int		length_tab(char **str);
+char	**add_str(char **str, char *s);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:27:31 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/29 18:56:57 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/30 11:55:22 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,3 +83,40 @@ void	ft_add_spc(char **str)
 	str[i+1] = NULL;
 }
 
+int	length_tab(char **str)
+{
+	int i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	**add_str(char **str, char *s)
+{
+	int		i;
+	char	**tmp;
+	
+	if (!s)
+		return (str);
+	i = length_tab(str);
+	tmp = malloc(sizeof(char *) * (i + 2));
+	if (!tmp)
+		return(NULL);
+	i = 0;
+	if (str)
+	{
+		while (str[i])
+		{
+			tmp[i] = ft_strdup(str[i]);
+			i++;
+		}
+	}
+	tmp[i] = ft_strdup(s);
+	tmp[i + 1] = NULL;
+	free_all(str);
+	return (tmp);
+}
