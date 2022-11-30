@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 14:09:37 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/30 15:19:23 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_map
 	char	position;
 	t_cord	indx;
 	char	**map_splited;
+	void *init;
+	void *win;
 }	t_map;
 
 typedef struct s_data
@@ -94,5 +96,5 @@ void    free_all(char **str);
 void 	free_data(t_data *data);
 int		length_tab(char **str);
 char	**add_str(char **str, char *s);
-
+void  draw2d(t_data *data);
 #endif

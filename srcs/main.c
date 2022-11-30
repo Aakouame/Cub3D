@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 14:22:37 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/30 15:22:01 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int main(int ac, char **av)
 		{
 			printf("good parsing\n");
 			fill_map(&data);
+			draw2d(&data);
 			// execution(&data)
 			// system("leaks cub3D");
 		}
