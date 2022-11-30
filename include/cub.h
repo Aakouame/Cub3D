@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 15:19:23 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/11/30 16:22:20 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <mlx.h>
 #include "../srcs/libft/libft.h"
 #include "../srcs/gnl/get_next_line.h"
+#include <math.h>
 
 typedef struct s_cord
 {
@@ -61,8 +62,16 @@ typedef struct s_map
 	char	position;
 	t_cord	indx;
 	char	**map_splited;
+	
+	// mlx
 	void *init;
 	void *win;
+	void *img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+
 }	t_map;
 
 typedef struct s_data
@@ -96,5 +105,6 @@ void    free_all(char **str);
 void 	free_data(t_data *data);
 int		length_tab(char **str);
 char	**add_str(char **str, char *s);
+void  init_mlx(t_data *data);
 void  draw2d(t_data *data);
 #endif
