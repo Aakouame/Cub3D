@@ -6,12 +6,12 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 17:46:59 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/11/30 20:36:53 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
-int my_cubs_len = 30;
+int my_cubs_len = 40;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -88,10 +88,22 @@ void drawcub(t_data *data , int x , int y,unsigned int color)
 		y0++;
 	}
 }
+
+void player(t_data *data)
+{
+	int x;
+	int y;
+
+	x = (data->player.x * my_cubs_len) + my_cubs_len/2;
+	y = (data->player.y * my_cubs_len) + my_cubs_len/2;
+	my_mlx_pixel_put(data, x, y,0xffffff); // put pixel at (X,Y)
+}
+
 void draw2d(t_data *data)
 {
 	int y;
-	int x; 
+	int x;
+
 	init_mlx(data);
 	data->max.y = get_height(data->my_map.map_splited);
 	data->max.x = get_weight(data->my_map.map_splited);
@@ -103,15 +115,14 @@ void draw2d(t_data *data)
 		{
 			if (data->my_map.map_splited[y][x] == ' ')
 				drawcub(data,x,y,0x000000);
-			if (data->my_map.map_splited[y][x] == '1')
+			else if (data->my_map.map_splited[y][x] == '1')
 				drawcub(data,x,y,0x124A2A);
-			if (data->my_map.map_splited[y][x] == '0')
+			else if (data->my_map.map_splited[y][x] == '0')
 				drawcub(data,x,y,0x475E6B);
-			if (!ft_search("WSNE",data->my_map.map_splited[y][x]))
-				drawcub(data,x,y,0xFF439F);
 			x++;
 		}
 		y++;
 	}
+	player(data);
 }
 
