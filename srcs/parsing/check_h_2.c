@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:13:30 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 14:19:29 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/30 15:04:28 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,20 @@ int	ft_check_map(t_data *data)
 		indx.x = 0;
 		while (t[indx.y][indx.x])
 		{
+			if (!ft_search("0NSEW", t[data->max.y - 1][indx.x]))
+				return (1);
 			if (!ft_search("0NSEW", t[indx.y][indx.x]))
 			{
 				if ((indx.x < data->max.x) && (indx.x > 0))
 					if (ft_search("01NSEW",t[indx.y][indx.x + 1]) ||\
 						ft_search("01NSEW",t[indx.y][indx.x - 1]))
 						return (1);
-				if ((indx.y < data->max.y))
+				if (((indx.y + 1) < data->max.y) && (indx.y > 0))
 					if (ft_search("01NSEW",t[indx.y + 1][indx.x]) ||\
 						ft_search("01NSEW",t[indx.y - 1][indx.x]))
 						return (1);
 			}
+
 			indx.x++;
 		}
 			if (check_empty_line(t[indx.y]))
