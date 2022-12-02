@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 19:56:48 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/02 20:03:59 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_key_hook(int key_code, t_data *data)
 int main(int ac, char **av)
 {
 	t_data	data;
-	
+
 	if (ac == 2)
 	{
 		if (!ft_check(av[1], &data))
