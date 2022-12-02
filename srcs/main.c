@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 20:11:03 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/02 20:32:20 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,39 @@ int	ft_exit(t_data data)
 {	
 	(void) data;
 	exit(0);
+	return (0);
+}
+
+int check_walls(t_data *data,char c)
+{
+	int x;
+	int y;
+	y = 0;
+	x = 0;
+	if (c == 'W')
+	{
+			x = data->player.pos_px.y + data->player.step_m * sin(data->player.fi);
+			y = data->player.pos_px.x + data->player.step_m * cos(data->player.fi);
+	}
+	else if (c == 'S')
+	{
+		x = data->player.pos_px.y - data->player.step_m * sin(data->player.fi);
+		y = data->player.pos_px.x - data->player.step_m * cos(data->player.fi);
+	}
+	else if (c == 'D')
+	{
+		x = data->player.pos_px.x - data->player.step_m * sin(data->player.fi);
+		y = data->player.pos_px.y + data->player.step_m * cos(data->player.fi);
+	}
+	else if (c == 'A')
+	{
+		x = data->player.pos_px.x + data->player.step_m * sin(data->player.fi);
+		y = data->player.pos_px.y - data->player.step_m * cos(data->player.fi);
+	}
+	x = x / my_cubs_len;
+	y = y / my_cubs_len;
+	if (data->my_map.map_splited[y][x] == '1')
+		return (1);
 	return (0);
 }
 
@@ -41,23 +74,35 @@ int	ft_key_hook(int key_code, t_data *data)
 	}
 	else if (key_code == 13) // w
 	{
-		data->player.pos_px.y += data->player.step_m * sin(data->player.fi);
-		data->player.pos_px.x += data->player.step_m * cos(data->player.fi);
+		if (!check_walls(data,'W'))
+		{
+			data->player.pos_px.y += data->player.step_m * sin(data->player.fi);
+			data->player.pos_px.x += data->player.step_m * cos(data->player.fi);
+		}
 	}
 	else if (key_code == 1) // S
 	{
+		if (!check_walls(data,'S'))
+		{
 		data->player.pos_px.y -= data->player.step_m * sin(data->player.fi);
 		data->player.pos_px.x -= data->player.step_m * cos(data->player.fi);
+		}
 	}
 	else if (key_code == 0) // A
 	{
+		if (!check_walls(data,'A'))
+		{
 		data->player.pos_px.x += data->player.step_m * sin(data->player.fi);
 		data->player.pos_px.y -= data->player.step_m * cos(data->player.fi);
+		}
 	}
 	else if (key_code == 2) //  D
 	{
+		if (!check_walls(data,'D'))
+		{
 		data->player.pos_px.x -= data->player.step_m * sin(data->player.fi);
 		data->player.pos_px.y += data->player.step_m * cos(data->player.fi);
+		}
 	}
 	draw_map(data);
 	mlx_put_image_to_window(data->my_map.init, data->my_map.win, data->my_map.img, 0, 0);

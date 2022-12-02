@@ -6,12 +6,11 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 17:30:52 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/02 20:18:17 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
-int my_cubs_len = 32;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -97,8 +96,6 @@ void init_player(t_data *data)
 		data->player.fi =  M_PI / 2;
 	data->player.pos_px.x = (data->player.pos_mp.x * my_cubs_len) + my_cubs_len/2;
 	data->player.pos_px.y = (data->player.pos_mp.y * my_cubs_len) + my_cubs_len/2;
-
-	//my_mlx_pixel_put(data, roundf(data->player.pos_px.x), roundf(data->player.pos_px.y),0xffffff);
 }
 
 void draw_map(t_data *data)

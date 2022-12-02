@@ -6,13 +6,13 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 16:45:51 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/02 20:18:35 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
-
 #define CUB_H
+#define my_cubs_len 30
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
