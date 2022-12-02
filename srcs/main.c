@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 16:33:39 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/02 16:36:52 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int main(int ac, char **av)
 			//printf("good parsing\n");
 			fill_map(&data);
 			init_mlx(&data);
-			init_player(&data);
 			draw_map(&data);
+			init_player(&data);
 			mlx_put_image_to_window(data.my_map.init, data.my_map.win, data.my_map.img, 0, 0);
 			mlx_hook(data.my_map.win, 17, 1L << 0, ft_exit, &data);
 			mlx_hook(data.my_map.win, 2, 0L, ft_key_hook, &data);
