@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 17:33:33 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/02 17:43:21 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,21 @@ int	ft_key_hook(int key_code, t_data *data)
 	data->key = key_code;
 	if (key_code == 53)
 		exit(0);
-	else if (key_code == 124)
+	else if (key_code == 124) // right key
 	{
-		data->player.fi -= data->player.step_r;
+		data->player.fi += data->player.step_r;
+		data->player.fi = fmod(data->player.fi,2 * M_PI);
+		if (data->player.fi < 0)
+			data->player.fi += 2 * M_PI;
 		mlx_clear_window(data->my_map.init,data->my_map.win);
 		draw_map(data);
 	}
-	else if (key_code == 123)
+	else if (key_code == 123) // left key
 	{
-		data->player.fi += data->player.step_r;
+		data->player.fi -= data->player.step_r;
+		data->player.fi = fmod(data->player.fi,2 * M_PI);
+		if (data->player.fi < 0)
+			data->player.fi += 2 * M_PI;
 		mlx_clear_window(data->my_map.init,data->my_map.win);
 		draw_map(data);
 	}
@@ -43,22 +49,24 @@ int	ft_key_hook(int key_code, t_data *data)
 		mlx_clear_window(data->my_map.init,data->my_map.win);
 		draw_map(data);
 	}
-	else if (key_code == 1)
+	else if (key_code == 1) // S
 	{
 		data->player.pos_px.y -= data->player.step_m * sin(data->player.fi);
 		data->player.pos_px.x -= data->player.step_m * cos(data->player.fi);
 		mlx_clear_window(data->my_map.init,data->my_map.win);
 		draw_map(data);
 	}
-	else if (key_code == 0)
+	else if (key_code == 0) // A
 	{
-		data->player.pos_px.x -= data->player.step_m + cos(data->player.fi);
+		data->player.pos_px.x += data->player.step_m * cos(data->player.fi);
+		data->player.pos_px.y -= data->player.step_m * sin(data->player.fi);
 		mlx_clear_window(data->my_map.init,data->my_map.win);
 		draw_map(data);
 	}
-	else if (key_code == 2)
+	else if (key_code == 2) //  D
 	{
-		data->player.pos_px.x += data->player.step_m + cos(data->player.fi);
+		data->player.pos_px.x -= data->player.step_m * cos(data->player.fi);
+		data->player.pos_px.y += data->player.step_m * sin(data->player.fi);
 		mlx_clear_window(data->my_map.init,data->my_map.win);
 		draw_map(data);
 	}
