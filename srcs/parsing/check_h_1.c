@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:59:42 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/29 18:59:22 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/02 12:04:40 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,10 @@ int	check_exist_map(char **splited, t_data *data)
 				data->my_map.wall++;
 			else if (splited[i][j] == 'N' || splited[i][j] == 'S'\
 					|| splited[i][j] == 'W' || splited[i][j] == 'E')
-				data->my_map.p++;
+				{
+					data->player.p = splited[i][j];
+					data->my_map.p++;
+				}
 			j++;
 		}	
 		i++;

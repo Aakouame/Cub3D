@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 16:22:20 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/02 12:04:03 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ typedef struct s_cord
 	int	x;
 	int	y;
 }	t_cord;
+
+typedef struct	s_cord_float
+{
+	float	x;
+	float	y;
+}	t_cord_float;
 
 typedef struct s_textures
 {
@@ -64,9 +70,9 @@ typedef struct s_map
 	char	**map_splited;
 	
 	// mlx
-	void *init;
-	void *win;
-	void *img;
+	void 	*init;
+	void	*win;
+	void 	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -74,9 +80,19 @@ typedef struct s_map
 
 }	t_map;
 
+typedef struct s_player
+{
+	t_cord	pos;
+	float	fi;
+	float	step_m;
+	float	step_r;
+	char	p;
+}	t_player;
+
+
 typedef struct s_data
 {
-	t_cord		player;
+	t_player	player;
 	t_textures	txtrs;
 	t_color		color;
 	char		*all;
@@ -86,6 +102,8 @@ typedef struct s_data
 	t_exist		check;
 	t_cord		max;
 	t_map		my_map;
+	int			key;
+	int			key_code;
 }	t_data;
 
 int		ft_check_exist(char *line, char *find, char **txtr, int size);
@@ -106,5 +124,5 @@ void 	free_data(t_data *data);
 int		length_tab(char **str);
 char	**add_str(char **str, char *s);
 void  init_mlx(t_data *data);
-void  draw2d(t_data *data);
+void  execution(t_data *data);
 #endif

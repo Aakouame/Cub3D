@@ -19,8 +19,8 @@ void fill_map(t_data *data)
 			if (!ft_search("WSNE",data->all_splited[i][j]))
 			{
 				data->all_splited[i][j] = '0';
-				data->player.y = i - 6;
- 				data->player.x = j;
+				data->player.pos.y = i - 6;
+ 				data->player.pos.x = j;
 			}
 			j++;
 		}

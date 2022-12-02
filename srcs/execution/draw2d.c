@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start.c                                            :+:      :+:    :+:   */
+/*   draw2d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 20:36:53 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/02 12:09:19 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
-int my_cubs_len = 40;
+int my_cubs_len = 32;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -91,15 +91,23 @@ void drawcub(t_data *data , int x , int y,unsigned int color)
 
 void player(t_data *data)
 {
-	int x;
-	int y;
+	float	x;
+	float	y;
 
-	x = (data->player.x * my_cubs_len) + my_cubs_len/2;
-	y = (data->player.y * my_cubs_len) + my_cubs_len/2;
-	my_mlx_pixel_put(data, x, y,0xffffff); // put pixel at (X,Y)
+	if (data->player.p == 'E')
+		data->player.fi = 0;
+	if (data->player.p == 'S')
+		data->player.fi = (3 * M_PI) / 2;
+	if (data->player.p == 'W')
+		data->player.fi = M_PI;
+	if (data->player.p == 'N')
+		data->player.fi =  M_PI / 2;
+	x = (data->player.pos.x * my_cubs_len) + my_cubs_len/2;
+	y = (data->player.pos.y * my_cubs_len) + my_cubs_len/2;
+	my_mlx_pixel_put(data, roundf(x), roundf(y),0xffffff);
 }
 
-void draw2d(t_data *data)
+void execution(t_data *data)
 {
 	int y;
 	int x;
@@ -125,4 +133,3 @@ void draw2d(t_data *data)
 	}
 	player(data);
 }
-
