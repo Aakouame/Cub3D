@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 09:24:55 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/28 15:56:21 by akouame          ###   ########.fr       */
+/*   Updated: 2022/11/30 15:06:38 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,37 @@ int	check_file(char *name)
 	return (0);
 }
 
-char	*ft_read(char *file)
+char	*ft_read(char *file, t_data *data)
 {
 	int		fd;
-	char	*all;
 	char	*line;
+	int		i;
 	
+	i = 0;
 	fd = open(file, O_RDONLY);
-	all = NULL;
 	if (fd < 0)
 	{
 		ft_putstr_fd("Error: open file !", 2);
 		exit(2);
 	}
+	data->all = NULL;
+	data->all_split = NULL;
 	line = get_next_line(fd);
 	if (!line)
 		return (NULL);
+	data->all = ft_strdup(line);
+	data->all_split = add_str(data->all_split, line);
 	free(line);
-	all = ft_strdup(line);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break;
-		all = ft_strjoin(all, line);
+		data->all_split = add_str(data->all_split, ft_substr(line, 0, (ft_strlen(line) - 1)));
+		data->all = ft_strjoin(data->all, line);
 		free(line);
 	}
-	return (all);
+	return (data->all);
 }
 
 int	ft_check_exist(char *line, char *find, char **txtr, int size)
@@ -112,7 +116,7 @@ int	ft_check(char *file, t_data *data)
 		data->msg = "Check ur file name !";
 		return (1);
 	}
-	data->all = ft_read(file); // read all the file 
+	data->all = ft_read(file, data); // read all the file 
 	if (!data->all)
 	{
 		data->msg = "Empty File !";
@@ -129,15 +133,10 @@ int	ft_check(char *file, t_data *data)
 		data->msg = "Check Colors !";
 		return (1);
 	}
-	// while (data->all_splited[i])
-	// {
-	// 	printf("%s\n",data->all_splited[i]);
-	// 	i++;
-	// }
-	// if (check_map(data->all_splited, data))
-	// {
-	// 	data->msg = "Check Map !";
-	// 	return (1);
-	// }
+	if (check_map(data->all_splited, data))
+	{
+		data->msg = "Check Map !";
+		return (1);
+	}
 	return (0);
 }

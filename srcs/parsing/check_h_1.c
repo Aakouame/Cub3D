@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:59:42 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/28 16:03:44 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/02 12:04:40 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_range_color(char *color, int *tb)
 	j = 0;
 	if (!color)
 		return (1);
-	if (h_m_repeated(color, ',') >= 3)
+	if (h_m_repeated(color, ',') != 2)
 		return (1);
 	clr_splited = ft_split(color, ',');
 	if (!clr_splited)
@@ -29,9 +29,9 @@ int	check_range_color(char *color, int *tb)
 	i = 0;
 	while (clr_splited[i])
 		i++;
-	if (i > 3)
+	if (i != 3)
 	{
-		ft_frees(clr_splited);
+		free_all(clr_splited);
 		return (1);
 	}
 	i = 0;
@@ -44,7 +44,7 @@ int	check_range_color(char *color, int *tb)
 			j = 1;	
 		i++;
 	}
-	ft_frees(clr_splited);
+	free_all(clr_splited);
 	return (j);
 }
 
@@ -74,20 +74,57 @@ int check_color(char **splited, t_data *data)
 	return 0;
 }
 
-int	check_map(char	**splited, t_data *data)
+int	check_exist_map(char **splited, t_data *data)
 {
 	int	i;
 	int	j;
 	
-	i = ft_indix_map(splited);
-	data.
+	i = 6;
+	data->my_map.fr_space = 0;
+	data->my_map.wall = 0;
+	data->my_map.p = 0;
 	while (splited[i])
 	{
 		j = 0;
 		while (splited[i][j])
 		{
-			
-
+			if (splited[i][j] == '1')
+				data->my_map.wall++;
+			else if (splited[i][j] == 'N' || splited[i][j] == 'S'\
+					|| splited[i][j] == 'W' || splited[i][j] == 'E')
+				{
+					data->player.p = splited[i][j];
+					data->my_map.p++;
+				}
+			j++;
 		}	
+		i++;
 	}
+	if ((data->my_map.wall > 0) && (data->my_map.p == 1))
+		return (0);
+	return (1);
+}
+
+int	check_map(char **splited, t_data *data)
+{
+	int	i;
+	int	j;
+	
+	if (check_exist_map(splited, data))
+		return (1);
+	i = 6;
+	while (splited[i])
+	{
+		j = 0;
+		while (splited[i][j])
+		{
+			if (ft_search("01NSEW \n", splited[i][j]))
+				return (1);
+			j++;
+		}	
+		i++;
+	}
+	if (ft_check_map(data))
+		return (1);
+	return (0);
 }

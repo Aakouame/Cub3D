@@ -6,12 +6,76 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/28 14:15:56 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/02 19:56:48 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
 
+int	ft_exit(t_data data)
+{	
+	(void) data;
+	exit(0);
+	return (0);
+}
+
+int	ft_key_hook(int key_code, t_data *data)
+{
+	data->key = key_code;
+	if (key_code == 53)
+		exit(0);
+	else if (key_code == 124) // right key
+	{
+		data->player.fi += data->player.step_r;
+		data->player.fi = fmod(data->player.fi,2 * M_PI);
+		if (data->player.fi < 0)
+			data->player.fi += 2 * M_PI;
+		mlx_clear_window(data->my_map.init,data->my_map.win);
+		draw_map(data);
+	}
+	else if (key_code == 123) // left key
+	{
+		data->player.fi -= data->player.step_r;
+		data->player.fi = fmod(data->player.fi,2 * M_PI);
+		if (data->player.fi < 0)
+			data->player.fi += 2 * M_PI;
+		mlx_clear_window(data->my_map.init,data->my_map.win);
+		draw_map(data);
+	}
+	else if (key_code == 13) // w
+	{
+		data->player.pos_px.y += data->player.step_m * sin(data->player.fi);
+		data->player.pos_px.x += data->player.step_m * cos(data->player.fi);
+		mlx_clear_window(data->my_map.init,data->my_map.win);
+		draw_map(data);
+	}
+	else if (key_code == 1) // S
+	{
+		data->player.pos_px.y -= data->player.step_m * sin(data->player.fi);
+		data->player.pos_px.x -= data->player.step_m * cos(data->player.fi);
+		mlx_clear_window(data->my_map.init,data->my_map.win);
+		draw_map(data);
+	}
+	/*   here  */
+	else if (key_code == 0) // A
+	{
+		data->player.pos_px.x += data->player.step_m * sin(data->player.fi);
+		data->player.pos_px.y -= data->player.step_m * cos(data->player.fi);
+		mlx_clear_window(data->my_map.init,data->my_map.win);
+		draw_map(data);
+	}
+	else if (key_code == 2) //  D
+	{
+		data->player.pos_px.x -= data->player.step_m * sin(data->player.fi);
+		data->player.pos_px.y += data->player.step_m * cos(data->player.fi);
+		mlx_clear_window(data->my_map.init,data->my_map.win);
+		draw_map(data);
+	}
+	/* ------------------------*/
+	mlx_put_image_to_window(data->my_map.init, data->my_map.win, data->my_map.img, 0, 0);
+	printf("%d\n",key_code);
+	return (0);
+}
 int main(int ac, char **av)
 {
 	t_data	data;
@@ -20,7 +84,15 @@ int main(int ac, char **av)
 	{
 		if (!ft_check(av[1], &data))
 		{
-			printf("good parsing \n");
+			fill_map(&data);
+			init_mlx(&data);
+			init_player(&data);
+			draw_map(&data);
+			mlx_put_image_to_window(data.my_map.init, data.my_map.win, data.my_map.img, 0, 0);
+			mlx_hook(data.my_map.win, 17, 1L << 0, ft_exit, &data);
+			mlx_hook(data.my_map.win, 2, 0L, ft_key_hook, &data);
+			mlx_loop(data.my_map.init);
+			// system("leaks cub3D");
 		}
 		else
 		{
@@ -32,12 +104,9 @@ int main(int ac, char **av)
 	else
 	{
 		ft_putstr_fd("Check ur number of arguments !\n", 2);
-	// system("leaks cub3D");
+			// system("leaks cub3D");
 		return (1);
 	}
-	
-	// printf("c = %d,%d,%d\n", data.color.tab_c[0],data.color.tab_c[1],data.color.tab_c[2]);
-	// printf("f = %d,%d,%d\n", data.color.tab_f[0],data.color.tab_f[1],data.color.tab_f[2]);
-	// printf("%s\n%s\n%s\n%s\n", data.txtrs.ea, data.txtrs.no, data.txtrs.so, data.txtrs.we);
+			// system("leaks cub3D");
 	return 0;
 }
