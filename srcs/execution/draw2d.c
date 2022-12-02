@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 12:09:19 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/02 16:34:26 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,8 @@ void drawcub(t_data *data , int x , int y,unsigned int color)
 	}
 }
 
-void player(t_data *data)
+void init_player(t_data *data)
 {
-	float	x;
-	float	y;
-
 	if (data->player.p == 'E')
 		data->player.fi = 0;
 	if (data->player.p == 'S')
@@ -102,17 +99,17 @@ void player(t_data *data)
 		data->player.fi = M_PI;
 	if (data->player.p == 'N')
 		data->player.fi =  M_PI / 2;
-	x = (data->player.pos.x * my_cubs_len) + my_cubs_len/2;
-	y = (data->player.pos.y * my_cubs_len) + my_cubs_len/2;
-	my_mlx_pixel_put(data, roundf(x), roundf(y),0xffffff);
+	data->player.pos_px.x = (data->player.pos_mp.x * my_cubs_len) + my_cubs_len/2;
+	data->player.pos_px.y = (data->player.pos_mp.y * my_cubs_len) + my_cubs_len/2;
+
+	my_mlx_pixel_put(data, roundf(data->player.pos_px.x), roundf(data->player.pos_px.y),0xffffff);
 }
 
-void execution(t_data *data)
+void draw_map(t_data *data)
 {
 	int y;
 	int x;
 
-	init_mlx(data);
 	data->max.y = get_height(data->my_map.map_splited);
 	data->max.x = get_weight(data->my_map.map_splited);
 	y = 0;
@@ -131,5 +128,4 @@ void execution(t_data *data)
 		}
 		y++;
 	}
-	player(data);
 }

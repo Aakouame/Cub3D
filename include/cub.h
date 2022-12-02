@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 12:04:03 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/02 16:35:37 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	t_cord	pos;
+	t_cord	pos_mp;
+	t_cord_float	pos_px;
+
 	float	fi;
 	float	step_m;
 	float	step_r;
@@ -124,5 +126,6 @@ void 	free_data(t_data *data);
 int		length_tab(char **str);
 char	**add_str(char **str, char *s);
 void  init_mlx(t_data *data);
-void  execution(t_data *data);
+void  draw_map(t_data *data);
+void init_player(t_data *data);
 #endif
