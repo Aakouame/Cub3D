@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 19:10:58 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/02 19:56:48 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int main(int ac, char **av)
 	{
 		if (!ft_check(av[1], &data))
 		{
-			//printf("good parsing\n");
 			fill_map(&data);
 			init_mlx(&data);
 			init_player(&data);
