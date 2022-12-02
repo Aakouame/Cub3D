@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 17:43:21 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/02 17:55:52 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,22 @@ int	ft_key_hook(int key_code, t_data *data)
 		mlx_clear_window(data->my_map.init,data->my_map.win);
 		draw_map(data);
 	}
+	/*   here  */
 	else if (key_code == 0) // A
 	{
-		data->player.pos_px.x += data->player.step_m * cos(data->player.fi);
-		data->player.pos_px.y -= data->player.step_m * sin(data->player.fi);
+		data->player.pos_px.x += data->player.step_m * sin(data->player.fi);
+		data->player.pos_px.y += -data->player.step_m * cos(data->player.fi);
 		mlx_clear_window(data->my_map.init,data->my_map.win);
 		draw_map(data);
 	}
 	else if (key_code == 2) //  D
 	{
-		data->player.pos_px.x -= data->player.step_m * cos(data->player.fi);
-		data->player.pos_px.y += data->player.step_m * sin(data->player.fi);
+		data->player.pos_px.x += -data->player.step_m * sin(data->player.fi);
+		data->player.pos_px.y += data->player.step_m * cos(data->player.fi);
 		mlx_clear_window(data->my_map.init,data->my_map.win);
 		draw_map(data);
 	}
+	/* ------------------------*/
 	mlx_put_image_to_window(data->my_map.init, data->my_map.win, data->my_map.img, 0, 0);
 	printf("%d\n",key_code);
 	return (0);
