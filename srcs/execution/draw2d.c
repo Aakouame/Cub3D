@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 16:34:26 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/02 17:30:52 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,20 @@ void  init_mlx(t_data *data)
 
 void dda(int X0, int Y0, int X1, int Y1,t_data *data,int color)
 {
-    // calculate dx & dy
     int dx = X1 - X0;
     int dy = Y1 - Y0;
  
-    // calculate steps required for generating pixels
     int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
  
-    // calculate increment in x & y for each steps
     float Xinc = dx / (float)steps;
     float Yinc = dy / (float)steps;
  
-    // Put pixel for each step
     float X = X0;
     float Y = Y0;
     for (int i = 0; i <= steps; i++) {
-        my_mlx_pixel_put(data,round(X), round(Y),color); // put pixel at (X,Y)
-        X += Xinc; // increment in x at each step
-        Y += Yinc; // increment in y at each step
+        my_mlx_pixel_put(data,round(X), round(Y),color); 
+        X += Xinc; 
+        Y += Yinc;
     }
 }
 
@@ -102,7 +98,7 @@ void init_player(t_data *data)
 	data->player.pos_px.x = (data->player.pos_mp.x * my_cubs_len) + my_cubs_len/2;
 	data->player.pos_px.y = (data->player.pos_mp.y * my_cubs_len) + my_cubs_len/2;
 
-	my_mlx_pixel_put(data, roundf(data->player.pos_px.x), roundf(data->player.pos_px.y),0xffffff);
+	//my_mlx_pixel_put(data, roundf(data->player.pos_px.x), roundf(data->player.pos_px.y),0xffffff);
 }
 
 void draw_map(t_data *data)
@@ -128,4 +124,6 @@ void draw_map(t_data *data)
 		}
 		y++;
 	}
+	my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffffff);
+	dda(data->player.pos_px.x,data->player.pos_px.y,data->player.pos_px.x + cos(data->player.fi) * 20,data->player.pos_px.y + sin(data->player.fi) * 20,data,0xffffff);
 }
