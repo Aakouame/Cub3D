@@ -6,7 +6,7 @@
 #    By: akouame <akouame@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 04:25:39 by akouame           #+#    #+#              #
-#    Updated: 2022/12/02 16:35:03 by yaskour          ###   ########.fr        #
+#    Updated: 2022/12/03 11:59:13 by akouame          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ $(NAME): $(LIB) $(OBJS)
 	@$(CC) -I $(CFLAGS) -c $< -o $@ -I $(HEADER)
 
 $(LIB):
-	@/bin/echo -n "loading: ▶️ "
+	@/bin/echo -n "loading: ▶ "
 	@make -C srcs/libft
 
 clean:
