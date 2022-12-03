@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/03 18:20:45 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/03 19:00:38 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_data
 	t_map		my_map;
 	int			key;
 	int			key_code;
+	t_cord_float ray;
 }	t_data;
 
 int		ft_check_exist(char *line, char *find, char **txtr, int size);
@@ -132,4 +133,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void dda(int X0, int Y0, int X1, int Y1,t_data *data,int color);
 void first_horizontal_intr(t_data *data,int ang);
 void first_vertical_intr(t_data *data,int ang);
+void draw_ray_ver(t_data *data,int ang);
+void draw_ray_hor(t_data *data,int ang);
 #endif
