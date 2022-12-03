@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/03 11:27:21 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/03 12:14:12 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ int main(int ac, char **av)
 	}
 	else
 	{
-		ft_putstr_fd("Check ur number of arguments !\n", 2);
+		ft_putstr_fd("Error ✗: Check ur number of arguments !\n", 2);
 		return (1);
 	}
 			// system("leaks cub3D");

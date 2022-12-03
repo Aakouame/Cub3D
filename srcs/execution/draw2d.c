@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 20:18:17 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/03 16:34:35 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 void  init_mlx(t_data *data)
 {
 	data->my_map.init = mlx_init();
-	data->my_map.win = mlx_new_window ( data->my_map.init, 2560, 1440, "cub3d");
+	data->my_map.win = mlx_new_window ( data->my_map.init, 1920, 1080, "cub3d");
 	data->my_map.img = mlx_new_image(data->my_map.init,2560,1440);
 	data->my_map.addr = mlx_get_data_addr(data->my_map.img, &data->my_map.bits_per_pixel, &data->my_map.line_length,&data->my_map.endian);
 }
@@ -102,7 +102,8 @@ void draw_map(t_data *data)
 {
 	int y;
 	int x;
-
+	float	i;
+	
 	data->max.y = get_height(data->my_map.map_splited);
 	data->max.x = get_weight(data->my_map.map_splited);
 	y = 0;
@@ -122,5 +123,13 @@ void draw_map(t_data *data)
 		y++;
 	}
 	my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffffff);
-	dda(data->player.pos_px.x,data->player.pos_px.y,data->player.pos_px.x + cos(data->player.fi) * 20,data->player.pos_px.y + sin(data->player.fi) * 20,data,0xffffff);
+	dda(data->player.pos_px.x,data->player.pos_px.y,data->player.pos_px.x + cos(data->player.fi),data->player.pos_px.y + sin(data->player.fi),data,0xffffff);
+	data->ray = data->player.fi - 30;
+	i = 0;
+	while (i < 1920)	
+	{
+		draw_rz(data, data->ray);
+		data->ray += 1 / 1920;
+		i ++;
+	}
 }
