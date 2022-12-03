@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 20:18:35 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/03 18:14:46 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,4 +129,5 @@ void  init_mlx(t_data *data);
 void  draw_map(t_data *data);
 void init_player(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void dda(int X0, int Y0, int X1, int Y1,t_data *data,int color);
 #endif
