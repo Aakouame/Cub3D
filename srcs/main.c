@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 20:32:20 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/03 10:59:11 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,42 @@ int	ft_exit(t_data data)
 	return (0);
 }
 
+int	check_wall(t_data *data,int x, int y)
+{
+	t_cord	r;
+	t_cord	p;
+	
+	p.x = data->player.pos_px.x /my_cubs_len;
+	p.y = data->player.pos_px.y/ my_cubs_len;
+	r.x = (x / my_cubs_len) - p.x;
+	r.y = (y /my_cubs_len) - p.y;
+	if (r.x == 1 && r.y == -1)
+	{
+		if (data->my_map.map_splited[p.y][p.x - 1] == '1'\
+			&& data->my_map.map_splited[p.y + 1][p.x] == '1')
+				return (1);
+	}
+	if (r.x == -1 && r.y == -1)
+	{
+		if (data->my_map.map_splited[p.y][p.x + 1] == '1'\
+			&& data->my_map.map_splited[p.y + 1][p.x] == '1')
+				return (1);
+	}
+	if (r.x == 1 && r.y == 1)
+	{
+		if (data->my_map.map_splited[p.y][p.x - 1] == '1'\
+			&& data->my_map.map_splited[p.y - 1][p.x] == '1')
+				return (1);
+	}
+	if (r.x == -1 && r.y == 1)
+	{
+		if (data->my_map.map_splited[p.y - 1][p.x] == '1'\
+			&& data->my_map.map_splited[p.y][p.x + 1] == '1')
+				return (1);
+	}
+	return (0);
+}
+
 int check_walls(t_data *data,char c)
 {
 	int x;
@@ -27,23 +63,31 @@ int check_walls(t_data *data,char c)
 	x = 0;
 	if (c == 'W')
 	{
-			x = data->player.pos_px.y + data->player.step_m * sin(data->player.fi);
-			y = data->player.pos_px.x + data->player.step_m * cos(data->player.fi);
+			y = data->player.pos_px.y + data->player.step_m * sin(data->player.fi);
+			x = data->player.pos_px.x + data->player.step_m * cos(data->player.fi);
+			if (check_wall(data, x, y))
+				return (1);
 	}
 	else if (c == 'S')
 	{
-		x = data->player.pos_px.y - data->player.step_m * sin(data->player.fi);
-		y = data->player.pos_px.x - data->player.step_m * cos(data->player.fi);
+		y = data->player.pos_px.y - data->player.step_m * sin(data->player.fi);
+		x = data->player.pos_px.x - data->player.step_m * cos(data->player.fi);
+			if (check_wall(data, x, y))
+				return (1);
 	}
 	else if (c == 'D')
 	{
 		x = data->player.pos_px.x - data->player.step_m * sin(data->player.fi);
 		y = data->player.pos_px.y + data->player.step_m * cos(data->player.fi);
+			if (check_wall(data, x, y))
+				return (1);
 	}
 	else if (c == 'A')
 	{
 		x = data->player.pos_px.x + data->player.step_m * sin(data->player.fi);
 		y = data->player.pos_px.y - data->player.step_m * cos(data->player.fi);
+			if (check_wall(data, x, y))
+				return (1);
 	}
 	x = x / my_cubs_len;
 	y = y / my_cubs_len;
