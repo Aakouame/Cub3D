@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/03 10:59:11 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/03 11:27:21 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,34 @@ int	check_wall(t_data *data,int x, int y)
 	
 	p.x = data->player.pos_px.x /my_cubs_len;
 	p.y = data->player.pos_px.y/ my_cubs_len;
-	r.x = (x / my_cubs_len) - p.x;
-	r.y = (y /my_cubs_len) - p.y;
+	x = (x / my_cubs_len);
+	r.x = x - p.x;
+	y = (y /my_cubs_len);
+	r.y = y - p.y;
+	if(data->my_map.map_splited[y][x] != '0')
+		return (1);
 	if (r.x == 1 && r.y == -1)
 	{
-		if (data->my_map.map_splited[p.y][p.x - 1] == '1'\
-			&& data->my_map.map_splited[p.y + 1][p.x] == '1')
+		if (data->my_map.map_splited[y][x - 1] == '1'\
+			&& data->my_map.map_splited[y + 1][x] == '1')
 				return (1);
 	}
 	if (r.x == -1 && r.y == -1)
 	{
-		if (data->my_map.map_splited[p.y][p.x + 1] == '1'\
-			&& data->my_map.map_splited[p.y + 1][p.x] == '1')
+		if (data->my_map.map_splited[y][x + 1] == '1'\
+			&& data->my_map.map_splited[y + 1][x] == '1')
 				return (1);
 	}
 	if (r.x == 1 && r.y == 1)
 	{
-		if (data->my_map.map_splited[p.y][p.x - 1] == '1'\
-			&& data->my_map.map_splited[p.y - 1][p.x] == '1')
+		if (data->my_map.map_splited[y][x - 1] == '1'\
+			&& data->my_map.map_splited[y - 1][x] == '1')
 				return (1);
 	}
 	if (r.x == -1 && r.y == 1)
 	{
-		if (data->my_map.map_splited[p.y - 1][p.x] == '1'\
-			&& data->my_map.map_splited[p.y][p.x + 1] == '1')
+		if (data->my_map.map_splited[y - 1][x] == '1'\
+			&& data->my_map.map_splited[y][x + 1] == '1')
 				return (1);
 	}
 	return (0);
