@@ -6,7 +6,7 @@
 #    By: akouame <akouame@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 04:25:39 by akouame           #+#    #+#              #
-#    Updated: 2022/12/02 16:35:03 by yaskour          ###   ########.fr        #
+#    Updated: 2022/12/03 18:22:24 by yaskour          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIB = srcs/libft/libft.a
 SRCS = $(addprefix srcs/, main.c parsing/check.c gnl/get_next_line_utils.c\
 		gnl/get_next_line.c outils/outil_1.c parsing/check_h_1.c \
 		outils/outil_2.c parsing/check_h_2.c fill.c free.c execution/draw2d.c\
-		execution/execution.c execution/player.c)
+		execution/execution.c execution/player.c execution/draw_ray.c)
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

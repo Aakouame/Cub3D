@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 20:18:17 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/03 18:25:39 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,6 @@ void draw_map(t_data *data)
 		}
 		y++;
 	}
-	my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffffff);
-	dda(data->player.pos_px.x,data->player.pos_px.y,data->player.pos_px.x + cos(data->player.fi) * 20,data->player.pos_px.y + sin(data->player.fi) * 20,data,0xffffff);
+	my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffff);
+	first_vertical_intr(data,data->player.fi);
 }
