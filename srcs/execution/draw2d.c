@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/04 20:44:18 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/04 21:33:08 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,16 +164,18 @@ int is_left(t_data *data)
 
 int is_wall(t_data *data,float y,float x)
 {
+	printf("%c",data->my_map.map_splited[25][7]);
 	int x_map;
 	int y_map;
 	x_map = floor(x/my_cubs_len);
 	y_map = floor(y/my_cubs_len);
+	printf("y = %d   x = %d\n",y_map,x_map);
 	if (data->my_map.map_splited[y_map][x_map] == '1')
 		return (1);
 	return (0);
 }
 
-void cast_one_ray(t_data *data)
+void cast_horz(t_data *data)
 {
 	float first_x_inter;
 	float first_y_inter;
@@ -182,6 +184,7 @@ void cast_one_ray(t_data *data)
 	float y_check;
 	float x_check;
 
+	data->player.ray.found_h = 0;
 	/* horizontal inter */
 	first_y_inter = floor(data->player.pos_px.y/my_cubs_len) * my_cubs_len;
 	if (is_down(data))
@@ -206,14 +209,76 @@ void cast_one_ray(t_data *data)
 	{
 		if (is_wall(data,y_check,x_check))
 		{
-			data->player.ray.wall_hit_x = x_check;
-			data->player.ray.wall_hit_y = y_check;
+			data->player.ray.found_h = 1;
+			data->player.ray.h_x = x_check;
+			data->player.ray.h_y = y_check;
 			break;
 		}
 		y_check += y_step;
 		x_check += x_step;
 	}
+}
 
+void cast_ver(t_data *data)
+{
+	float first_x_inter;
+	float first_y_inter;
+	float y_step;
+	float x_step;
+	float y_check;
+	float x_check;
+
+	data->player.ray.found_v = 0;
+	/* vertical inter */
+	first_x_inter = floor(data->player.pos_px.x/my_cubs_len) * my_cubs_len;
+	// i need to check this later
+	if (is_right(data))
+		first_x_inter += my_cubs_len;
+	first_y_inter = data->player.pos_px.y + ((first_x_inter - data->player.pos_px.x) * tan(data->player.ray_angle));
+
+	x_step = my_cubs_len;
+	if (is_left(data))
+		x_step *= -1;
+
+	y_step = my_cubs_len * tan(data->player.ray_angle);
+	if (is_up(data) && y_step > 0)
+		y_step *= -1;
+	if (is_down(data) && y_step < 0)
+		y_step *= -1;
+
+	y_check = first_y_inter;
+	x_check = first_x_inter;
+	if (is_left(data))
+		x_check--;
+	while(x_check >= 0 && x_check <= WIDTH && y_check >= 0 && y_check <= HEIGHT)
+	{
+		if (is_wall(data,y_check,x_check))
+		{
+			data->player.ray.found_v = 1;
+			data->player.ray.v_x = x_check;
+			data->player.ray.v_y = y_check;
+			break;
+		}
+		y_check += y_step;
+		x_check += x_step;
+	}
+}
+
+void get_distance(t_data *data)
+{
+	if (data->player.ray.found_h)
+	{
+		data->player.ray.h_distance = 0;
+		data->player.ray.h_distance = sqrt(((data->player.ray.h_x - data->player.pos_px.x) * (data->player.ray.h_x - data->player.pos_px.x)) + ((data->player.ray.h_y - data->player.pos_px.y) * (data->player.ray.h_y - data->player.pos_px.y)));
+	}
+	else
+		data->player.ray.h_distance = INT_MAX;
+	if (data->player.ray.found_v)
+	{
+		data->player.ray.v_distance = sqrt(((data->player.ray.v_x - data->player.pos_px.x) * (data->player.ray.v_x - data->player.pos_px.x)) + ((data->player.ray.v_y - data->player.pos_px.y) * (data->player.ray.v_y - data->player.pos_px.y)));
+	}
+	else
+		data->player.ray.v_distance = INT_MAX;
 }
 
 void cast_all_rays(t_data *data)
@@ -230,8 +295,13 @@ void cast_all_rays(t_data *data)
 	float inc_ang = (M_PI/6)/WIDTH;
 	while(i < WIDTH)
 	{
-		cast_one_ray(data);
-		dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.wall_hit_x,data->player.ray.wall_hit_y,data,0xffff);
+		cast_horz(data);
+		cast_ver(data);
+		get_distance(data);
+		if (data->player.ray.v_distance > data->player.ray.h_distance)
+			dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.h_x,data->player.ray.h_y,data,0xffffff);
+		else
+			dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.v_x,data->player.ray.v_y,data,0xffffff);
 		data->player.ray_angle += inc_ang;
 		i++;
 	}

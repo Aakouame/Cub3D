@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/04 19:31:31 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/04 21:15:11 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include "../srcs/libft/libft.h"
 #include "../srcs/gnl/get_next_line.h"
 #include <math.h>
+#include <limits.h>
 
 typedef struct s_cord
 {
@@ -84,9 +85,16 @@ typedef struct s_map
 
 typedef struct s_ray
 {
-	float wall_hit_x;
-	float wall_hit_y;
-	float distance;
+	float h_x;
+	float h_y;
+	int 	found_h;
+	float h_distance;
+
+
+	float v_x;
+	float v_y;
+	int found_v;
+	float v_distance;
 } t_ray;
 
 typedef struct s_player
