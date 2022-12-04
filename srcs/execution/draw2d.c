@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/03 19:40:07 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/04 17:34:32 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,25 @@ void draw_map(t_data *data)
 		y++;
 	}
 	my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffff);
-	first_vertical_intr(data,data->player.fi - (M_PI/6));
-	draw_ray_ver(data,data->player.fi - (M_PI/6));
-	dda(data->player.pos_px.x,data->player.pos_px.y,data->ray.x,data->ray.y,data,0xffffff);
+	//first_vertical_intr(data,data->player.fi - (M_PI/6));
+	//draw_ray_ver(data,data->player.fi - (M_PI/6));
 }
+
+/*int normalize_angle(int angle)
+{
+	double normalize_ang = angle % (2 * 1);
+	return ()
+}
+void cast_all_rays(t_data *data)
+{
+	int ray_angle = data->player.fi - (M_PI/6);
+	int i = 0;
+	float inc_ang = (M_PI/6)/1440;
+	while(i < 1440)
+	{
+		// cast ray;
+		ray_angle += inc_ang;
+	}
+
+}*/
+
