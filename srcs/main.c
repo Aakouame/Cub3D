@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/03 11:27:21 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/04 17:49:04 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,16 +109,12 @@ int	ft_key_hook(int key_code, t_data *data)
 	if (key_code == 124) // right key
 	{
 		data->player.fi += data->player.step_r;
-		data->player.fi = fmod(data->player.fi,2 * M_PI);
-		if (data->player.fi < 0)
-			data->player.fi += 2 * M_PI;
+		normalize_angle(data);
 	}
 	else if (key_code == 123) // left key
 	{
 		data->player.fi -= data->player.step_r;
-		data->player.fi = fmod(data->player.fi,2 * M_PI);
-		if (data->player.fi < 0)
-			data->player.fi += 2 * M_PI;
+		normalize_angle(data);
 	}
 	else if (key_code == 13) // w
 	{

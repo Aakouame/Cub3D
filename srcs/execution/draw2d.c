@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/04 17:34:32 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/04 17:49:02 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,14 @@ void draw_map(t_data *data)
 	//draw_ray_ver(data,data->player.fi - (M_PI/6));
 }
 
-/*int normalize_angle(int angle)
+void normalize_angle(t_data *data)
 {
-	double normalize_ang = angle % (2 * 1);
-	return ()
+	data->player.fi = fmod(data->player.fi,2 * M_PI);
+	if (data->player.fi < 0)
+		data->player.fi += 2 * M_PI;
 }
-void cast_all_rays(t_data *data)
+
+/*void cast_all_rays(t_data *data)
 {
 	int ray_angle = data->player.fi - (M_PI/6);
 	int i = 0;
