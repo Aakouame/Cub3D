@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/04 17:41:59 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/04 17:57:31 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ typedef struct s_data
 	t_map		my_map;
 	int			key;
 	int			key_code;
-	t_cord_float ray;
-	t_cord_float p_ray;
 }	t_data;
 
 int		ft_check_exist(char *line, char *find, char **txtr, int size);

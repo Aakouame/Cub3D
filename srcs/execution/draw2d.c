@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/04 17:49:02 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/04 17:58:08 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,9 +133,12 @@ void normalize_angle(t_data *data)
 		data->player.fi += 2 * M_PI;
 }
 
-/*void cast_all_rays(t_data *data)
+void cast_all_rays(t_data *data)
 {
-	int ray_angle = data->player.fi - (M_PI/6);
+	float ray_angle = data->player.fi - (M_PI/6);
+	ray_angle = fmod(ray_angle,2 * M_PI);
+	if (ray_angle < 0)
+		ray_angle += 2 * M_PI;
 	int i = 0;
 	float inc_ang = (M_PI/6)/1440;
 	while(i < 1440)
@@ -144,5 +147,4 @@ void normalize_angle(t_data *data)
 		ray_angle += inc_ang;
 	}
 
-}*/
-
+}
