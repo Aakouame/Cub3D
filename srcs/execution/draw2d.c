@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/04 20:42:34 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/04 20:44:18 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,6 @@ void cast_all_rays(t_data *data)
 	while(i < WIDTH)
 	{
 		cast_one_ray(data);
-		// cast ray;
 		dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.wall_hit_x,data->player.ray.wall_hit_y,data,0xffff);
 		data->player.ray_angle += inc_ang;
 		i++;
