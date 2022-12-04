@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/04 17:58:08 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/04 19:41:14 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 void  init_mlx(t_data *data)
 {
 	data->my_map.init = mlx_init();
-	data->my_map.win = mlx_new_window ( data->my_map.init, 2560, 1440, "cub3d");
-	data->my_map.img = mlx_new_image(data->my_map.init,2560,1440);
+	data->my_map.win = mlx_new_window ( data->my_map.init, WIDTH, HEIGHT, "cub3d");
+	data->my_map.img = mlx_new_image(data->my_map.init,WIDTH,HEIGHT);
 	data->my_map.addr = mlx_get_data_addr(data->my_map.img, &data->my_map.bits_per_pixel, &data->my_map.line_length,&data->my_map.endian);
 }
 
@@ -122,6 +122,7 @@ void draw_map(t_data *data)
 		y++;
 	}
 	my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffff);
+	cast_all_rays(data);
 	//first_vertical_intr(data,data->player.fi - (M_PI/6));
 	//draw_ray_ver(data,data->player.fi - (M_PI/6));
 }
@@ -133,18 +134,104 @@ void normalize_angle(t_data *data)
 		data->player.fi += 2 * M_PI;
 }
 
-void cast_all_rays(t_data *data)
+int is_down(t_data *data)
 {
-	float ray_angle = data->player.fi - (M_PI/6);
-	ray_angle = fmod(ray_angle,2 * M_PI);
-	if (ray_angle < 0)
-		ray_angle += 2 * M_PI;
-	int i = 0;
-	float inc_ang = (M_PI/6)/1440;
-	while(i < 1440)
+	if (data->player.ray_angle > 0 && data->player.ray_angle < M_PI)
+		return (1);
+	return (0);
+}
+
+int is_up(t_data *data)
+{
+	if (!is_down(data))
+		return (1);
+	return (0);
+}
+
+int is_right(t_data *data)
+{
+	if (data->player.ray_angle < (0.5 * M_PI) || data->player.ray_angle > (1.5 * M_PI))
+		return (1);
+	return (0);
+}
+
+int is_left(t_data *data)
+{
+	if (!is_right(data))
+		return (1);
+	return (0);
+}
+
+int is_wall(t_data *data,float y,float x)
+{
+	int x_map;
+	int y_map;
+	x_map = floor(x/my_cubs_len);
+	y_map = floor(y/my_cubs_len);
+	if (data->my_map.map_splited[y_map][x_map] == '1')
+		return (1);
+	return (0);
+}
+
+void cast_one_ray(t_data *data)
+{
+	float first_x_inter;
+	float first_y_inter;
+	float y_step;
+	float x_step;
+	float y_check;
+	float x_check;
+
+	/* horizontal inter */
+	first_y_inter = floor(data->player.pos_px.y/my_cubs_len) * my_cubs_len;
+	if (is_down(data))
+		first_y_inter += my_cubs_len;
+	first_x_inter = data->player.pos_px.x + ((first_y_inter - data->player.pos_px.y) /tan(data->player.ray_angle));
+
+	y_step = my_cubs_len;
+	if (is_up(data))
+		y_step *= -1;
+
+	x_step = my_cubs_len / tan(data->player.ray_angle);
+	if (is_left(data) && x_step > 0)
+		x_step *= -1;
+
+	y_check = first_y_inter;
+	x_check = first_x_inter;
+	if (is_up(data))
+		y_check--;
+	while(x_check >= 0 && x_check <= WIDTH && y_check >= 0 && y_check <= HEIGHT)
 	{
-		// cast ray;
-		ray_angle += inc_ang;
+		if (is_wall(data,y_check,x_check))
+		{
+			data->player.ray.wall_hit_x = x_check;
+			data->player.ray.wall_hit_y = y_check;
+			break;
+		}
+		y_check += y_step;
+		x_check += x_step;
 	}
 
+}
+
+void cast_all_rays(t_data *data)
+{
+	// ************ calculate start angle and normalize it *************//
+	data->player.ray_angle = data->player.fi - (M_PI/6);
+	data->player.ray_angle = fmod(data->player.ray_angle,2 * M_PI);
+	if (data->player.ray_angle < 0)
+		data->player.ray_angle += 2 * M_PI;
+	// ******************************************************************//
+
+	int i = 0;
+
+	float inc_ang = (M_PI/6)/WIDTH;
+	while(i < 1)
+	{
+		cast_one_ray(data);
+		// cast ray;
+		data->player.ray_angle += inc_ang;
+		i++;
+	}
+	dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.wall_hit_x,data->player.ray.wall_hit_y,data,0xffff);
 }

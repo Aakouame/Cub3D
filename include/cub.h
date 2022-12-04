@@ -6,13 +6,15 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/04 17:57:31 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/04 19:31:31 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 #define CUB_H
 #define my_cubs_len 30
+#define WIDTH 2560
+#define HEIGHT 1440
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -80,6 +82,13 @@ typedef struct s_map
 
 }	t_map;
 
+typedef struct s_ray
+{
+	float wall_hit_x;
+	float wall_hit_y;
+	float distance;
+} t_ray;
+
 typedef struct s_player
 {
 	t_cord	pos_mp;
@@ -89,6 +98,8 @@ typedef struct s_player
 	float	step_m;
 	float	step_r;
 	char	p;
+	t_ray ray;
+	float ray_angle;
 }	t_player;
 
 
@@ -135,4 +146,5 @@ void first_vertical_intr(t_data *data,int ang);
 void draw_ray_ver(t_data *data,int ang);
 void draw_ray_hor(t_data *data,int ang);
 void normalize_angle(t_data *data);
+void cast_all_rays(t_data *data);
 #endif
