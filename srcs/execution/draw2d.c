@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/04 19:41:14 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/04 20:42:34 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,8 @@ void cast_one_ray(t_data *data)
 	x_step = my_cubs_len / tan(data->player.ray_angle);
 	if (is_left(data) && x_step > 0)
 		x_step *= -1;
+	if (is_right(data) && x_step < 0)
+		x_step *= -1;
 
 	y_check = first_y_inter;
 	x_check = first_x_inter;
@@ -226,12 +228,12 @@ void cast_all_rays(t_data *data)
 	int i = 0;
 
 	float inc_ang = (M_PI/6)/WIDTH;
-	while(i < 1)
+	while(i < WIDTH)
 	{
 		cast_one_ray(data);
 		// cast ray;
+		dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.wall_hit_x,data->player.ray.wall_hit_y,data,0xffff);
 		data->player.ray_angle += inc_ang;
 		i++;
 	}
-	dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.wall_hit_x,data->player.ray.wall_hit_y,data,0xffff);
 }
