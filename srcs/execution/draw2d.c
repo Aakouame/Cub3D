@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/05 14:04:28 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/05 14:41:04 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,9 @@ void cast_horz(t_data *data)
 	float x_step;
 	float y_check;
 	float x_check;
+	data->player.ray_angle = fmod(data->player.ray_angle,2 * M_PI);
+	if (data->player.ray_angle < 0)
+		data->player.ray_angle += 2 * M_PI;
 
 	data->player.ray.found_h = 0;
 	/* horizontal inter */
@@ -229,6 +232,10 @@ void cast_ver(t_data *data)
 	float x_step;
 	float y_check;
 	float x_check;
+
+	data->player.ray_angle = fmod(data->player.ray_angle,2 * M_PI);
+	if (data->player.ray_angle < 0)
+		data->player.ray_angle += 2 * M_PI;
 
 	data->player.ray.found_v = 0;
 	/* vertical inter */
@@ -282,9 +289,6 @@ void cast_all_rays(t_data *data)
 {
 	// ************ calculate start angle and normalize it *************//
 	data->player.ray_angle = data->player.fi - (M_PI /6);
-	data->player.ray_angle = fmod(data->player.ray_angle,2 * M_PI);
-	if (data->player.ray_angle < 0)
-		data->player.ray_angle += 2 * M_PI;
 	// ******************************************************************//
 
 	int i = 0;
