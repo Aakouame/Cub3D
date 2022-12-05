@@ -6,13 +6,15 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 16:45:51 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/05 19:01:34 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
-
 #define CUB_H
+#define my_cubs_len 30
+#define WIDTH 2560
+#define HEIGHT 1440
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -21,6 +23,7 @@
 #include "../srcs/libft/libft.h"
 #include "../srcs/gnl/get_next_line.h"
 #include <math.h>
+#include <limits.h>
 
 typedef struct s_cord
 {
@@ -80,15 +83,30 @@ typedef struct s_map
 
 }	t_map;
 
+typedef struct s_ray
+{
+	float h_x;
+	float h_y;
+	int 	found_h;
+	float h_distance;
+
+
+	float v_x;
+	float v_y;
+	int found_v;
+	float v_distance;
+} t_ray;
+
 typedef struct s_player
 {
 	t_cord	pos_mp;
 	t_cord_float	pos_px;
-
 	float	fi;
 	float	step_m;
 	float	step_r;
 	char	p;
+	t_ray ray;
+	float ray_angle;
 }	t_player;
 
 
@@ -129,4 +147,11 @@ void  init_mlx(t_data *data);
 void  draw_map(t_data *data);
 void init_player(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void dda(int X0, int Y0, int X1, int Y1,t_data *data,int color);
+void first_horizontal_intr(t_data *data,int ang);
+void first_vertical_intr(t_data *data,int ang);
+void draw_ray_ver(t_data *data,int ang);
+void draw_ray_hor(t_data *data,int ang);
+void normalize_angle(t_data *data);
+void cast_all_rays(t_data *data);
 #endif

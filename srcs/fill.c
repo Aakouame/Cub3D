@@ -28,8 +28,8 @@ void fill_map(t_data *data)
 		k++;
 		i++;
 	}
-	data->player.step_m = 10;
-	data->player.step_r = 0.1;
+	data->player.step_m = 5;
+	data->player.step_r = M_PI/30;
 	data->my_map.map_splited[k] = NULL;
 }
 

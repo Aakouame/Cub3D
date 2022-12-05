@@ -6,12 +6,11 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 17:30:52 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/05 19:20:37 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
-int my_cubs_len = 32;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -23,8 +22,8 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 void  init_mlx(t_data *data)
 {
 	data->my_map.init = mlx_init();
-	data->my_map.win = mlx_new_window ( data->my_map.init, 2560, 1440, "cub3d");
-	data->my_map.img = mlx_new_image(data->my_map.init,2560,1440);
+	data->my_map.win = mlx_new_window ( data->my_map.init, WIDTH, HEIGHT, "cub3d");
+	data->my_map.img = mlx_new_image(data->my_map.init,WIDTH,HEIGHT);
 	data->my_map.addr = mlx_get_data_addr(data->my_map.img, &data->my_map.bits_per_pixel, &data->my_map.line_length,&data->my_map.endian);
 }
 
@@ -97,33 +96,217 @@ void init_player(t_data *data)
 		data->player.fi =  M_PI / 2;
 	data->player.pos_px.x = (data->player.pos_mp.x * my_cubs_len) + my_cubs_len/2;
 	data->player.pos_px.y = (data->player.pos_mp.y * my_cubs_len) + my_cubs_len/2;
-
-	//my_mlx_pixel_put(data, roundf(data->player.pos_px.x), roundf(data->player.pos_px.y),0xffffff);
 }
 
 void draw_map(t_data *data)
 {
 	int y;
-	int x;
+	// int x;
 
 	data->max.y = get_height(data->my_map.map_splited);
 	data->max.x = get_weight(data->my_map.map_splited);
 	y = 0;
-	while(y < data->max.y)
+	// while(y < data->max.y)
+	// {
+	// 	x = 0;
+	// 	while(x < data->max.x)
+	// 	{
+	// 		if (data->my_map.map_splited[y][x] == ' ')
+	// 			drawcub(data,x,y,0x000000);
+	// 		else if (data->my_map.map_splited[y][x] == '1')
+	// 			drawcub(data,x,y,0x124A2A);
+	// 		else if (data->my_map.map_splited[y][x] == '0')
+	// 			drawcub(data,x,y,0x475E6B);
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
+	my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffff);
+	cast_all_rays(data);
+	//first_vertical_intr(data,data->player.fi - (M_PI/6));
+	//draw_ray_ver(data,data->player.fi - (M_PI/6));
+}
+
+void normalize_angle(t_data *data)
+{
+	data->player.fi = fmod(data->player.fi,2 * M_PI);
+	if (data->player.fi < 0)
+		data->player.fi += 2 * M_PI;
+}
+
+int is_down(t_data *data)
+{
+	if (data->player.ray_angle > 0 && data->player.ray_angle < M_PI)
+		return (1);
+	return (0);
+}
+
+int is_up(t_data *data)
+{
+	if (!is_down(data))
+		return (1);
+	return (0);
+}
+
+int is_right(t_data *data)
+{
+	if (data->player.ray_angle < (0.5 * M_PI) || data->player.ray_angle > (1.5 * M_PI))
+		return (1);
+	return (0);
+}
+
+int is_left(t_data *data)
+{
+	if (!is_right(data))
+		return (1);
+	return (0);
+}
+
+int is_wall(t_data *data,float y,float x)
+{
+	int x_map;
+	int y_map;
+
+	x_map = floor(x/my_cubs_len);
+	y_map = floor(y/my_cubs_len);
+	//printf("y = %d   x = %d\n",y_map,x_map);
+	if (y >= (data->max.y * my_cubs_len))
+		return (1);
+	if (data->my_map.map_splited[y_map][x_map] == '1')
+		return (1);
+	return (0);
+}
+
+void cast_horz(t_data *data)
+{
+	float first_x_inter;
+	float first_y_inter;
+	float y_step;
+	float x_step;
+	float y_check;
+	float x_check;
+	data->player.ray_angle = fmod(data->player.ray_angle,2 * M_PI);
+	if (data->player.ray_angle < 0)
+		data->player.ray_angle += 2 * M_PI;
+
+	data->player.ray.found_h = 0;
+	/* horizontal inter */
+	first_y_inter = floor(data->player.pos_px.y/my_cubs_len) * my_cubs_len;
+	if (is_down(data))
+		first_y_inter += my_cubs_len;
+	first_x_inter = data->player.pos_px.x + ((first_y_inter - data->player.pos_px.y) /tan(data->player.ray_angle));
+
+	y_step = my_cubs_len;
+	if (is_up(data))
+		y_step *= -1;
+	x_step = my_cubs_len / tan(data->player.ray_angle);
+	if (is_left(data) && x_step > 0)
+		x_step *= -1;
+	if (is_right(data) && x_step < 0)
+		x_step *= -1;
+
+	y_check = first_y_inter;
+	x_check = first_x_inter;
+	if (is_up(data))
+		y_check--;
+	while(x_check >= 0 && x_check <= WIDTH && y_check >= 0 && y_check <= HEIGHT)
 	{
-		x = 0;
-		while(x < data->max.x)
+		if (is_wall(data,y_check,x_check))
 		{
-			if (data->my_map.map_splited[y][x] == ' ')
-				drawcub(data,x,y,0x000000);
-			else if (data->my_map.map_splited[y][x] == '1')
-				drawcub(data,x,y,0x124A2A);
-			else if (data->my_map.map_splited[y][x] == '0')
-				drawcub(data,x,y,0x475E6B);
-			x++;
+			data->player.ray.found_h = 1;
+			data->player.ray.h_x = first_x_inter;
+			data->player.ray.h_y = first_y_inter;
+			break;
 		}
-		y++;
+		y_check += y_step;
+		x_check += x_step;
+		first_x_inter += x_step;
+		first_y_inter += y_step;
 	}
-	my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffffff);
-	dda(data->player.pos_px.x,data->player.pos_px.y,data->player.pos_px.x + cos(data->player.fi) * 20,data->player.pos_px.y + sin(data->player.fi) * 20,data,0xffffff);
+}
+
+void cast_ver(t_data *data)
+{
+	float first_x_inter;
+	float first_y_inter;
+	float y_step;
+	float x_step;
+	float y_check;
+	float x_check;
+
+	data->player.ray_angle = fmod(data->player.ray_angle,2 * M_PI);
+	if (data->player.ray_angle < 0)
+		data->player.ray_angle += 2 * M_PI;
+
+	data->player.ray.found_v = 0;
+	/* vertical inter */
+	first_x_inter = floor(data->player.pos_px.x/my_cubs_len) * my_cubs_len;
+	// i need to check this later
+	if (is_right(data))
+		first_x_inter += my_cubs_len;
+	first_y_inter = data->player.pos_px.y + ((first_x_inter - data->player.pos_px.x) * tan(data->player.ray_angle));
+
+	x_step = my_cubs_len;
+	if (is_left(data))
+		x_step *= -1;
+
+	y_step = my_cubs_len * tan(data->player.ray_angle);
+	if (is_up(data) && y_step > 0)
+		y_step *= -1;
+	if (is_down(data) && y_step < 0)
+		y_step *= -1;
+
+	y_check = first_y_inter;
+	x_check = first_x_inter;
+	if (is_left(data))
+		x_check--;
+	while(x_check >= 0 && x_check <= WIDTH && y_check >= 0 && y_check <= HEIGHT)
+	{
+		if (is_wall(data,y_check,x_check))
+		{
+			data->player.ray.found_v = 1;
+			data->player.ray.v_x = first_x_inter;
+			data->player.ray.v_y = first_y_inter;
+			break;
+		}
+		y_check += y_step;
+		x_check += x_step;
+		first_x_inter += x_step;
+		first_y_inter += y_step;
+	}
+}
+
+void get_distance(t_data *data)
+{
+	if (data->player.ray.found_h)
+		data->player.ray.h_distance = sqrt(((data->player.ray.h_x - data->player.pos_px.x) * (data->player.ray.h_x - data->player.pos_px.x)) + ((data->player.ray.h_y - data->player.pos_px.y) * (data->player.ray.h_y - data->player.pos_px.y)));
+	else
+		data->player.ray.h_distance = INT_MAX;
+	if (data->player.ray.found_v)
+		data->player.ray.v_distance = sqrt(((data->player.ray.v_x - data->player.pos_px.x) * (data->player.ray.v_x - data->player.pos_px.x)) + ((data->player.ray.v_y - data->player.pos_px.y) * (data->player.ray.v_y - data->player.pos_px.y)));
+	else
+		data->player.ray.v_distance = INT_MAX;
+}
+
+void cast_all_rays(t_data *data)
+{
+	// ************ calculate start angle and normalize it *************//
+	data->player.ray_angle = data->player.fi - (M_PI /6);
+	int i = 0;
+
+	float inc_ang = (M_PI/3)/WIDTH;
+	while(i < WIDTH)
+	{
+		cast_horz(data);
+		cast_ver(data);
+		get_distance(data);
+		if (data->player.ray.v_distance > data->player.ray.h_distance)
+			dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.h_x,data->player.ray.h_y,data,0xffffff);
+			// printf("h < v\n");
+		else
+			dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.v_x,data->player.ray.v_y,data,0xffffff);
+			// printf("v < h\n");
+		data->player.ray_angle += inc_ang;
+		i++;
+	}
 }

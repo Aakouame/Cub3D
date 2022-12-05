@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 20:12:08 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/05 19:03:00 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,87 @@ int	ft_exit(t_data data)
 	return (0);
 }
 
+int	check_wall(t_data *data,int x, int y)
+{
+	t_cord	r;
+	t_cord	p;
+	
+	p.x = data->player.pos_px.x /my_cubs_len;
+	p.y = data->player.pos_px.y/ my_cubs_len;
+	x = (x / my_cubs_len);
+	r.x = x - p.x;
+	y = (y /my_cubs_len);
+	r.y = y - p.y;
+	if(data->my_map.map_splited[y][x] != '0')
+		return (1);
+	if (r.x == 1 && r.y == -1)
+	{
+		if (data->my_map.map_splited[y][x - 1] == '1'\
+			&& data->my_map.map_splited[y + 1][x] == '1')
+				return (1);
+	}
+	if (r.x == -1 && r.y == -1)
+	{
+		if (data->my_map.map_splited[y][x + 1] == '1'\
+			&& data->my_map.map_splited[y + 1][x] == '1')
+				return (1);
+	}
+	if (r.x == 1 && r.y == 1)
+	{
+		if (data->my_map.map_splited[y][x - 1] == '1'\
+			&& data->my_map.map_splited[y - 1][x] == '1')
+				return (1);
+	}
+	if (r.x == -1 && r.y == 1)
+	{
+		if (data->my_map.map_splited[y - 1][x] == '1'\
+			&& data->my_map.map_splited[y][x + 1] == '1')
+				return (1);
+	}
+	return (0);
+}
+
+int check_walls(t_data *data,char c)
+{
+	int x;
+	int y;
+	y = 0;
+	x = 0;
+	if (c == 'W')
+	{
+			y = data->player.pos_px.y + data->player.step_m * sin(data->player.fi);
+			x = data->player.pos_px.x + data->player.step_m * cos(data->player.fi);
+			if (check_wall(data, x, y))
+				return (1);
+	}
+	else if (c == 'S')
+	{
+		y = data->player.pos_px.y - data->player.step_m * sin(data->player.fi);
+		x = data->player.pos_px.x - data->player.step_m * cos(data->player.fi);
+			if (check_wall(data, x, y))
+				return (1);
+	}
+	else if (c == 'D')
+	{
+		x = data->player.pos_px.x - data->player.step_m * sin(data->player.fi);
+		y = data->player.pos_px.y + data->player.step_m * cos(data->player.fi);
+			if (check_wall(data, x, y))
+				return (1);
+	}
+	else if (c == 'A')
+	{
+		x = data->player.pos_px.x + data->player.step_m * sin(data->player.fi);
+		y = data->player.pos_px.y - data->player.step_m * cos(data->player.fi);
+			if (check_wall(data, x, y))
+				return (1);
+	}
+	x = x / my_cubs_len;
+	y = y / my_cubs_len;
+	if (data->my_map.map_splited[y][x] == '1')
+		return (1);
+	return (0);
+}
+
 int	ft_key_hook(int key_code, t_data *data)
 {
 	data->key = key_code;
@@ -28,36 +109,44 @@ int	ft_key_hook(int key_code, t_data *data)
 	if (key_code == 124) // right key
 	{
 		data->player.fi += data->player.step_r;
-		data->player.fi = fmod(data->player.fi,2 * M_PI);
-		if (data->player.fi < 0)
-			data->player.fi += 2 * M_PI;
+		normalize_angle(data);
 	}
 	else if (key_code == 123) // left key
 	{
 		data->player.fi -= data->player.step_r;
-		data->player.fi = fmod(data->player.fi,2 * M_PI);
-		if (data->player.fi < 0)
-			data->player.fi += 2 * M_PI;
+		normalize_angle(data);
 	}
 	else if (key_code == 13) // w
 	{
-		data->player.pos_px.y += data->player.step_m * sin(data->player.fi);
-		data->player.pos_px.x += data->player.step_m * cos(data->player.fi);
+		if (!check_walls(data,'W'))
+		{
+			data->player.pos_px.y += data->player.step_m * sin(data->player.fi);
+			data->player.pos_px.x += data->player.step_m * cos(data->player.fi);
+		}
 	}
 	else if (key_code == 1) // S
 	{
+		if (!check_walls(data,'S'))
+		{
 		data->player.pos_px.y -= data->player.step_m * sin(data->player.fi);
 		data->player.pos_px.x -= data->player.step_m * cos(data->player.fi);
+		}
 	}
 	else if (key_code == 0) // A
 	{
+		if (!check_walls(data,'A'))
+		{
 		data->player.pos_px.x += data->player.step_m * sin(data->player.fi);
 		data->player.pos_px.y -= data->player.step_m * cos(data->player.fi);
+		}
 	}
 	else if (key_code == 2) //  D
 	{
+		if (!check_walls(data,'D'))
+		{
 		data->player.pos_px.x -= data->player.step_m * sin(data->player.fi);
 		data->player.pos_px.y += data->player.step_m * cos(data->player.fi);
+		}
 	}
 	draw_map(data);
 	mlx_put_image_to_window(data->my_map.init, data->my_map.win, data->my_map.img, 0, 0);
