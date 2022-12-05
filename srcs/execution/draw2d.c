@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/05 14:41:04 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/05 14:44:51 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,12 +215,14 @@ void cast_horz(t_data *data)
 		if (is_wall(data,y_check,x_check))
 		{
 			data->player.ray.found_h = 1;
-			data->player.ray.h_x = x_check;
-			data->player.ray.h_y = y_check;
+			data->player.ray.h_x = first_x_inter;
+			data->player.ray.h_y = first_y_inter;
 			break;
 		}
 		y_check += y_step;
 		x_check += x_step;
+		first_x_inter += x_step;
+		first_y_inter += y_step;
 	}
 }
 
@@ -264,12 +266,14 @@ void cast_ver(t_data *data)
 		if (is_wall(data,y_check,x_check))
 		{
 			data->player.ray.found_v = 1;
-			data->player.ray.v_x = x_check;
-			data->player.ray.v_y = y_check;
+			data->player.ray.v_x = first_x_inter;
+			data->player.ray.v_y = first_y_inter;
 			break;
 		}
 		y_check += y_step;
 		x_check += x_step;
+		first_x_inter += x_step;
+		first_y_inter += y_step;
 	}
 }
 
