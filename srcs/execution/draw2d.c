@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/05 15:01:54 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/05 19:16:14 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void  init_mlx(t_data *data)
 }
 
 
-void dda(int X0, int Y0, int X1, int Y1,t_data *data,int color)
+void dda(double X0, double Y0, double X1, double Y1,t_data *data,double color)
 {
-    int dx = X1 - X0;
-    int dy = Y1 - Y0;
+    double dx = X1 - X0;
+    double dy = Y1 - Y0;
  
-    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+    double steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy);
  
     double Xinc = dx / (double)steps;
     double Yinc = dy / (double)steps;
@@ -179,10 +179,13 @@ void cast_horz(t_data *data)
 {
 	double first_x_inter;
 	double first_y_inter;
+
 	double y_step;
 	double x_step;
+
 	double y_check;
 	double x_check;
+
 	data->player.ray_angle = fmod(data->player.ray_angle,2 * M_PI);
 	if (data->player.ray_angle < 0)
 		data->player.ray_angle += 2 * M_PI;
@@ -240,7 +243,6 @@ void cast_ver(t_data *data)
 	data->player.ray.found_v = 0;
 	/* vertical inter */
 	first_x_inter = floor(data->player.pos_px.x/my_cubs_len) * my_cubs_len;
-	// i need to check this later
 	if (is_right(data))
 		first_x_inter += my_cubs_len;
 	first_y_inter = data->player.pos_px.y + ((first_x_inter - data->player.pos_px.x) * tan(data->player.ray_angle));
