@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/05 13:53:22 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/05 14:04:28 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ int is_wall(t_data *data,float y,float x)
 
 	x_map = floor(x/my_cubs_len);
 	y_map = floor(y/my_cubs_len);
-	printf("y = %d   x = %d\n",y_map,x_map);
+	//printf("y = %d   x = %d\n",y_map,x_map);
 	if (y >= (data->max.y * my_cubs_len))
 		return (1);
 	if (data->my_map.map_splited[y_map][x_map] == '1')
@@ -281,7 +281,7 @@ void get_distance(t_data *data)
 void cast_all_rays(t_data *data)
 {
 	// ************ calculate start angle and normalize it *************//
-	data->player.ray_angle = data->player.fi - (M_PI/6);
+	data->player.ray_angle = data->player.fi - (M_PI /6);
 	data->player.ray_angle = fmod(data->player.ray_angle,2 * M_PI);
 	if (data->player.ray_angle < 0)
 		data->player.ray_angle += 2 * M_PI;
@@ -289,7 +289,7 @@ void cast_all_rays(t_data *data)
 
 	int i = 0;
 
-	float inc_ang = (M_PI/6)/WIDTH;
+	float inc_ang = (M_PI/3)/WIDTH;
 	while(i < WIDTH)
 	{
 		cast_horz(data);
