@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/05 14:58:54 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/05 15:01:54 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void dda(int X0, int Y0, int X1, int Y1,t_data *data,int color)
  
     int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
  
-    float Xinc = dx / (float)steps;
-    float Yinc = dy / (float)steps;
+    double Xinc = dx / (double)steps;
+    double Yinc = dy / (double)steps;
  
-    float X = X0;
-    float Y = Y0;
+    double X = X0;
+    double Y = Y0;
     for (int i = 0; i <= steps; i++) {
         my_mlx_pixel_put(data,round(X), round(Y),color); 
         X += Xinc; 
@@ -160,7 +160,7 @@ int is_left(t_data *data)
 	return (0);
 }
 
-int is_wall(t_data *data,float y,float x)
+int is_wall(t_data *data,double y,double x)
 {
 	int x_map;
 	int y_map;
@@ -177,12 +177,12 @@ int is_wall(t_data *data,float y,float x)
 
 void cast_horz(t_data *data)
 {
-	float first_x_inter;
-	float first_y_inter;
-	float y_step;
-	float x_step;
-	float y_check;
-	float x_check;
+	double first_x_inter;
+	double first_y_inter;
+	double y_step;
+	double x_step;
+	double y_check;
+	double x_check;
 	data->player.ray_angle = fmod(data->player.ray_angle,2 * M_PI);
 	if (data->player.ray_angle < 0)
 		data->player.ray_angle += 2 * M_PI;
@@ -226,12 +226,12 @@ void cast_horz(t_data *data)
 
 void cast_ver(t_data *data)
 {
-	float first_x_inter;
-	float first_y_inter;
-	float y_step;
-	float x_step;
-	float y_check;
-	float x_check;
+	double first_x_inter;
+	double first_y_inter;
+	double y_step;
+	double x_step;
+	double y_check;
+	double x_check;
 
 	data->player.ray_angle = fmod(data->player.ray_angle,2 * M_PI);
 	if (data->player.ray_angle < 0)
@@ -295,7 +295,7 @@ void cast_all_rays(t_data *data)
 
 	int i = 0;
 
-	float inc_ang = (M_PI/3)/WIDTH;
+	double inc_ang = (M_PI/3)/WIDTH;
 	while(i < WIDTH)
 	{
 		cast_horz(data);
