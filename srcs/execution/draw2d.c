@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/04 21:33:08 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/05 13:05:55 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,16 +267,11 @@ void cast_ver(t_data *data)
 void get_distance(t_data *data)
 {
 	if (data->player.ray.found_h)
-	{
-		data->player.ray.h_distance = 0;
 		data->player.ray.h_distance = sqrt(((data->player.ray.h_x - data->player.pos_px.x) * (data->player.ray.h_x - data->player.pos_px.x)) + ((data->player.ray.h_y - data->player.pos_px.y) * (data->player.ray.h_y - data->player.pos_px.y)));
-	}
 	else
 		data->player.ray.h_distance = INT_MAX;
 	if (data->player.ray.found_v)
-	{
 		data->player.ray.v_distance = sqrt(((data->player.ray.v_x - data->player.pos_px.x) * (data->player.ray.v_x - data->player.pos_px.x)) + ((data->player.ray.v_y - data->player.pos_px.y) * (data->player.ray.v_y - data->player.pos_px.y)));
-	}
 	else
 		data->player.ray.v_distance = INT_MAX;
 }
