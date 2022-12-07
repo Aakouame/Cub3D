@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 15:04:05 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/07 16:00:40 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,10 +295,9 @@ void cast_all_rays(t_data *data)
 	data->player.ray_angle = data->player.fi - (M_PI /6);
 	// ******************************************************************//
 
-	//int middle = HEIGHT/2;
 	double wall_height;
-	double distance_projected_wall ;
 	int i = 0;
+	double  test;
 
 	double inc_ang = (M_PI/3)/WIDTH;
 	while(i < WIDTH)
@@ -308,17 +307,19 @@ void cast_all_rays(t_data *data)
 		get_distance(data);
 		if (data->player.ray.v_distance > data->player.ray.h_distance)
 		{
-			distance_projected_wall = (WIDTH/2) * tan(M_PI / 6);
-			wall_height = (my_cubs_len/data->player.ray.h_distance) * distance_projected_wall;
+			test = data->player.ray.h_distance / my_cubs_len;
+			wall_height = HEIGHT/(test);
+			printf("%f\n",data->player.ray.h_distance);
 		}
 		else
 		{
-			distance_projected_wall = (WIDTH/2) * tan(M_PI / 6);
-			wall_height = (my_cubs_len/data->player.ray.v_distance) *  distance_projected_wall;
+			test = data->player.ray.v_distance / my_cubs_len;
+			wall_height = HEIGHT/(test);
+			printf("%f\n",data->player.ray.v_distance);
 		}
-		dda(i,0,i,(HEIGHT/2),data,0xffffff);
-		dda(i,(HEIGHT/2) - (wall_height / 2),i,(wall_height/2) + (HEIGHT/2) ,data,0xff);
-		dda(i,(wall_height/2)+ (HEIGHT/2),i,HEIGHT -1,data,0xffff);
+		//dda(i,0,i,(HEIGHT/2),data,0xffffff);
+		//dda(i,(HEIGHT/2) - (wall_height / 2),i,(wall_height/2) + (HEIGHT/2) ,data,0xff);
+		//dda(i,(wall_height/2)+ (HEIGHT/2),i,HEIGHT -1,data,0xffff);
 		data->player.ray_angle += inc_ang;
 		i++;
 	}
