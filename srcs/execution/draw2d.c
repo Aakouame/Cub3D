@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 13:04:24 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/07 14:47:47 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,8 +295,9 @@ void cast_all_rays(t_data *data)
 	data->player.ray_angle = data->player.fi - (M_PI /6);
 	// ******************************************************************//
 
-	int middle = HEIGHT/2;
-	int wall_height;
+	//int middle = HEIGHT/2;
+	double wall_height;
+	double distance_projected_wall ;
 	int i = 0;
 
 	double inc_ang = (M_PI/3)/WIDTH;
@@ -307,21 +308,15 @@ void cast_all_rays(t_data *data)
 		get_distance(data);
 		if (data->player.ray.v_distance > data->player.ray.h_distance)
 		{
-			wall_height = data->player.ray.v_distance/my_cubs_len;
-			wall_height = HEIGHT/wall_height;
-			printf("%d\n",wall_height);
-			dda(i,middle - (wall_height / 2),i,middle + (wall_height / 2) ,data,0xff);
-			//dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.h_x,data->player.ray.h_y,data,0xffffff);
+			distance_projected_wall = (WIDTH/2) * tan(M_PI / 6);
+			wall_height = (my_cubs_len/data->player.ray.h_distance) * distance_projected_wall;
 		}
 		else
 		{
-			wall_height = data->player.ray.v_distance/my_cubs_len;
-			wall_height = HEIGHT/wall_height;
-			printf("%d\n",wall_height);
-			dda(i,middle - (wall_height / 2),i,middle + (wall_height / 2) ,data,0xff);
-			//dda(i,middle,i,middle,data,0xffffff);
-			//dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.v_x,data->player.ray.v_y,data,0xffffff);
+			distance_projected_wall = (WIDTH/2) * tan(M_PI / 6);
+			wall_height = (my_cubs_len/data->player.ray.v_distance) *  distance_projected_wall;
 		}
+		dda(i,(HEIGHT/2) - (wall_height / 2),i,(wall_height/2) + (HEIGHT/2) ,data,0xff);
 		data->player.ray_angle += inc_ang;
 		i++;
 	}
