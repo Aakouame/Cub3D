@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 16:00:40 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/07 21:04:03 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,10 +260,10 @@ void cast_ver(t_data *data)
 
 	y_check = first_y_inter;
 	x_check = first_x_inter;
-	if (is_left(data))
-		x_check--;
 	while(x_check >= 0 && x_check <= WIDTH && y_check >= 0 && y_check <= HEIGHT)
 	{
+	if (is_left(data))
+		x_check--;
 		if (is_wall(data,y_check,x_check))
 		{
 			data->player.ray.found_v = 1;
