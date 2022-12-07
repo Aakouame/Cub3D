@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 12:50:37 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/07 13:04:24 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void draw_map(t_data *data)
 	//}
 	//my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffff);
 	cast_all_rays(data);
+	mlx_put_image_to_window(data->my_map.init, data->my_map.win, data->my_map.img, 0, 0);
 }
 
 void normalize_angle(t_data *data)

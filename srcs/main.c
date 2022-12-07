@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/05 14:58:02 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/07 13:06:13 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ int	ft_key_hook(int key_code, t_data *data)
 		}
 	}
 	draw_map(data);
-	mlx_put_image_to_window(data->my_map.init, data->my_map.win, data->my_map.img, 0, 0);
 	return (0);
 }
 int main(int ac, char **av)
@@ -164,7 +163,6 @@ int main(int ac, char **av)
 			init_mlx(&data);
 			init_player(&data);
 			draw_map(&data);
-			mlx_put_image_to_window(data.my_map.init, data.my_map.win, data.my_map.img, 0, 0);
 			mlx_hook(data.my_map.win, 17, 1L << 0, ft_exit, &data);
 			mlx_hook(data.my_map.win, 2, 0L, ft_key_hook, &data);
 			mlx_loop(data.my_map.init);
@@ -179,7 +177,7 @@ int main(int ac, char **av)
 	}
 	else
 	{
-		ft_putstr_fd("Error ✗: Check ur number of arguments !\n", 2);
+		ft_putstr_fd("Check ur number of arguments !\n", 2);
 		return (1);
 	}
 			// system("leaks cub3D");
