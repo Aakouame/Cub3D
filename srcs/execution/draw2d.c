@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/05 19:16:14 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/07 12:50:37 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,28 +100,28 @@ void init_player(t_data *data)
 
 void draw_map(t_data *data)
 {
-	int y;
-	int x;
+	//int y;
+	//int x;
 	
 	data->max.y = get_height(data->my_map.map_splited);
 	data->max.x = get_weight(data->my_map.map_splited);
-	y = 0;
-	while(y < data->max.y)
-	{
-		x = 0;
-		while(x < data->max.x)
-		{
-			if (data->my_map.map_splited[y][x] == ' ')
-				drawcub(data,x,y,0x000000);
-			else if (data->my_map.map_splited[y][x] == '1')
-				drawcub(data,x,y,0x124A2A);
-			else if (data->my_map.map_splited[y][x] == '0')
-				drawcub(data,x,y,0x475E6B);
-			x++;
-		}
-		y++;
-	}
-	my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffff);
+	//y = 0;
+	//while(y < data->max.y)
+	//{
+	//	x = 0;
+	//	while(x < data->max.x)
+	//	{
+	//		if (data->my_map.map_splited[y][x] == ' ')
+	//			drawcub(data,x,y,0x000000);
+	//		else if (data->my_map.map_splited[y][x] == '1')
+	//			drawcub(data,x,y,0x124A2A);
+	//		else if (data->my_map.map_splited[y][x] == '0')
+	//			drawcub(data,x,y,0x475E6B);
+	//		x++;
+	//	}
+	//	y++;
+	//}
+	//my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffff);
 	cast_all_rays(data);
 }
 
@@ -291,10 +291,11 @@ void get_distance(t_data *data)
 
 void cast_all_rays(t_data *data)
 {
-	// ************ calculate start angle and normalize it *************//
 	data->player.ray_angle = data->player.fi - (M_PI /6);
 	// ******************************************************************//
 
+	int middle = HEIGHT/2;
+	int wall_height;
 	int i = 0;
 
 	double inc_ang = (M_PI/3)/WIDTH;
@@ -304,9 +305,22 @@ void cast_all_rays(t_data *data)
 		cast_ver(data);
 		get_distance(data);
 		if (data->player.ray.v_distance > data->player.ray.h_distance)
-			dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.h_x,data->player.ray.h_y,data,0xffffff);
+		{
+			wall_height = data->player.ray.v_distance/my_cubs_len;
+			wall_height = HEIGHT/wall_height;
+			printf("%d\n",wall_height);
+			dda(i,middle - (wall_height / 2),i,middle + (wall_height / 2) ,data,0xff);
+			//dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.h_x,data->player.ray.h_y,data,0xffffff);
+		}
 		else
-			dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.v_x,data->player.ray.v_y,data,0xffffff);
+		{
+			wall_height = data->player.ray.v_distance/my_cubs_len;
+			wall_height = HEIGHT/wall_height;
+			printf("%d\n",wall_height);
+			dda(i,middle - (wall_height / 2),i,middle + (wall_height / 2) ,data,0xff);
+			//dda(i,middle,i,middle,data,0xffffff);
+			//dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.v_x,data->player.ray.v_y,data,0xffffff);
+		}
 		data->player.ray_angle += inc_ang;
 		i++;
 	}
