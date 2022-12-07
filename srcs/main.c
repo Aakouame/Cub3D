@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 13:12:02 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/07 21:56:09 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	check_wall(t_data *data,int x, int y)
 	t_cord	r;
 	t_cord	p;
 	
-	p.x = data->player.pos_px.x /my_cubs_len;
-	p.y = data->player.pos_px.y/ my_cubs_len;
-	x = (x / my_cubs_len);
+	p.x = data->player.pos_px.x /data->my_cubs_len;
+	p.y = data->player.pos_px.y/ data->my_cubs_len;
+	x = (x / data->my_cubs_len);
 	r.x = x - p.x;
-	y = (y /my_cubs_len);
+	y = (y /data->my_cubs_len);
 	r.y = y - p.y;
 	if(data->my_map.map_splited[y][x] != '0')
 		return (1);
@@ -93,8 +93,8 @@ int check_walls(t_data *data,char c)
 			if (check_wall(data, x, y))
 				return (1);
 	}
-	x = x / my_cubs_len;
-	y = y / my_cubs_len;
+	x = x / data->my_cubs_len;
+	y = y / data->my_cubs_len;
 	if (data->my_map.map_splited[y][x] == '1')
 		return (1);
 	return (0);
