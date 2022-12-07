@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 21:59:49 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/07 22:18:10 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,13 @@ int is_wall(t_data *data,double y,double x)
 	int y_map;
 
 	x_map = floor(x/data->my_cubs_len);
+	if (x_map < 0)
+		x_map = 0;
+	// printf("x_map = %d\n", x_map);
 	y_map = floor(y/data->my_cubs_len);
+	if (y_map < 0)
+		y_map = 0;
+	// printf("y_map = %d\n", y_map);
 	//printf("y = %d   x = %d\n",y_map,x_map);
 	if (y >= (data->max.y * data->my_cubs_len))
 		return (1);
