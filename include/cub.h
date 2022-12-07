@@ -6,15 +6,15 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/05 19:22:36 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/07 15:07:11 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 #define CUB_H
-#define my_cubs_len 30
-#define WIDTH 2560
-#define HEIGHT 1440
+#define my_cubs_len 32
+#define WIDTH 800
+#define HEIGHT 700
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>

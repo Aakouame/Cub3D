@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 14:47:47 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/07 15:04:05 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,7 +316,9 @@ void cast_all_rays(t_data *data)
 			distance_projected_wall = (WIDTH/2) * tan(M_PI / 6);
 			wall_height = (my_cubs_len/data->player.ray.v_distance) *  distance_projected_wall;
 		}
+		dda(i,0,i,(HEIGHT/2),data,0xffffff);
 		dda(i,(HEIGHT/2) - (wall_height / 2),i,(wall_height/2) + (HEIGHT/2) ,data,0xff);
+		dda(i,(wall_height/2)+ (HEIGHT/2),i,HEIGHT -1,data,0xffff);
 		data->player.ray_angle += inc_ang;
 		i++;
 	}
