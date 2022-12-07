@@ -6,9 +6,10 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/05 19:20:37 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/07 14:47:53 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../include/cub.h"
 
@@ -28,18 +29,18 @@ void  init_mlx(t_data *data)
 }
 
 
-void dda(int X0, int Y0, int X1, int Y1,t_data *data,int color)
+void dda(double X0, double Y0, double X1, double Y1,t_data *data,double color)
 {
-    int dx = X1 - X0;
-    int dy = Y1 - Y0;
+    double dx = X1 - X0;
+    double dy = Y1 - Y0;
  
-    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+    double steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy);
  
-    float Xinc = dx / (float)steps;
-    float Yinc = dy / (float)steps;
+    double Xinc = dx / (double)steps;
+    double Yinc = dy / (double)steps;
  
-    float X = X0;
-    float Y = Y0;
+    double X = X0;
+    double Y = Y0;
     for (int i = 0; i <= steps; i++) {
         my_mlx_pixel_put(data,round(X), round(Y),color); 
         X += Xinc; 
@@ -100,31 +101,29 @@ void init_player(t_data *data)
 
 void draw_map(t_data *data)
 {
-	int y;
-	// int x;
-
+	//int y;
+	//int x;
+	
 	data->max.y = get_height(data->my_map.map_splited);
 	data->max.x = get_weight(data->my_map.map_splited);
-	y = 0;
-	// while(y < data->max.y)
-	// {
-	// 	x = 0;
-	// 	while(x < data->max.x)
-	// 	{
-	// 		if (data->my_map.map_splited[y][x] == ' ')
-	// 			drawcub(data,x,y,0x000000);
-	// 		else if (data->my_map.map_splited[y][x] == '1')
-	// 			drawcub(data,x,y,0x124A2A);
-	// 		else if (data->my_map.map_splited[y][x] == '0')
-	// 			drawcub(data,x,y,0x475E6B);
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
-	my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffff);
+	//y = 0;
+	//while(y < data->max.y)
+	//{
+	//	x = 0;
+	//	while(x < data->max.x)
+	//	{
+	//		if (data->my_map.map_splited[y][x] == ' ')
+	//			drawcub(data,x,y,0x000000);
+	//		else if (data->my_map.map_splited[y][x] == '1')
+	//			drawcub(data,x,y,0x124A2A);
+	//		else if (data->my_map.map_splited[y][x] == '0')
+	//			drawcub(data,x,y,0x475E6B);
+	//		x++;
+	//	}
+	//	y++;
+	//}
+	//my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffff);
 	cast_all_rays(data);
-	//first_vertical_intr(data,data->player.fi - (M_PI/6));
-	//draw_ray_ver(data,data->player.fi - (M_PI/6));
 }
 
 void normalize_angle(t_data *data)
@@ -162,7 +161,7 @@ int is_left(t_data *data)
 	return (0);
 }
 
-int is_wall(t_data *data,float y,float x)
+int is_wall(t_data *data,double y,double x)
 {
 	int x_map;
 	int y_map;
@@ -179,12 +178,15 @@ int is_wall(t_data *data,float y,float x)
 
 void cast_horz(t_data *data)
 {
-	float first_x_inter;
-	float first_y_inter;
-	float y_step;
-	float x_step;
-	float y_check;
-	float x_check;
+	double first_x_inter;
+	double first_y_inter;
+
+	double y_step;
+	double x_step;
+
+	double y_check;
+	double x_check;
+
 	data->player.ray_angle = fmod(data->player.ray_angle,2 * M_PI);
 	if (data->player.ray_angle < 0)
 		data->player.ray_angle += 2 * M_PI;
@@ -227,12 +229,12 @@ void cast_horz(t_data *data)
 
 void cast_ver(t_data *data)
 {
-	float first_x_inter;
-	float first_y_inter;
-	float y_step;
-	float x_step;
-	float y_check;
-	float x_check;
+	double first_x_inter;
+	double first_y_inter;
+	double y_step;
+	double x_step;
+	double y_check;
+	double x_check;
 
 	data->player.ray_angle = fmod(data->player.ray_angle,2 * M_PI);
 	if (data->player.ray_angle < 0)
@@ -241,7 +243,6 @@ void cast_ver(t_data *data)
 	data->player.ray.found_v = 0;
 	/* vertical inter */
 	first_x_inter = floor(data->player.pos_px.x/my_cubs_len) * my_cubs_len;
-	// i need to check this later
 	if (is_right(data))
 		first_x_inter += my_cubs_len;
 	first_y_inter = data->player.pos_px.y + ((first_x_inter - data->player.pos_px.x) * tan(data->player.ray_angle));
@@ -290,22 +291,36 @@ void get_distance(t_data *data)
 
 void cast_all_rays(t_data *data)
 {
-	// ************ calculate start angle and normalize it *************//
 	data->player.ray_angle = data->player.fi - (M_PI /6);
-	int i = 0;
+	// ******************************************************************//
 
-	float inc_ang = (M_PI/3)/WIDTH;
+	int middle = HEIGHT/2;
+	int wall_height;
+	int 	i = 0;
+	double inc_ang = (M_PI/3)/WIDTH;
+	
 	while(i < WIDTH)
 	{
 		cast_horz(data);
 		cast_ver(data);
 		get_distance(data);
 		if (data->player.ray.v_distance > data->player.ray.h_distance)
-			dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.h_x,data->player.ray.h_y,data,0xffffff);
-			// printf("h < v\n");
+		{
+			wall_height = data->player.ray.v_distance/my_cubs_len;
+			wall_height = HEIGHT/wall_height;
+			printf("%d\n",wall_height);
+			dda(i,middle - (wall_height / 2),i,middle + (wall_height / 2) ,data,0xff);
+			//dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.h_x,data->player.ray.h_y,data,0xffffff);
+		}
 		else
-			dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.v_x,data->player.ray.v_y,data,0xffffff);
-			// printf("v < h\n");
+		{
+			wall_height = data->player.ray.v_distance/my_cubs_len;
+			wall_height = HEIGHT/wall_height;
+			printf("%d\n",wall_height);
+			dda(i,middle - (wall_height / 2),i,middle + (wall_height / 2) ,data,0xff);
+			//dda(i,middle,i,middle,data,0xffffff);
+			//dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.v_x,data->player.ray.v_y,data,0xffffff);
+		}
 		data->player.ray_angle += inc_ang;
 		i++;
 	}

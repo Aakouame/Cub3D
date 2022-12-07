@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/05 19:01:34 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/07 12:58:33 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ typedef struct s_cord
 	int	y;
 }	t_cord;
 
-typedef struct	s_cord_float
+typedef struct	s_cord_double
 {
-	float	x;
-	float	y;
-}	t_cord_float;
+	double	x;
+	double	y;
+}	t_cord_double;
 
 typedef struct s_textures
 {
@@ -85,28 +85,29 @@ typedef struct s_map
 
 typedef struct s_ray
 {
-	float h_x;
-	float h_y;
+	double h_x;
+	double h_y;
 	int 	found_h;
-	float h_distance;
+	double h_distance;
 
 
-	float v_x;
-	float v_y;
+	double v_x;
+	double v_y;
 	int found_v;
-	float v_distance;
+	double v_distance;
 } t_ray;
 
 typedef struct s_player
 {
 	t_cord	pos_mp;
-	t_cord_float	pos_px;
-	float	fi;
-	float	step_m;
-	float	step_r;
+	t_cord_double	pos_px;
+
+	double	fi;
+	double	step_m;
+	double	step_r;
 	char	p;
 	t_ray ray;
-	float ray_angle;
+	double ray_angle;
 }	t_player;
 
 
@@ -124,6 +125,7 @@ typedef struct s_data
 	t_map		my_map;
 	int			key;
 	int			key_code;
+	double		ray;
 }	t_data;
 
 int		ft_check_exist(char *line, char *find, char **txtr, int size);
@@ -147,7 +149,7 @@ void  init_mlx(t_data *data);
 void  draw_map(t_data *data);
 void init_player(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void dda(int X0, int Y0, int X1, int Y1,t_data *data,int color);
+void dda(double X0, double Y0, double X1, double Y1,t_data *data,double color);
 void first_horizontal_intr(t_data *data,int ang);
 void first_vertical_intr(t_data *data,int ang);
 void draw_ray_ver(t_data *data,int ang);
