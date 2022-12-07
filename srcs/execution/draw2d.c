@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 21:17:00 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/07 21:32:28 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,20 +311,20 @@ void cast_all_rays(t_data *data)
 		{
 			test = data->player.ray.h_distance / my_cubs_len;
 			wall_height = HEIGHT/(test);
-			printf("%f\n",data->player.ray.h_distance);
 		}
 		else
 		{
 			test = data->player.ray.v_distance / my_cubs_len;
 			wall_height = HEIGHT/(test);
-			printf("%f\n",data->player.ray.v_distance);
 		}
 		start = (HEIGHT/2) - (wall_height/2);
 		end = (HEIGHT/2) + (wall_height/2);
 		if (start < 0)
 			start = 0;
 		if (end > HEIGHT)
-			end = HEIGHT;
+			end = HEIGHT - 1;
+		printf("start : %f\n",start);
+		printf("end : %f\n",end);
 
 		dda(i,0,i,(HEIGHT/2),data,0xffffff);
 		dda(i,start,i,end,data,0xff);
