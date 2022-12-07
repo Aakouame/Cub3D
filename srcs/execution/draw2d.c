@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 21:04:26 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/07 21:17:00 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,6 +298,8 @@ void cast_all_rays(t_data *data)
 	double wall_height;
 	int i = 0;
 	double  test;
+	double start;
+	double end;
 
 	double inc_ang = (M_PI/3)/WIDTH;
 	while(i < WIDTH)
@@ -317,9 +319,16 @@ void cast_all_rays(t_data *data)
 			wall_height = HEIGHT/(test);
 			printf("%f\n",data->player.ray.v_distance);
 		}
-		//dda(i,0,i,(HEIGHT/2),data,0xffffff);
-		//dda(i,(HEIGHT/2) - (wall_height / 2),i,(wall_height/2) + (HEIGHT/2) ,data,0xff);
-		//dda(i,(wall_height/2)+ (HEIGHT/2),i,HEIGHT -1,data,0xffff);
+		start = (HEIGHT/2) - (wall_height/2);
+		end = (HEIGHT/2) + (wall_height/2);
+		if (start < 0)
+			start = 0;
+		if (end > HEIGHT)
+			end = HEIGHT;
+
+		dda(i,0,i,(HEIGHT/2),data,0xffffff);
+		dda(i,start,i,end,data,0xff);
+		dda(i,end,i,HEIGHT -1,data,0xffff);
 		data->player.ray_angle += inc_ang;
 		i++;
 	}
