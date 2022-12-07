@@ -6,13 +6,12 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 15:07:11 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/07 21:50:00 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 #define CUB_H
-#define my_cubs_len 32
 #define WIDTH 800
 #define HEIGHT 700
 #include <stdlib.h>
@@ -126,6 +125,7 @@ typedef struct s_data
 	int			key;
 	int			key_code;
 	double		ray;
+	int my_cubs_len;
 }	t_data;
 
 int		ft_check_exist(char *line, char *find, char **txtr, int size);
