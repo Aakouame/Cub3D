@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 22:18:10 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/08 14:33:41 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,6 @@ void cast_horz(t_data *data)
 		y_check--;
 		if (is_wall(data,y_check,x_check))
 		{
-			data->player.ray.found_h = 1;
 			data->player.ray.h_x = first_x_inter;
 			data->player.ray.h_y = first_y_inter;
 			break;
@@ -273,7 +272,6 @@ void cast_ver(t_data *data)
 		x_check--;
 		if (is_wall(data,y_check,x_check))
 		{
-			data->player.ray.found_v = 1;
 			data->player.ray.v_x = first_x_inter;
 			data->player.ray.v_y = first_y_inter;
 			break;
@@ -287,14 +285,8 @@ void cast_ver(t_data *data)
 
 void get_distance(t_data *data)
 {
-	if (data->player.ray.found_h)
 		data->player.ray.h_distance = sqrt(((data->player.ray.h_x - data->player.pos_px.x) * (data->player.ray.h_x - data->player.pos_px.x)) + ((data->player.ray.h_y - data->player.pos_px.y) * (data->player.ray.h_y - data->player.pos_px.y)));
-	else
-		data->player.ray.h_distance = INT_MAX;
-	if (data->player.ray.found_v)
 		data->player.ray.v_distance = sqrt(((data->player.ray.v_x - data->player.pos_px.x) * (data->player.ray.v_x - data->player.pos_px.x)) + ((data->player.ray.v_y - data->player.pos_px.y) * (data->player.ray.v_y - data->player.pos_px.y)));
-	else
-		data->player.ray.v_distance = INT_MAX;
 }
 
 void cast_all_rays(t_data *data)
