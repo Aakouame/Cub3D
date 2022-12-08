@@ -10,8 +10,31 @@ The project takes a .cub file as input, which contains a grid of characters repr
     '0' represents a free space or open area in the scene
     'W', 'S', 'E', or 'N' represents the direction of the player's field of view
 
-Example .cub file
-[examlple](File:younes.cub)
+[Example .cub file](./younes.cub)
+
+```
+C 225,255,0
+SO ./algo.txt
+EA ./algo.txt
+WE ./algo.txt  
+NO ./younes.txt                     
+F 225,255,0
+
+11111111111111111
+10000000000000001
+10000000000000001
+10000000000000001
+10000000000000001
+10000000000000001
+10000000E000000001
+10000000000000001
+10000000000000001
+10000000000000001
+10000000000000001
+10000000000000001
+10000000000000001
+11111111111111111
+```
 
 Once you have provided a .cub file as input, you can run the project to render the 3D representation of the map on the screen. The project also supports user input, allowing you to move the viewpoint around the scene and interact with the environment using the arrow keys to rotate the player's field of view and the W/S/A/D keys to move forward, backward, left, and right, respectively.
 
