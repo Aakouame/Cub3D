@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 22:18:10 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/09 11:25:52 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,16 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void  init_mlx(t_data *data)
 {
-	data->my_cubs_len = HEIGHT/data->max.y;
+	int	l;
+
+	if (HEIGHT <= WIDTH)
+		l = HEIGHT;
+	else
+		l = WIDTH;
+	if (data->max.x > data->max.y)
+		data->my_cubs_len = l/data->max.x;
+	if (data->max.x < data->max.y)
+		data->my_cubs_len = l/data->max.y;
 	data->my_map.init = mlx_init();
 	data->my_map.win = mlx_new_window ( data->my_map.init, WIDTH, HEIGHT, "cub3d");
 	data->my_map.img = mlx_new_image(data->my_map.init,WIDTH,HEIGHT);
@@ -174,6 +183,10 @@ int is_wall(t_data *data,double y,double x)
 	y_map = floor(y/data->my_cubs_len);
 	if (y_map < 0)
 		y_map = 0;
+	if (y_map > data->max.y)
+		y_map = data->max.y;
+	if (x_map > data->max.x)
+		x_map = data->max.x;
 	// printf("y_map = %d\n", y_map);
 	//printf("y = %d   x = %d\n",y_map,x_map);
 	if (y >= (data->max.y * data->my_cubs_len))
@@ -330,9 +343,9 @@ void cast_all_rays(t_data *data)
 			start = 0;
 		if (end > HEIGHT)
 			end = HEIGHT - 1;
-		printf("start : %f\n",start);
-		printf("end : %f\n",end);
-
+		// printf("start : %f\n",start);
+		// printf("end : %f\n",end);
+		// printf("cub_len = %d\n", data->my_cubs_len);
 		dda(i,0,i,(HEIGHT/2),data,0xffffff);
 		dda(i,start,i,end,data,0xff);
 		dda(i,end,i,HEIGHT -1,data,0xffff);

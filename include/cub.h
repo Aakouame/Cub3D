@@ -6,14 +6,14 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 22:00:44 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/09 11:26:58 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 #define CUB_H
-#define WIDTH 800
-#define HEIGHT 700
+#define WIDTH 1100
+#define HEIGHT 800
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
