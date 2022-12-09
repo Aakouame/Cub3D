@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 14:47:53 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/09 11:29:03 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void  init_mlx(t_data *data)
 {
+	int	l;
+
+	if (HEIGHT <= WIDTH)
+		l = HEIGHT;
+	else
+		l = WIDTH;
+	if (data->max.x > data->max.y)
+		data->my_cubs_len = l/data->max.x;
+	if (data->max.x < data->max.y)
+		data->my_cubs_len = l/data->max.y;
 	data->my_map.init = mlx_init();
 	data->my_map.win = mlx_new_window ( data->my_map.init, WIDTH, HEIGHT, "cub3d");
 	data->my_map.img = mlx_new_image(data->my_map.init,WIDTH,HEIGHT);
@@ -74,10 +84,10 @@ int get_weight(char **str)
 
 void drawcub(t_data *data , int x , int y,unsigned int color)
 {
-	int x0 = x * my_cubs_len;
-	int x1 = (x + 1) * my_cubs_len;
-	int y0 = y * my_cubs_len;
-	int y1 = (y + 1) * my_cubs_len;
+	int x0 = x * data->my_cubs_len;
+	int x1 = (x + 1) * data->my_cubs_len;
+	int y0 = y * data->my_cubs_len;
+	int y1 = (y + 1) * data->my_cubs_len;
 	while(y0 < y1)
 	{
 		dda(x0,y0,x1,y0,data,color);
@@ -95,8 +105,8 @@ void init_player(t_data *data)
 		data->player.fi = M_PI;
 	if (data->player.p == 'N')
 		data->player.fi =  M_PI / 2;
-	data->player.pos_px.x = (data->player.pos_mp.x * my_cubs_len) + my_cubs_len/2;
-	data->player.pos_px.y = (data->player.pos_mp.y * my_cubs_len) + my_cubs_len/2;
+	data->player.pos_px.x = (data->player.pos_mp.x * data->my_cubs_len) + data->my_cubs_len/2;
+	data->player.pos_px.y = (data->player.pos_mp.y * data->my_cubs_len) + data->my_cubs_len/2;
 }
 
 void draw_map(t_data *data)
@@ -124,6 +134,7 @@ void draw_map(t_data *data)
 	//}
 	//my_mlx_pixel_put(data,data->player.pos_px.x,data->player.pos_px.y,0xffff);
 	cast_all_rays(data);
+	mlx_put_image_to_window(data->my_map.init, data->my_map.win, data->my_map.img, 0, 0);
 }
 
 void normalize_angle(t_data *data)
@@ -166,10 +177,20 @@ int is_wall(t_data *data,double y,double x)
 	int x_map;
 	int y_map;
 
-	x_map = floor(x/my_cubs_len);
-	y_map = floor(y/my_cubs_len);
+	x_map = floor(x/data->my_cubs_len);
+	if (x_map < 0)
+		x_map = 0;
+	// printf("x_map = %d\n", x_map);
+	y_map = floor(y/data->my_cubs_len);
+	if (y_map < 0)
+		y_map = 0;
+	if (y_map > data->max.y)
+		y_map = data->max.y;
+	if (x_map > data->max.x)
+		x_map = data->max.x;
+	// printf("y_map = %d\n", y_map);
 	//printf("y = %d   x = %d\n",y_map,x_map);
-	if (y >= (data->max.y * my_cubs_len))
+	if (y >= (data->max.y * data->my_cubs_len))
 		return (1);
 	if (data->my_map.map_splited[y_map][x_map] == '1')
 		return (1);
@@ -193,15 +214,16 @@ void cast_horz(t_data *data)
 
 	data->player.ray.found_h = 0;
 	/* horizontal inter */
-	first_y_inter = floor(data->player.pos_px.y/my_cubs_len) * my_cubs_len;
+	first_y_inter = floor(data->player.pos_px.y/data->my_cubs_len) * data->my_cubs_len;
 	if (is_down(data))
-		first_y_inter += my_cubs_len;
+		first_y_inter += data->my_cubs_len;
 	first_x_inter = data->player.pos_px.x + ((first_y_inter - data->player.pos_px.y) /tan(data->player.ray_angle));
 
-	y_step = my_cubs_len;
+	y_step = data->my_cubs_len;
 	if (is_up(data))
 		y_step *= -1;
-	x_step = my_cubs_len / tan(data->player.ray_angle);
+
+	x_step = data->my_cubs_len / tan(data->player.ray_angle);
 	if (is_left(data) && x_step > 0)
 		x_step *= -1;
 	if (is_right(data) && x_step < 0)
@@ -209,13 +231,12 @@ void cast_horz(t_data *data)
 
 	y_check = first_y_inter;
 	x_check = first_x_inter;
-	if (is_up(data))
-		y_check--;
 	while(x_check >= 0 && x_check <= WIDTH && y_check >= 0 && y_check <= HEIGHT)
 	{
+	if (is_up(data))
+		y_check--;
 		if (is_wall(data,y_check,x_check))
 		{
-			data->player.ray.found_h = 1;
 			data->player.ray.h_x = first_x_inter;
 			data->player.ray.h_y = first_y_inter;
 			break;
@@ -242,16 +263,16 @@ void cast_ver(t_data *data)
 
 	data->player.ray.found_v = 0;
 	/* vertical inter */
-	first_x_inter = floor(data->player.pos_px.x/my_cubs_len) * my_cubs_len;
+	first_x_inter = floor(data->player.pos_px.x/data->my_cubs_len) * data->my_cubs_len;
 	if (is_right(data))
-		first_x_inter += my_cubs_len;
+		first_x_inter += data->my_cubs_len;
 	first_y_inter = data->player.pos_px.y + ((first_x_inter - data->player.pos_px.x) * tan(data->player.ray_angle));
 
-	x_step = my_cubs_len;
+	x_step = data->my_cubs_len;
 	if (is_left(data))
 		x_step *= -1;
 
-	y_step = my_cubs_len * tan(data->player.ray_angle);
+	y_step = data->my_cubs_len * tan(data->player.ray_angle);
 	if (is_up(data) && y_step > 0)
 		y_step *= -1;
 	if (is_down(data) && y_step < 0)
@@ -259,13 +280,12 @@ void cast_ver(t_data *data)
 
 	y_check = first_y_inter;
 	x_check = first_x_inter;
-	if (is_left(data))
-		x_check--;
 	while(x_check >= 0 && x_check <= WIDTH && y_check >= 0 && y_check <= HEIGHT)
 	{
+	if (is_left(data))
+		x_check--;
 		if (is_wall(data,y_check,x_check))
 		{
-			data->player.ray.found_v = 1;
 			data->player.ray.v_x = first_x_inter;
 			data->player.ray.v_y = first_y_inter;
 			break;
@@ -279,14 +299,8 @@ void cast_ver(t_data *data)
 
 void get_distance(t_data *data)
 {
-	if (data->player.ray.found_h)
 		data->player.ray.h_distance = sqrt(((data->player.ray.h_x - data->player.pos_px.x) * (data->player.ray.h_x - data->player.pos_px.x)) + ((data->player.ray.h_y - data->player.pos_px.y) * (data->player.ray.h_y - data->player.pos_px.y)));
-	else
-		data->player.ray.h_distance = INT_MAX;
-	if (data->player.ray.found_v)
 		data->player.ray.v_distance = sqrt(((data->player.ray.v_x - data->player.pos_px.x) * (data->player.ray.v_x - data->player.pos_px.x)) + ((data->player.ray.v_y - data->player.pos_px.y) * (data->player.ray.v_y - data->player.pos_px.y)));
-	else
-		data->player.ray.v_distance = INT_MAX;
 }
 
 void cast_all_rays(t_data *data)
@@ -294,11 +308,13 @@ void cast_all_rays(t_data *data)
 	data->player.ray_angle = data->player.fi - (M_PI /6);
 	// ******************************************************************//
 
-	int middle = HEIGHT/2;
-	int wall_height;
-	int 	i = 0;
+	double wall_height;
+	int i = 0;
+	double  test;
+	double start;
+	double end;
+
 	double inc_ang = (M_PI/3)/WIDTH;
-	
 	while(i < WIDTH)
 	{
 		cast_horz(data);
@@ -306,21 +322,26 @@ void cast_all_rays(t_data *data)
 		get_distance(data);
 		if (data->player.ray.v_distance > data->player.ray.h_distance)
 		{
-			wall_height = data->player.ray.v_distance/my_cubs_len;
-			wall_height = HEIGHT/wall_height;
-			printf("%d\n",wall_height);
-			dda(i,middle - (wall_height / 2),i,middle + (wall_height / 2) ,data,0xff);
-			//dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.h_x,data->player.ray.h_y,data,0xffffff);
+			test = data->player.ray.h_distance / data->my_cubs_len;
+			wall_height = HEIGHT/(test);
 		}
 		else
 		{
-			wall_height = data->player.ray.v_distance/my_cubs_len;
-			wall_height = HEIGHT/wall_height;
-			printf("%d\n",wall_height);
-			dda(i,middle - (wall_height / 2),i,middle + (wall_height / 2) ,data,0xff);
-			//dda(i,middle,i,middle,data,0xffffff);
-			//dda(data->player.pos_px.x,data->player.pos_px.y,data->player.ray.v_x,data->player.ray.v_y,data,0xffffff);
+			test = data->player.ray.v_distance / data->my_cubs_len;
+			wall_height = HEIGHT/(test);
 		}
+		start = (HEIGHT/2) - (wall_height/2);
+		end = (HEIGHT/2) + (wall_height/2);
+		if (start < 0)
+			start = 0;
+		if (end > HEIGHT)
+			end = HEIGHT - 1;
+		// printf("start : %f\n",start);
+		// printf("end : %f\n",end);
+		// printf("cub_len = %d\n", data->my_cubs_len);
+		dda(i,0,i,(HEIGHT/2),data,0xffffff);
+		dda(i,start,i,end,data,0xff);
+		dda(i,end,i,HEIGHT -1,data,0xffff);
 		data->player.ray_angle += inc_ang;
 		i++;
 	}

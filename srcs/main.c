@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/07 12:57:42 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/09 10:25:59 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	check_wall(t_data *data,int x, int y)
 	t_cord	r;
 	t_cord	p;
 	
-	p.x = data->player.pos_px.x /my_cubs_len;
-	p.y = data->player.pos_px.y/ my_cubs_len;
-	x = (x / my_cubs_len);
+	p.x = data->player.pos_px.x /data->my_cubs_len;
+	p.y = data->player.pos_px.y/ data->my_cubs_len;
+	x = (x / data->my_cubs_len);
 	r.x = x - p.x;
-	y = (y /my_cubs_len);
+	y = (y /data->my_cubs_len);
 	r.y = y - p.y;
 	if(data->my_map.map_splited[y][x] != '0')
 		return (1);
@@ -93,8 +93,10 @@ int check_walls(t_data *data,char c)
 			if (check_wall(data, x, y))
 				return (1);
 	}
-	x = x / my_cubs_len;
-	y = y / my_cubs_len;
+	x = x / data->my_cubs_len;
+	y = y / data->my_cubs_len;
+		printf(" OK : x = %d | y = %d\n",x,y);
+		printf(" max OK : x = %d | y = %d\n",data->max.x,data->max.y);
 	if (data->my_map.map_splited[y][x] == '1')
 		return (1);
 	return (0);
@@ -108,54 +110,65 @@ int	ft_key_hook(int key_code, t_data *data)
 	mlx_clear_window(data->my_map.init,data->my_map.win);
 	if (key_code == 124) // right key
 	{
+		printf("right before : x = %f | y = %f\n", data->player.pos_px.x, data->player.pos_px.y);
 		data->player.fi += data->player.step_r;
 		normalize_angle(data);
+		printf("right after  : x = %f | y = %f\n", data->player.pos_px.x, data->player.pos_px.y);
 	}
 	else if (key_code == 123) // left key
 	{
+		printf("left before : x = %f | y = %f\n", data->player.pos_px.x, data->player.pos_px.y);
 		data->player.fi -= data->player.step_r;
 		normalize_angle(data);
+		printf("left after  : x = %f | y = %f\n", data->player.pos_px.x, data->player.pos_px.y);
 	}
 	else if (key_code == 13) // w
 	{
+		printf("W before : x = %f | y = %f\n", data->player.pos_px.x, data->player.pos_px.y);
 		if (!check_walls(data,'W'))
 		{
 			data->player.pos_px.y += data->player.step_m * sin(data->player.fi);
 			data->player.pos_px.x += data->player.step_m * cos(data->player.fi);
 		}
+		printf("W after  : x = %f | y = %f\n", data->player.pos_px.x, data->player.pos_px.y);
 	}
 	else if (key_code == 1) // S
 	{
+		printf("S before : x = %f | y = %f\n", data->player.pos_px.x, data->player.pos_px.y);
 		if (!check_walls(data,'S'))
 		{
 		data->player.pos_px.y -= data->player.step_m * sin(data->player.fi);
 		data->player.pos_px.x -= data->player.step_m * cos(data->player.fi);
 		}
+		printf("S after  : x = %f | y = %f\n", data->player.pos_px.x, data->player.pos_px.y);
 	}
 	else if (key_code == 0) // A
 	{
+		printf("A before : x = %f | y = %f\n", data->player.pos_px.x, data->player.pos_px.y);
 		if (!check_walls(data,'A'))
 		{
 		data->player.pos_px.x += data->player.step_m * sin(data->player.fi);
 		data->player.pos_px.y -= data->player.step_m * cos(data->player.fi);
 		}
+		printf("A after  : x = %f | y = %f\n", data->player.pos_px.x, data->player.pos_px.y);
 	}
 	else if (key_code == 2) //  D
 	{
+		printf("D before : x = %f | y = %f\n", data->player.pos_px.x, data->player.pos_px.y);
 		if (!check_walls(data,'D'))
 		{
 		data->player.pos_px.x -= data->player.step_m * sin(data->player.fi);
 		data->player.pos_px.y += data->player.step_m * cos(data->player.fi);
 		}
+		printf("D after  : x = %f | y = %f\n", data->player.pos_px.x, data->player.pos_px.y);
 	}
 	draw_map(data);
-	mlx_put_image_to_window(data->my_map.init, data->my_map.win, data->my_map.img, 0, 0);
 	return (0);
 }
 int main(int ac, char **av)
 {
 	t_data	data;
-
+	
 	if (ac == 2)
 	{
 		if (!ft_check(av[1], &data))
@@ -164,7 +177,6 @@ int main(int ac, char **av)
 			init_mlx(&data);
 			init_player(&data);
 			draw_map(&data);
-			mlx_put_image_to_window(data.my_map.init, data.my_map.win, data.my_map.img, 0, 0);
 			mlx_hook(data.my_map.win, 17, 1L << 0, ft_exit, &data);
 			mlx_hook(data.my_map.win, 2, 0L, ft_key_hook, &data);
 			mlx_loop(data.my_map.init);
@@ -179,7 +191,7 @@ int main(int ac, char **av)
 	}
 	else
 	{
-		ft_putstr_fd("Error ✗: Check ur number of arguments !\n", 2);
+		ft_putstr_fd("Check ur number of arguments !\n", 2);
 		return (1);
 	}
 			// system("leaks cub3D");
