@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/11 10:31:58 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/11 16:52:30 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,6 @@ int is_wall(t_data *data,double y,double x)
 	x_map = floor(x/data->my_cubs_len);
 	if (x_map < 0)
 		x_map = 0;
-	// printf("x_map = %d\n", x_map);
 	y_map = floor(y/data->my_cubs_len);
 	if (y_map < 0)
 		y_map = 0;
@@ -188,8 +187,6 @@ int is_wall(t_data *data,double y,double x)
 		y_map = data->max.y;
 	if (x_map > data->max.x)
 		x_map = data->max.x;
-	// printf("y_map = %d\n", y_map);
-	//printf("y = %d   x = %d\n",y_map,x_map);
 	if (y >= (data->max.y * data->my_cubs_len))
 		return (1);
 	if (data->my_map.map_splited[y_map][x_map] == '1')
@@ -346,9 +343,6 @@ void cast_all_rays(t_data *data)
 			start = 0;
 		if (end > HEIGHT)
 			end = HEIGHT - 1;
-		// printf("start : %f\n",start);
-		// printf("end : %f\n",end);
-		// printf("cub_len = %d\n", data->my_cubs_len);
 		dda(i,0,i,(HEIGHT/2),data,0xffffff);
 		dda(i,start,i,end,data,0xff);
 		dda(i,end,i,HEIGHT -1,data,0xffff);
