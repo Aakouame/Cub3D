@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/11 18:10:46 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/11 18:50:19 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ typedef struct s_player
 typedef struct s_text
 {
 	void *img;
+	int *height;
+	int *width;
 } t_text;
 
 typedef struct s_data
