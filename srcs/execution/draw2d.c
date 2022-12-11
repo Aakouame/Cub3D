@@ -6,9 +6,10 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/09 11:25:52 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/11 10:31:58 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../include/cub.h"
 
@@ -29,8 +30,8 @@ void  init_mlx(t_data *data)
 		l = WIDTH;
 	if (data->max.x > data->max.y)
 		data->my_cubs_len = l/data->max.x;
-	if (data->max.x < data->max.y)
-		data->my_cubs_len = l/data->max.y;
+	else
+		data->my_cubs_len = HEIGHT/data->max.y;
 	data->my_map.init = mlx_init();
 	data->my_map.win = mlx_new_window ( data->my_map.init, WIDTH, HEIGHT, "cub3d");
 	data->my_map.img = mlx_new_image(data->my_map.init,WIDTH,HEIGHT);
@@ -230,15 +231,16 @@ void cast_horz(t_data *data)
 
 	y_check = first_y_inter;
 	x_check = first_x_inter;
-	while(x_check >= 0 && x_check <= WIDTH && y_check >= 0 && y_check <= HEIGHT)
+	while(((x_check >= 0 && x_check <= ((data->max.x * data->my_cubs_len) + 1) && (y_check >= 0 && y_check <= (data->max.y * data->my_cubs_len) + 1))))
 	{
 	if (is_up(data))
 		y_check--;
 		if (is_wall(data,y_check,x_check))
 		{
-			data->player.ray.found_h = 1;
 			data->player.ray.h_x = first_x_inter;
 			data->player.ray.h_y = first_y_inter;
+			data->player.ray.found_h = 1;
+
 			break;
 		}
 		y_check += y_step;
@@ -280,15 +282,16 @@ void cast_ver(t_data *data)
 
 	y_check = first_y_inter;
 	x_check = first_x_inter;
-	while(x_check >= 0 && x_check <= WIDTH && y_check >= 0 && y_check <= HEIGHT)
+	while(((x_check >= 0 && x_check <= ((data->max.x * data->my_cubs_len) + 1) && (y_check >= 0 && y_check <= (data->max.y * data->my_cubs_len) + 1))))
 	{
 	if (is_left(data))
 		x_check--;
 		if (is_wall(data,y_check,x_check))
 		{
-			data->player.ray.found_v = 1;
 			data->player.ray.v_x = first_x_inter;
 			data->player.ray.v_y = first_y_inter;
+			data->player.ray.found_v = 1;
+
 			break;
 		}
 		y_check += y_step;
