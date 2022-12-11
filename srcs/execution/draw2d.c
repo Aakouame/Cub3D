@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/11 16:52:30 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/11 17:50:42 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,11 +329,13 @@ void cast_all_rays(t_data *data)
 		get_distance(data);
 		if (data->player.ray.v_distance > data->player.ray.h_distance)
 		{
+			data->player.ray.h_distance *= cos(data->player.ray_angle - data->player.fi);
 			test = data->player.ray.h_distance / data->my_cubs_len;
 			wall_height = HEIGHT/(test);
 		}
 		else
 		{
+			data->player.ray.v_distance *= cos(data->player.ray_angle - data->player.fi);
 			test = data->player.ray.v_distance / data->my_cubs_len;
 			wall_height = HEIGHT/(test);
 		}
