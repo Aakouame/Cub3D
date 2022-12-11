@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 09:24:55 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 15:06:38 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/11 18:26:16 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	*ft_read(char *file, t_data *data)
 int	ft_check_exist(char *line, char *find, char **txtr, int size)
 {
 	char	*tmp;
+	int fd;
 	
 	tmp = ft_strtrim(line, " \t");
 	if (!strncmp(tmp, find, size))
@@ -70,6 +71,12 @@ int	ft_check_exist(char *line, char *find, char **txtr, int size)
 			tmp = tmp + size;
 			tmp = ft_strtrim(tmp, " ");
 			*txtr = ft_strdup(tmp);
+			fd = open(*txtr,O_RDONLY);
+			if (fd < 0)
+			{
+				ft_putstr_fd("Error : Textures files doesn't exist",2);
+				exit(2);
+			}
 			free(tmp);
 			return (0);
 	}

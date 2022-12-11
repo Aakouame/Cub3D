@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/09 11:26:58 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/11 18:10:46 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,10 @@ typedef struct s_player
 	double ray_angle;
 }	t_player;
 
+typedef struct s_text
+{
+	void *img;
+} t_text;
 
 typedef struct s_data
 {
@@ -126,7 +130,13 @@ typedef struct s_data
 	int			key_code;
 	double		ray;
 	int my_cubs_len;
+
+	t_text r_texture;
+	t_text l_texture;
+	t_text f_texture;
+	t_text b_texture;
 }	t_data;
+
 
 int		ft_check_exist(char *line, char *find, char **txtr, int size);
 int		ft_check(char *file, t_data *data);
