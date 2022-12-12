@@ -30,9 +30,17 @@ void fill_map(t_data *data)
 	}
 	data->player.step_m = 3;
 	data->l_texture.img = mlx_xpm_file_to_image(data->my_map.init,data->txtrs.we,data->l_texture.width,data->l_texture.height);
+	if (!data->l_texture.img)
+		exit(1);
 	data->r_texture.img = mlx_xpm_file_to_image(data->my_map.init,data->txtrs.ea,data->r_texture.width,data->r_texture.height);
+	if (!data->r_texture.img)
+		exit(1);
 	data->b_texture.img = mlx_xpm_file_to_image(data->my_map.init,data->txtrs.so,data->b_texture.width,data->b_texture.height);
+	if (!data->b_texture.img)
+		exit(1);
 	data->f_texture.img = mlx_xpm_file_to_image(data->my_map.init,data->txtrs.no,data->f_texture.width,data->f_texture.height);
+	if (!data->f_texture.img)
+		exit(1);
 	data->player.step_r = M_PI/30;
 	data->my_map.map_splited[k] = NULL;
 }
