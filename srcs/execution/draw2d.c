@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/12 18:45:23 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/12 19:00:13 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	char	*dst;
 	dst = data->my_map.addr + (y * data->my_map.line_length + x * (data->my_map.bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
+}
+
+unsigned int get_pixel(int start, int y,int x,float wall_height,t_data *data)
+{
+	y = ((y - start) * data->l_texture.height ) / wall_height;
+	printf("y  = %d\n",y);
+	return (0xff);
 }
 
 void  init_mlx(t_data *data)
@@ -318,7 +325,10 @@ void cast_all_rays(t_data *data)
 			my_mlx_pixel_put(data,i,j++,0x000000);
 		j = start;
 		while(j < end)
-			my_mlx_pixel_put(data,i,j++,0xfff);
+		{
+			my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data));
+			j++;
+		}
 		j = end;
 		while(j < HEIGHT - 1)
 			my_mlx_pixel_put(data,i,j++,0x000000);
