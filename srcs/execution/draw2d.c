@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/11 18:53:12 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/12 18:45:23 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,6 @@ void  init_mlx(t_data *data)
 	data->my_map.addr = mlx_get_data_addr(data->my_map.img, &data->my_map.bits_per_pixel, &data->my_map.line_length,&data->my_map.endian);
 }
 
-
-void dda(double X0, double Y0, double X1, double Y1,t_data *data,double color)
-{
-    double dx = X1 - X0;
-    double dy = Y1 - Y0;
- 
-    double steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy);
- 
-    double Xinc = dx / (double)steps;
-    double Yinc = dy / (double)steps;
- 
-    double X = X0;
-    double Y = Y0;
-    for (int i = 0; i <= steps; i++) {
-        my_mlx_pixel_put(data,round(X), round(Y),color); 
-        X += Xinc; 
-        Y += Yinc;
-    }
-}
-
 int get_height(char **str)
 {
 	int i = 0;
@@ -82,18 +62,6 @@ int get_weight(char **str)
 	return (big_len);
 }
 
-void drawcub(t_data *data , int x , int y,unsigned int color)
-{
-	int x0 = x * data->my_cubs_len;
-	int x1 = (x + 1) * data->my_cubs_len;
-	int y0 = y * data->my_cubs_len;
-	int y1 = (y + 1) * data->my_cubs_len;
-	while(y0 < y1)
-	{
-		dda(x0,y0,x1,y0,data,color);
-		y0++;
-	}
-}
 
 void init_player(t_data *data)
 {
@@ -345,9 +313,15 @@ void cast_all_rays(t_data *data)
 			start = 0;
 		if (end > HEIGHT)
 			end = HEIGHT - 1;
-		dda(i,0,i,(HEIGHT/2),data,0xffffff);
-		dda(i,start,i,end,data,0xff);
-		dda(i,end,i,HEIGHT -1,data,0xffff);
+		int j = 0;
+		while(j < (HEIGHT/2))
+			my_mlx_pixel_put(data,i,j++,0x000000);
+		j = start;
+		while(j < end)
+			my_mlx_pixel_put(data,i,j++,0xfff);
+		j = end;
+		while(j < HEIGHT - 1)
+			my_mlx_pixel_put(data,i,j++,0x000000);
 		data->player.ray_angle += inc_ang;
 		i++;
 	}
