@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/12 20:14:37 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/12 20:34:23 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ unsigned int get_pixel(int start, int y,int x,float wall_height,t_data *data)
 	int color;
 
 	y = ((y - start) * data->l_texture.height ) / wall_height;
+
+	y = ((y - (((HEIGHT - wall_height) / 2))) * data->l_texture.height) / wall_height;
 	color = data->l_texture.arr[y * (data->l_texture.line_length / 4) + x];
 	//color = *(data->l_texture.arr + (y * data->l_texture.line_length + x * (data->l_texture.bpp / 8)));
 	//printf("y  = %d\n",y);
