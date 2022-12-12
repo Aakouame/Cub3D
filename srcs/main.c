@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/11 16:54:48 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/12 17:17:36 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,8 @@ int main(int ac, char **av)
 	{
 		if (!ft_check(av[1], &data))
 		{
-			fill_map(&data);
 			init_mlx(&data);
+			fill_map(&data);
 			init_player(&data);
 			draw_map(&data);
 			mlx_hook(data.my_map.win, 17, 1L << 0, ft_exit, &data);
