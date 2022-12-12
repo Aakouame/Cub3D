@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/12 20:05:12 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/12 20:13:58 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ typedef struct s_text
 	void *img;
 	int height;
 	int width;
-	char *arr;
+	int *arr;
 	int line_length;
 	int bpp;
 	int endian;
