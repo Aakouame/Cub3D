@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/11 18:53:12 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/12 15:22:57 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+unsigned int getpixel_color(double wall_height,t_data *data,int y,int x)
+{
+	unsigned int color;
+
+	y = ((y - (((HEIGHT - wall_height) / 2))) * *data->b_texture.height) / wall_height;
+	color = data->b_texture.addr[ y * (data->b_texture.line_length / 4) + x];
+	//int txtr_height = *(data->l_texture.height);
+	//int steps = wall_height/txtr_height;
+
+
+	return (color);
+}
 void  init_mlx(t_data *data)
 {
 	int	l;
@@ -39,7 +51,7 @@ void  init_mlx(t_data *data)
 }
 
 
-void dda(double X0, double Y0, double X1, double Y1,t_data *data,double color)
+void dda(double X0, double Y0, double X1, double Y1,t_data *data,double color,double wall_height)
 {
     double dx = X1 - X0;
     double dy = Y1 - Y0;
@@ -52,7 +64,7 @@ void dda(double X0, double Y0, double X1, double Y1,t_data *data,double color)
     double X = X0;
     double Y = Y0;
     for (int i = 0; i <= steps; i++) {
-        my_mlx_pixel_put(data,round(X), round(Y),color); 
+        my_mlx_pixel_put(data,round(X), round(Y),getpixel_color(wall_height,data,Y,X)); 
         X += Xinc; 
         Y += Yinc;
     }
@@ -90,7 +102,7 @@ void drawcub(t_data *data , int x , int y,unsigned int color)
 	int y1 = (y + 1) * data->my_cubs_len;
 	while(y0 < y1)
 	{
-		dda(x0,y0,x1,y0,data,color);
+		dda(x0,y0,x1,y0,data,color,0);
 		y0++;
 	}
 }
@@ -310,6 +322,8 @@ void get_distance(t_data *data)
 		data->player.ray.v_distance = INT_MAX;
 }
 
+
+
 void cast_all_rays(t_data *data)
 {
 	data->player.ray_angle = data->player.fi - (M_PI /6);
@@ -345,9 +359,7 @@ void cast_all_rays(t_data *data)
 			start = 0;
 		if (end > HEIGHT)
 			end = HEIGHT - 1;
-		dda(i,0,i,(HEIGHT/2),data,0xffffff);
-		dda(i,start,i,end,data,0xff);
-		dda(i,end,i,HEIGHT -1,data,0xffff);
+		dda(i,start,i,end,data,0,wall_height);
 		data->player.ray_angle += inc_ang;
 		i++;
 	}
