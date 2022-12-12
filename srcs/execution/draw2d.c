@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/12 19:00:13 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/12 20:10:32 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 unsigned int get_pixel(int start, int y,int x,float wall_height,t_data *data)
 {
+	int color;
+
 	y = ((y - start) * data->l_texture.height ) / wall_height;
-	printf("y  = %d\n",y);
-	return (0xff);
+	color = *(data->l_texture.arr + (y * data->l_texture.line_length + x * (data->l_texture.bpp / 8)));
+	//printf("y  = %d\n",y);
+	return (color);
 }
 
 void  init_mlx(t_data *data)
@@ -322,7 +325,7 @@ void cast_all_rays(t_data *data)
 			end = HEIGHT - 1;
 		int j = 0;
 		while(j < (HEIGHT/2))
-			my_mlx_pixel_put(data,i,j++,0x000000);
+			my_mlx_pixel_put(data,i,j++,0x79b2e2);
 		j = start;
 		while(j < end)
 		{
@@ -331,7 +334,7 @@ void cast_all_rays(t_data *data)
 		}
 		j = end;
 		while(j < HEIGHT - 1)
-			my_mlx_pixel_put(data,i,j++,0x000000);
+			my_mlx_pixel_put(data,i,j++,0xa86024);
 		data->player.ray_angle += inc_ang;
 		i++;
 	}
