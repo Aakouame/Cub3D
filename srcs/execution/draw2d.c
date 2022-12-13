@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/13 16:09:23 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/13 17:13:29 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,10 @@ unsigned int get_pixel(int start, int y,int x,float wall_height,t_data *data)
 	int x_offset;
 
 	distance_from_y = y + (wall_height / 2) - (HEIGHT / 2);
-	x_offset = (data->x_offset - (int) data->x_offset ) *  data->l_texture.width;
+	x_offset = (data->x_offset / data->my_cubs_len ) *  data->l_texture.width;
 	y = ((distance_from_y) * (data->l_texture.height / wall_height));
-
 	color = data->l_texture.arr[(data->l_texture.height * y) + x_offset];
 
-	//color = *(data->l_texture.arr + (y * data->l_texture.line_length + x * (data->l_texture.bpp / 8)));
-	//printf("y  = %d\n",y);
 	return ((unsigned int)color);
 }
 
@@ -317,14 +314,14 @@ void cast_all_rays(t_data *data)
 			data->player.ray.h_distance *= cos(data->player.ray_angle - data->player.fi);
 			test = data->player.ray.h_distance / data->my_cubs_len;
 			wall_height = HEIGHT/(test);
-			data->x_offset = data->player.ray.h_x /data->my_cubs_len;
+			data->x_offset = fmod(data->player.ray.h_x,data->my_cubs_len);
 		}
 		else
 		{
 			data->player.ray.v_distance *= cos(data->player.ray_angle - data->player.fi);
 			test = data->player.ray.v_distance / data->my_cubs_len;
 			wall_height = HEIGHT/(test);
-			data->x_offset = data->player.ray.v_y / data->my_cubs_len;
+			data->x_offset = fmod(data->player.ray.v_y,data->my_cubs_len);
 
 		}
 		start = (HEIGHT/2) - (wall_height/2);
