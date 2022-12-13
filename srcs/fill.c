@@ -46,7 +46,7 @@ void fill_map(t_data *data)
 //	if (!data->f_texture.img)
 //		exit(1);
 //	data->f_texture.arr = 0;
-	data->player.step_r = M_PI/30;
+	data->player.step_r = M_PI/80;
 	data->my_map.map_splited[k] = NULL;
 }
 
