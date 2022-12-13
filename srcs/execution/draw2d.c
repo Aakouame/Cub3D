@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/13 17:45:10 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/13 19:35:23 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ unsigned int get_pixel(int start, int y,int x,float wall_height,t_data *data,t_t
 	distance_from_y = y + (wall_height / 2) - (HEIGHT / 2);
 	x_offset = (data->x_offset / data->my_cubs_len ) *  txt->width;
 	y = ((distance_from_y) * (txt->height / wall_height));
-	color = data->l_texture.arr[(txt->height * y) + x_offset];
+	color = txt->arr[(txt->height * y) + x_offset];
 
 	return ((unsigned int)color);
 }
@@ -339,9 +339,19 @@ void cast_all_rays(t_data *data)
 		while(j < end)
 		{
 			if (data->player.ray.v_distance > data->player.ray.h_distance)
-				my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->f_texture));
+			{
+				if (is_down(data))
+					my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->b_texture));
+				else if (is_up(data))
+					my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->f_texture));
+			}
 			else
-				my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->r_texture));
+			{
+				if (is_right(data))
+					my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->r_texture));
+				else if (is_left(data))
+					my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->l_texture));
+			}
 
 			j++;
 		}
