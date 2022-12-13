@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/12 20:13:58 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/12 21:10:58 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ typedef struct s_data
 	t_text l_texture;
 	t_text f_texture;
 	t_text b_texture;
+	int x_offset;
 }	t_data;
 
 
