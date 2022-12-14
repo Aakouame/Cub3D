@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/13 19:35:23 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/14 15:15:44 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void  init_mlx(t_data *data)
 {
 	int	l;
 
-	if (HEIGHT <= WIDTH)
+	if (HEIGHT >= WIDTH)
 		l = HEIGHT;
 	else
 		l = WIDTH;
 	if (data->max.x > data->max.y)
 		data->my_cubs_len = l/data->max.x;
 	else
-		data->my_cubs_len = HEIGHT/data->max.y;
+		data->my_cubs_len = l/data->max.y;
 	data->my_map.init = mlx_init();
 	data->my_map.win = mlx_new_window ( data->my_map.init, WIDTH, HEIGHT, "cub3d");
 	data->my_map.img = mlx_new_image(data->my_map.init,WIDTH,HEIGHT);
