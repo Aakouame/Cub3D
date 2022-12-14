@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/14 18:16:52 by yaskour          ###   ########.fr       */
+/*   Created: 2022/12/14 19:02:50 by yaskour           #+#    #+#             */
+/*   Updated: 2022/12/14 19:21:08 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
-#define CUB_H
-#define WIDTH 1100
-#define HEIGHT 800
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <mlx.h>
-#include "../srcs/libft/libft.h"
-#include "../srcs/gnl/get_next_line.h"
-#include <math.h>
-#include <limits.h>
+# define CUB_H
+# define WIDTH 1100
+# define HEIGHT 800
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <mlx.h>
+# include "../srcs/libft/libft.h"
+# include "../srcs/gnl/get_next_line.h"
+# include <math.h>
+# include <limits.h>
 
 typedef struct s_cord
 {
@@ -30,7 +30,7 @@ typedef struct s_cord
 	int	y;
 }	t_cord;
 
-typedef struct	s_cord_double
+typedef struct s_cord_double
 {
 	double	x;
 	double	y;
@@ -52,7 +52,7 @@ typedef struct s_color
 	int		tab_f[3];
 }	t_color;
 
-typedef struct	s_exist
+typedef struct s_exist
 {
 	int	no;
 	int	so;
@@ -60,121 +60,115 @@ typedef struct	s_exist
 	int	ea;
 	int	f;
 	int	c;
-}   t_exist;
+}	t_exist;
 
 typedef struct s_map
 {
-	int		fr_space;
-	int		wall;
-	int		p;
-	char	position;
 	t_cord	indx;
+	char	position;
 	char	**map_splited;
-	
-	// mlx
-	void 	*init;
-	void	*win;
-	void 	*img;
 	char	*addr;
+	void	*init;
+	void	*win;
+	void	*img;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		fr_space;
+	int		wall;
+	int		p;
 
 }	t_map;
 
 typedef struct s_ray
 {
-	double h_x;
-	double h_y;
-	int 	found_h;
-	double h_distance;
-
-
-	double v_x;
-	double v_y;
-	int found_v;
-	double v_distance;
-} t_ray;
+	double	h_distance;
+	double	v_x;
+	double	v_y;
+	double	h_x;
+	double	h_y;
+	double	v_distance;
+	int		found_h;
+	int		found_v;
+}	t_ray;
 
 typedef struct s_player
 {
-	t_cord	pos_mp;
 	t_cord_double	pos_px;
-
-	double	fi;
-	double	step_m;
-	double	step_r;
-	char	p;
-	t_ray ray;
-	double ray_angle;
+	t_cord			pos_mp;
+	t_ray			ray;
+	double			fi;
+	double			step_m;
+	double			step_r;
+	double			ray_angle;
+	char			p;
 }	t_player;
 
 typedef struct s_text
 {
-	void *img;
-	int height;
-	int width;
-	int *arr;
-	int line_length;
-	int bpp;
-	int endian;
-} t_text;
+	void	*img;
+	int		height;
+	int		width;
+	int		*arr;
+	int		line_length;
+	int		bpp;
+	int		endian;
+}	t_text;
 
 typedef struct s_data
 {
 	t_player	player;
 	t_textures	txtrs;
 	t_color		color;
-	char		*all;
-	char        **all_splited;
-	char        **all_split;
-	char        *msg;
 	t_exist		check;
 	t_cord		max;
 	t_map		my_map;
+	t_text		r_texture;
+	t_text		l_texture;
+	t_text		f_texture;
+	t_text		b_texture;
+	char		*all;
+	char		**all_splited;
+	char		**all_split;
+	char		*msg;
 	int			key;
 	int			key_code;
+	int			my_cubs_len;
 	double		ray;
-	int my_cubs_len;
-
-	t_text r_texture;
-	t_text l_texture;
-	t_text f_texture;
-	t_text b_texture;
-	double x_offset;
+	double		x_offset;
 }	t_data;
 
-
-int		ft_check_exist(char *line, char *find, char **txtr, int size);
-int		ft_check(char *file, t_data *data);
-int 	ft_search(char *str, int c);
-void    ft_er_msg(char *msg);
-int 	check_color(char **splited, t_data *data);
-int		h_m_repeated(char	*str, int c);
-int		is_number(char *str);
-int		check_map(char	**splited, t_data *data);
-int 	ft_search_indice(char  **str, char *s, int size);
-int 	ft_indix_start(t_data *data);
-int		ft_check_map(t_data *data);
-void	ft_add_spc(char **str, t_data *data);
-void 	fill_map(t_data *data);
-void    free_all(char **str);
-void 	free_data(t_data *data);
-int		length_tab(char **str);
-char	**add_str(char **str, char *s);
-void  init_mlx(t_data *data);
-void  draw_map(t_data *data);
-void init_player(t_data *data);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void dda(double X0, double Y0, double X1, double Y1,t_data *data,double color);
-void first_horizontal_intr(t_data *data,int ang);
-void first_vertical_intr(t_data *data,int ang);
-void draw_ray_ver(t_data *data,int ang);
-void draw_ray_hor(t_data *data,int ang);
-void normalize_angle(t_data *data);
-void cast_all_rays(t_data *data);
-int	check_wall(t_data *data,int x, int y);
-unsigned long get_floor(t_data *data);
-unsigned long get_cieling(t_data *data);
+unsigned long	get_floor(t_data *data);
+unsigned long	get_cieling(t_data *data);
+int				ft_check_exist(char *line, char *find, char **txtr, int size);
+int				ft_check(char *file, t_data *data);
+int				ft_search(char *str, int c);
+void			ft_er_msg(char *msg);
+int				check_color(char **splited, t_data *data);
+int				h_m_repeated(char	*str, int c);
+int				is_number(char *str);
+int				check_map(char	**splited, t_data *data);
+int				ft_search_indice(char **str, char *s, int size);
+int				ft_indix_start(t_data *data);
+int				ft_check_map(t_data *data);
+void			ft_add_spc(char **str, t_data *data);
+void			fill_map(t_data *data);
+void			free_all(char **str);
+void			free_data(t_data *data);
+int				length_tab(char **str);
+char			**add_str(char **str, char *s);
+void			init_mlx(t_data *data);
+void			draw_map(t_data *data);
+void			init_player(t_data *data);
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void			dda(double X0, double Y0, double X1, double Y1, \
+		t_data *data, double color);
+void			first_horizontal_intr(t_data *data, int ang);
+void			first_vertical_intr(t_data *data, int ang);
+void			draw_ray_ver(t_data *data, int ang);
+void			draw_ray_hor(t_data *data, int ang);
+void			normalize_angle(t_data *data);
+void			cast_all_rays(t_data *data);
+int				check_wall(t_data *data, int x, int y);
 
 #endif
