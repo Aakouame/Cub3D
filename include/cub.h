@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/13 16:07:07 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/14 16:22:51 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,4 +173,6 @@ void draw_ray_ver(t_data *data,int ang);
 void draw_ray_hor(t_data *data,int ang);
 void normalize_angle(t_data *data);
 void cast_all_rays(t_data *data);
+int	check_wall(t_data *data,int x, int y);
+
 #endif
