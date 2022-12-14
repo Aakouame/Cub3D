@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 09:24:55 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 15:06:38 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/11 18:41:40 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,30 @@ int	ft_check_exist(char *line, char *find, char **txtr, int size)
 	return (1);
 }
 
+int	ft_check_exist_textures(char *line, char *find, char **txtr, int size)
+{
+	char	*tmp;
+	int fd;
+	
+	tmp = ft_strtrim(line, " \t");
+	if (!strncmp(tmp, find, size))
+	{
+			tmp = tmp + size;
+			tmp = ft_strtrim(tmp, " ");
+			*txtr = ft_strdup(tmp);
+			fd = open(*txtr,O_RDONLY);
+			if (fd < 0)
+			{
+				ft_putstr_fd("Error : Textures files doesn't exist",2);
+				exit(2);
+			}
+			free(tmp);
+			return (0);
+	}
+	free(tmp);
+	return (1);
+}
+
 int check_textures(char **splited, t_data *data)
 {
 	int		i;
@@ -90,13 +114,13 @@ int check_textures(char **splited, t_data *data)
 		return (1);
 	while (splited[i])
 	{
-		if (!ft_check_exist(splited[i], "NO ", &data->txtrs.no, 3))
+		if (!ft_check_exist_textures(splited[i], "NO ", &data->txtrs.no, 3))
 			data->check.no++;
-		else if (!ft_check_exist(splited[i], "SO ", &data->txtrs.so, 3))
+		else if (!ft_check_exist_textures(splited[i], "SO ", &data->txtrs.so, 3))
 			data->check.so++;
-		else if (!ft_check_exist(splited[i], "WE ", &data->txtrs.we, 3))
+		else if (!ft_check_exist_textures(splited[i], "WE ", &data->txtrs.we, 3))
 			data->check.we++;
-		else if (!ft_check_exist(splited[i], "EA ", &data->txtrs.ea, 3))
+		else if (!ft_check_exist_textures(splited[i], "EA ", &data->txtrs.ea, 3))
 			data->check.ea++;
 		i++;
 	}

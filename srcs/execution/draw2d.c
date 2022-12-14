@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/09 11:29:03 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/14 18:37:40 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,42 +20,36 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+unsigned int get_pixel(int start, int y,int x,float wall_height,t_data *data,t_text *txt)
+{
+	int color;
+	int distance_from_y;
+	int x_offset;
+
+	distance_from_y = y + (wall_height / 2) - (HEIGHT / 2);
+	x_offset = (data->x_offset / data->my_cubs_len ) *  txt->width;
+	y = ((distance_from_y) * (txt->height / wall_height));
+	color = txt->arr[(txt->height * y) + x_offset];
+
+	return ((unsigned int)color);
+}
+
 void  init_mlx(t_data *data)
 {
 	int	l;
 
-	if (HEIGHT <= WIDTH)
+	if (HEIGHT >= WIDTH)
 		l = HEIGHT;
 	else
 		l = WIDTH;
 	if (data->max.x > data->max.y)
 		data->my_cubs_len = l/data->max.x;
-	if (data->max.x < data->max.y)
+	else
 		data->my_cubs_len = l/data->max.y;
 	data->my_map.init = mlx_init();
 	data->my_map.win = mlx_new_window ( data->my_map.init, WIDTH, HEIGHT, "cub3d");
 	data->my_map.img = mlx_new_image(data->my_map.init,WIDTH,HEIGHT);
 	data->my_map.addr = mlx_get_data_addr(data->my_map.img, &data->my_map.bits_per_pixel, &data->my_map.line_length,&data->my_map.endian);
-}
-
-
-void dda(double X0, double Y0, double X1, double Y1,t_data *data,double color)
-{
-    double dx = X1 - X0;
-    double dy = Y1 - Y0;
- 
-    double steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy);
- 
-    double Xinc = dx / (double)steps;
-    double Yinc = dy / (double)steps;
- 
-    double X = X0;
-    double Y = Y0;
-    for (int i = 0; i <= steps; i++) {
-        my_mlx_pixel_put(data,round(X), round(Y),color); 
-        X += Xinc; 
-        Y += Yinc;
-    }
 }
 
 int get_height(char **str)
@@ -82,18 +76,6 @@ int get_weight(char **str)
 	return (big_len);
 }
 
-void drawcub(t_data *data , int x , int y,unsigned int color)
-{
-	int x0 = x * data->my_cubs_len;
-	int x1 = (x + 1) * data->my_cubs_len;
-	int y0 = y * data->my_cubs_len;
-	int y1 = (y + 1) * data->my_cubs_len;
-	while(y0 < y1)
-	{
-		dda(x0,y0,x1,y0,data,color);
-		y0++;
-	}
-}
 
 void init_player(t_data *data)
 {
@@ -180,7 +162,6 @@ int is_wall(t_data *data,double y,double x)
 	x_map = floor(x/data->my_cubs_len);
 	if (x_map < 0)
 		x_map = 0;
-	// printf("x_map = %d\n", x_map);
 	y_map = floor(y/data->my_cubs_len);
 	if (y_map < 0)
 		y_map = 0;
@@ -188,8 +169,6 @@ int is_wall(t_data *data,double y,double x)
 		y_map = data->max.y;
 	if (x_map > data->max.x)
 		x_map = data->max.x;
-	// printf("y_map = %d\n", y_map);
-	//printf("y = %d   x = %d\n",y_map,x_map);
 	if (y >= (data->max.y * data->my_cubs_len))
 		return (1);
 	if (data->my_map.map_splited[y_map][x_map] == '1')
@@ -231,14 +210,16 @@ void cast_horz(t_data *data)
 
 	y_check = first_y_inter;
 	x_check = first_x_inter;
-	while(x_check >= 0 && x_check <= WIDTH && y_check >= 0 && y_check <= HEIGHT)
-	{
 	if (is_up(data))
 		y_check--;
+	while(((x_check >= 0 && x_check < ((data->max.x * data->my_cubs_len)) && (y_check >= 0 && y_check < (data->max.y * data->my_cubs_len)))))
+	{
 		if (is_wall(data,y_check,x_check))
 		{
 			data->player.ray.h_x = first_x_inter;
 			data->player.ray.h_y = first_y_inter;
+			data->player.ray.found_h = 1;
+
 			break;
 		}
 		y_check += y_step;
@@ -280,14 +261,16 @@ void cast_ver(t_data *data)
 
 	y_check = first_y_inter;
 	x_check = first_x_inter;
-	while(x_check >= 0 && x_check <= WIDTH && y_check >= 0 && y_check <= HEIGHT)
-	{
 	if (is_left(data))
 		x_check--;
+	while(((x_check >= 0 && x_check <= ((data->max.x * data->my_cubs_len) + 1) && (y_check >= 0 && y_check <= (data->max.y * data->my_cubs_len) + 1))))
+	{
 		if (is_wall(data,y_check,x_check))
 		{
 			data->player.ray.v_x = first_x_inter;
 			data->player.ray.v_y = first_y_inter;
+			data->player.ray.found_v = 1;
+
 			break;
 		}
 		y_check += y_step;
@@ -299,8 +282,14 @@ void cast_ver(t_data *data)
 
 void get_distance(t_data *data)
 {
+	if (data->player.ray.found_h)
 		data->player.ray.h_distance = sqrt(((data->player.ray.h_x - data->player.pos_px.x) * (data->player.ray.h_x - data->player.pos_px.x)) + ((data->player.ray.h_y - data->player.pos_px.y) * (data->player.ray.h_y - data->player.pos_px.y)));
+	else
+		data->player.ray.h_distance = INT_MAX;
+	if (data->player.ray.found_v)
 		data->player.ray.v_distance = sqrt(((data->player.ray.v_x - data->player.pos_px.x) * (data->player.ray.v_x - data->player.pos_px.x)) + ((data->player.ray.v_y - data->player.pos_px.y) * (data->player.ray.v_y - data->player.pos_px.y)));
+	else
+		data->player.ray.v_distance = INT_MAX;
 }
 
 void cast_all_rays(t_data *data)
@@ -313,6 +302,8 @@ void cast_all_rays(t_data *data)
 	double  test;
 	double start;
 	double end;
+	//t_text texture;
+
 
 	double inc_ang = (M_PI/3)/WIDTH;
 	while(i < WIDTH)
@@ -322,13 +313,18 @@ void cast_all_rays(t_data *data)
 		get_distance(data);
 		if (data->player.ray.v_distance > data->player.ray.h_distance)
 		{
+			data->player.ray.h_distance *= cos(data->player.ray_angle - data->player.fi);
 			test = data->player.ray.h_distance / data->my_cubs_len;
 			wall_height = HEIGHT/(test);
+			data->x_offset = fmod(data->player.ray.h_x,data->my_cubs_len);
 		}
 		else
 		{
+			data->player.ray.v_distance *= cos(data->player.ray_angle - data->player.fi);
 			test = data->player.ray.v_distance / data->my_cubs_len;
 			wall_height = HEIGHT/(test);
+			data->x_offset = fmod(data->player.ray.v_y,data->my_cubs_len);
+
 		}
 		start = (HEIGHT/2) - (wall_height/2);
 		end = (HEIGHT/2) + (wall_height/2);
@@ -336,12 +332,32 @@ void cast_all_rays(t_data *data)
 			start = 0;
 		if (end > HEIGHT)
 			end = HEIGHT - 1;
-		// printf("start : %f\n",start);
-		// printf("end : %f\n",end);
-		// printf("cub_len = %d\n", data->my_cubs_len);
-		dda(i,0,i,(HEIGHT/2),data,0xffffff);
-		dda(i,start,i,end,data,0xff);
-		dda(i,end,i,HEIGHT -1,data,0xffff);
+		int j = 0;
+		while(j < (HEIGHT/2))
+			my_mlx_pixel_put(data,i,j++,get_cieling(data));
+		j = start;
+		while(j < end)
+		{
+			if (data->player.ray.v_distance > data->player.ray.h_distance)
+			{
+				if (is_down(data))
+					my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->b_texture));
+				else if (is_up(data))
+					my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->f_texture));
+			}
+			else
+			{
+				if (is_right(data))
+					my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->r_texture));
+				else if (is_left(data))
+					my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->l_texture));
+			}
+
+			j++;
+		}
+		j = end;
+		while(j < HEIGHT - 1)
+			my_mlx_pixel_put(data,i,j++,get_floor(data));
 		data->player.ray_angle += inc_ang;
 		i++;
 	}

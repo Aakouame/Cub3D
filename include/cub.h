@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:43:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/09 11:26:58 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/14 18:33:08 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,16 @@ typedef struct s_player
 	double ray_angle;
 }	t_player;
 
+typedef struct s_text
+{
+	void *img;
+	int height;
+	int width;
+	int *arr;
+	int line_length;
+	int bpp;
+	int endian;
+} t_text;
 
 typedef struct s_data
 {
@@ -126,7 +136,14 @@ typedef struct s_data
 	int			key_code;
 	double		ray;
 	int my_cubs_len;
+
+	t_text r_texture;
+	t_text l_texture;
+	t_text f_texture;
+	t_text b_texture;
+	double x_offset;
 }	t_data;
+
 
 int		ft_check_exist(char *line, char *find, char **txtr, int size);
 int		ft_check(char *file, t_data *data);
@@ -156,4 +173,8 @@ void draw_ray_ver(t_data *data,int ang);
 void draw_ray_hor(t_data *data,int ang);
 void normalize_angle(t_data *data);
 void cast_all_rays(t_data *data);
+int	check_wall(t_data *data,int x, int y);
+unsigned long get_floor(t_data *data);
+unsigned long get_cieling(t_data *data);
+
 #endif
