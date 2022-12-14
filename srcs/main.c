@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/14 16:20:10 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/14 18:16:35 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,26 @@ int	ft_key_hook(int key_code, t_data *data)
 	}
 	draw_map(data);
 	return (0);
+}
+unsigned long createRGB(int r, int g, int b)
+{   
+    return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+}
+
+unsigned long get_cieling(t_data *data)
+{
+	unsigned long number;
+
+	number = createRGB(data->color.tab_c[0],data->color.tab_c[1],data->color.tab_c[2]);
+	return(number);
+}
+
+unsigned long get_floor(t_data *data)
+{
+	unsigned long number;
+
+	number = createRGB(data->color.tab_f[0],data->color.tab_f[1],data->color.tab_f[2]);
+	return(number);
 }
 
 int main(int ac, char **av)

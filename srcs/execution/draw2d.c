@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/14 16:24:28 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/14 18:17:25 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,7 +334,7 @@ void cast_all_rays(t_data *data)
 			end = HEIGHT - 1;
 		int j = 0;
 		while(j < (HEIGHT/2))
-			my_mlx_pixel_put(data,i,j++,0x79b2e2);
+			my_mlx_pixel_put(data,i,j++,get_cieling(data));
 		j = start;
 		while(j < end)
 		{
@@ -357,7 +357,7 @@ void cast_all_rays(t_data *data)
 		}
 		j = end;
 		while(j < HEIGHT - 1)
-			my_mlx_pixel_put(data,i,j++,0xa86024);
+			my_mlx_pixel_put(data,i,j++,get_floor(data));
 		data->player.ray_angle += inc_ang;
 		i++;
 	}
