@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:07:53 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/15 21:36:09 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/15 21:37:08 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	load_textures(t_data *data)
 	}
 }
 
-void fill_map_helper(t_data *data,int *k)
+void	fill_map_helper(t_data *data, int *k)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 6;
 	while (data->all_splited[i])
@@ -62,7 +62,6 @@ void fill_map_helper(t_data *data,int *k)
 		*k += 1;
 		i++;
 	}
-
 }
 
 void	fill_map(t_data *data)
@@ -75,7 +74,7 @@ void	fill_map(t_data *data)
 	while (data->all_splited[i])
 		i++;
 	data->my_map.map_splited = malloc(sizeof(char *) * i - 5);
-	fill_map_helper(data,&k);
+	fill_map_helper(data, &k);
 	load_textures(data);
 	data->player.step_m = 3;
 	data->player.step_r = M_PI / 80;
