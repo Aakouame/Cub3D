@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:59:42 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/15 19:06:38 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/15 20:38:35 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	check_range_color_h(int *tb, char **clr_splited, int *j)
 		if (is_number(clr_splited[i]))
 			*j = 1;
 		if (tb[i] > 255 || tb[i] < 0)
-			*j = 1;	
+			*j = 1;
 		i++;
 	}
 	free_all(clr_splited);
@@ -34,7 +34,7 @@ int	check_range_color(char *color, int *tb)
 	int		i;
 	char	**clr_splited;
 	int		j;
-	
+
 	j = 0;
 	if (!color)
 		return (1);
@@ -56,9 +56,9 @@ int	check_range_color(char *color, int *tb)
 	return (j);
 }
 
-int check_color(char **splited, t_data *data)
+int	check_color(char **splited, t_data *data)
 {
-	int i;
+	int	i;
 
 	data->check.c = 0;
 	data->check.f = 0;
@@ -79,34 +79,19 @@ int check_color(char **splited, t_data *data)
 		return (1);
 	if (check_range_color(data->color.f, data->color.tab_f))
 		return (1);
-	return 0;
+	return (0);
 }
 
 int	check_exist_map(char **splited, t_data *data)
 {
-	int	i;
-	int	j;
-	
-	i = 6;
+	data->i = 6;
 	data->my_map.fr_space = 0;
 	data->my_map.wall = 0;
 	data->my_map.p = 0;
-	while (splited[i])
+	while (splited[data->i])
 	{
-		j = 0;
-		while (splited[i][j])
-		{
-			if (splited[i][j] == '1')
-				data->my_map.wall++;
-			else if (splited[i][j] == 'N' || splited[i][j] == 'S'\
-					|| splited[i][j] == 'W' || splited[i][j] == 'E')
-				{
-					data->player.p = splited[i][j];
-					data->my_map.p++;
-				}
-			j++;
-		}	
-		i++;
+		check_exist_map_h(splited, data);
+		data->i++;
 	}
 	if ((data->my_map.wall > 0) && (data->my_map.p == 1))
 		return (0);
@@ -117,7 +102,7 @@ int	check_map(char **splited, t_data *data)
 {
 	int	i;
 	int	j;
-	
+
 	if (check_exist_map(splited, data))
 		return (1);
 	i = 6;

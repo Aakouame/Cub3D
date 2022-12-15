@@ -1,31 +1,4 @@
 srcs/parsing/check.c: OK!
-srcs/parsing/check_h_1.c: Error!
-Error: TOO_MANY_LINES       (line:  49, col:   1):	Function has more than 25 lines
-Error: SPACE_BEFORE_FUNC    (line:  51, col:   4):	space before function name
-Error: SPACE_REPLACE_TAB    (line:  53, col:   8):	Found space when expecting tab
-Error: RETURN_PARENTHESIS   (line:  74, col:  12):	Return value must be in parenthesis
-Error: SPACE_EMPTY_LINE     (line:  81, col:   1):	Space on empty line
-Error: TOO_MANY_TAB         (line:  95, col:   1):	Extra tabs for indent level
-Error: TOO_MANY_TAB         (line:  98, col:   1):	Extra tabs for indent level
-Error: TOO_MANY_LINES       (line: 106, col:   1):	Function has more than 25 lines
-Error: SPACE_EMPTY_LINE     (line: 112, col:   1):	Space on empty line
-srcs/parsing/check_h_2.c: Error!
-Error: SPACE_BEFORE_FUNC    (line:  15, col:   4):	space before function name
-Error: SPACE_REPLACE_TAB    (line:  17, col:   8):	Found space when expecting tab
-Error: SPACE_AFTER_KW       (line:  20, col:   5):	Missing space after keyword
-Error: SPC_BFR_PAR          (line:  20, col:  10):	Missing space before parenthesis (brace/bracket)
-Error: SPACE_EMPTY_LINE     (line:  33, col:   1):	Space on empty line
-Error: SPACE_AFTER_KW       (line:  39, col:   5):	Missing space after keyword
-Error: SPC_BFR_PAR          (line:  39, col:  10):	Missing space before parenthesis (brace/bracket)
-Error: SPC_AFTER_OPERATOR   (line:  51, col:  43):	missing space after operator
-Error: SPC_AFTER_OPERATOR   (line:  51, col:  67):	missing space after operator
-Error: SPC_AFTER_OPERATOR   (line:  52, col:  43):	missing space after operator
-Error: SPC_AFTER_OPERATOR   (line:  55, col:  43):	missing space after operator
-Error: SPC_AFTER_OPERATOR   (line:  55, col:  67):	missing space after operator
-Error: SPC_AFTER_OPERATOR   (line:  56, col:  43):	missing space after operator
-Error: EMPTY_LINE_FUNCTION  (line:  59, col:   1):	Empty line in function
-Error: TOO_MANY_TAB         (line:  62, col:   1):	Extra tabs for indent level
-Error: TOO_MANY_TAB         (line:  63, col:   1):	Extra tabs for indent level
-Error: TAB_INSTEAD_SPC      (line:  66, col:  16):	Found tab when expecting space
-Error: TOO_MANY_LINES       (line:  67, col:   1):	Function has more than 25 lines
+srcs/parsing/check_h_1.c: OK!
+srcs/parsing/check_h_2.c: OK!
 srcs/parsing/check_h_3.c: OK!

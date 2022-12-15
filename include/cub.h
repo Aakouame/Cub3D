@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:02:50 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/15 18:49:49 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/15 20:38:02 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,9 @@ typedef struct s_data
 	int			my_cubs_len;
 	double		ray;
 	double		x_offset;
+	int			j;
+	int			i;
+
 }	t_data;
 
 unsigned long	get_floor(t_data *data);
@@ -173,5 +176,6 @@ int				ft_check_exist_textures(char *line, char *find, \
 int				ft_check_exist(char *line, char *find, char **txtr, int size);
 void			ft_read_h(char *line, int fd, t_data *data, char *mok);
 void			ft_init(t_data *data);
+void			check_exist_map_h(char **splited, t_data *data);
 
 #endif

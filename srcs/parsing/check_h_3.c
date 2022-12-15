@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:04:35 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/15 18:40:27 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/15 20:38:17 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,24 @@ void	ft_read_h(char *line, int fd, t_data *data, char *mok)
 		free (mok);
 		data->all = ft_strjoin(data->all, line);
 		free(line);
+	}
+}
+
+void	check_exist_map_h(char **splited, t_data *data)
+{
+	data->j = 0;
+	while (splited[data->i][data->j])
+	{
+		if (splited[data->i][data->j] == '1')
+			data->my_map.wall++;
+		else if (splited[data->i][data->j] == 'N' || \
+				splited[data->i][data->j] == 'S'\
+				|| splited[data->i][data->j] == 'W' || \
+				splited[data->i][data->j] == 'E')
+		{
+			data->player.p = splited[data->i][data->j];
+			data->my_map.p++;
+		}
+		data->j++;
 	}
 }
