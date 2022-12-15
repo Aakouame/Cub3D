@@ -1,8 +1,5 @@
 srcs/parsing/check.c: Error!
-Error: SPACE_EMPTY_LINE     (line:  36, col:   1):	Space on empty line
-Error: SPACE_AFTER_KW       (line:  56, col:  13):	Missing space after keyword
 Error: TOO_MANY_LINES       (line:  64, col:   1):	Function has more than 25 lines
-Error: SPACE_EMPTY_LINE     (line:  70, col:   1):	Space on empty line
 Error: TOO_MANY_TAB         (line:  75, col:   1):	Extra tabs for indent level
 Error: TOO_MANY_TAB         (line:  78, col:   1):	Extra tabs for indent level
 Error: TOO_MANY_TAB         (line:  79, col:   1):	Extra tabs for indent level

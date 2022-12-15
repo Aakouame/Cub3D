@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 09:24:55 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/15 16:41:36 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/15 18:36:09 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,31 @@ int	check_file(char *name)
 	return (0);
 }
 
+void	ft_read_h(char *line , int fd, t_data *data, char *mok)
+{
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		mok = ft_substr(line, 0, (ft_strlen(line) - 1));
+		data->all_split = add_str(data->all_split, mok);
+		free (mok);
+		data->all = ft_strjoin(data->all, line);
+		free(line);
+	}
+}
+
 char	*ft_read(char *file, t_data *data)
 {
 	int		fd;
 	char	*line;
 	int		i;
 	char	*mok;
-		
+
 	i = 0;
 	fd = open(file, O_RDONLY);
+	mok = NULL;
 	if (fd < 0)
 	{
 		ft_putstr_fd("Error: open file !", 2);
@@ -49,17 +65,7 @@ char	*ft_read(char *file, t_data *data)
 	data->all = ft_strdup(line);
 	data->all_split = add_str(data->all_split, line);
 	free(line);
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (!line)
-			break;
-		mok = ft_substr(line, 0, (ft_strlen(line) - 1));
-		data->all_split = add_str(data->all_split, mok);
-		free (mok);
-		data->all = ft_strjoin(data->all, line);
-		free(line);
-	}
+	ft_read_h(line, fd, data, mok);
 	return (data->all);
 }
 
@@ -67,7 +73,7 @@ int	ft_check_exist(char *line, char *find, char **txtr, int size)
 {
 	char	*tmp;
 	char	*mok;
-	
+
 	tmp = ft_strtrim(line, " \t");
 	if (!strncmp(tmp, find, size))
 	{
