@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:02:50 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/15 18:45:02 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/15 18:49:49 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,6 @@ void			init_mlx(t_data *data);
 void			draw_map(t_data *data);
 void			init_player(t_data *data);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void			dda(double X0, double Y0, double X1, double Y1, \
-		t_data *data, double color);
 void			first_horizontal_intr(t_data *data, int ang);
 void			first_vertical_intr(t_data *data, int ang);
 void			draw_ray_ver(t_data *data, int ang);
@@ -170,9 +168,10 @@ void			draw_ray_hor(t_data *data, int ang);
 void			normalize_angle(t_data *data);
 void			cast_all_rays(t_data *data);
 int				check_wall(t_data *data, int x, int y);
-int	ft_check_exist_textures(char *line, char *find, char **txtr, int size);
-int	ft_check_exist(char *line, char *find, char **txtr, int size);
-void	ft_read_h(char *line, int fd, t_data *data, char *mok);
-void	ft_init(t_data *data);
+int				ft_check_exist_textures(char *line, char *find, \
+					char **txtr, int size);
+int				ft_check_exist(char *line, char *find, char **txtr, int size);
+void			ft_read_h(char *line, int fd, t_data *data, char *mok);
+void			ft_init(t_data *data);
 
 #endif
