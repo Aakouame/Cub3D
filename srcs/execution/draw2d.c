@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 10:58:20 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/14 19:49:48 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/15 14:51:09 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,6 +291,7 @@ void	cast_all_rays(t_data	*data)
 	double	end;
 	double	inc_ang;
 	int		i;
+	int		j;
 
 	i = 0;
 	data->player.ray_angle = data->player.fi - (M_PI / 6);
@@ -302,51 +303,55 @@ void	cast_all_rays(t_data	*data)
 		get_distance(data);
 		if (data->player.ray.v_distance > data->player.ray.h_distance)
 		{
-			data->player.ray.h_distance *= cos(data->player.ray_angle - data->player.fi);
+			data->player.ray.h_distance \
+				*= cos(data->player.ray_angle - data->player.fi);
 			test = data->player.ray.h_distance / data->my_cubs_len;
-			wall_height = HEIGHT/(test);
-			data->x_offset = fmod(data->player.ray.h_x,data->my_cubs_len);
+			wall_height = HEIGHT / (test);
+			data->x_offset = fmod(data->player.ray.h_x, data->my_cubs_len);
 		}
 		else
 		{
-			data->player.ray.v_distance *= cos(data->player.ray_angle - data->player.fi);
+			data->player.ray.v_distance \
+				*= cos(data->player.ray_angle - data->player.fi);
 			test = data->player.ray.v_distance / data->my_cubs_len;
-			wall_height = HEIGHT/(test);
-			data->x_offset = fmod(data->player.ray.v_y,data->my_cubs_len);
-
+			wall_height = HEIGHT / (test);
+			data->x_offset = fmod(data->player.ray.v_y, data->my_cubs_len);
 		}
-		start = (HEIGHT/2) - (wall_height/2);
-		end = (HEIGHT/2) + (wall_height/2);
+		start = (HEIGHT / 2) - (wall_height / 2);
+		end = (HEIGHT / 2) + (wall_height / 2);
 		if (start < 0)
 			start = 0;
 		if (end > HEIGHT)
 			end = HEIGHT - 1;
-		int j = 0;
-		while(j < (HEIGHT/2))
-			my_mlx_pixel_put(data,i,j++,get_cieling(data));
+		j = 0;
+		while (j < (HEIGHT / 2))
+			my_mlx_pixel_put(data, i, j++, get_cieling(data));
 		j = start;
-		while(j < end)
+		while (j < end)
 		{
 			if (data->player.ray.v_distance > data->player.ray.h_distance)
 			{
 				if (is_down(data))
-					my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->b_texture));
+					my_mlx_pixel_put(data, i, j, get_pixel(start, \
+								j, i, wall_height, data, &data->b_texture));
 				else if (is_up(data))
-					my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->f_texture));
+					my_mlx_pixel_put(data, i, j, get_pixel(start, \
+								j, i, wall_height, data, &data->f_texture));
 			}
 			else
 			{
 				if (is_right(data))
-					my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->r_texture));
+					my_mlx_pixel_put(data, i, j, get_pixel(start, \
+								j, i, wall_height, data, &data->r_texture));
 				else if (is_left(data))
-					my_mlx_pixel_put(data,i,j,get_pixel(start,j,i,wall_height,data,&data->l_texture));
+					my_mlx_pixel_put(data, i, j, get_pixel(start, \
+								j, i, wall_height, data, &data->l_texture));
 			}
-
 			j++;
 		}
 		j = end;
-		while(j < HEIGHT - 1)
-			my_mlx_pixel_put(data,i,j++,get_floor(data));
+		while (j < HEIGHT - 1)
+			my_mlx_pixel_put(data, i, j++, get_floor(data));
 		data->player.ray_angle += inc_ang;
 		i++;
 	}
