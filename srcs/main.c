@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/15 15:32:00 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/15 16:40:02 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ft_exit(t_data	data)
 {	
 	(void) data;
+	
 	exit(0);
 	return (0);
 }
@@ -202,7 +203,7 @@ int	main(int ac, char **av)
 		}
 		else
 		{
-			ft_er_msg(data.msg);
+			ft_er_msg(data.msg);		
 			return (2);
 		}
 	}
@@ -211,5 +212,6 @@ int	main(int ac, char **av)
 		ft_putstr_fd("Check ur number of arguments !\n", 2);
 		return (1);
 	}
+			
 	return (0);
 }

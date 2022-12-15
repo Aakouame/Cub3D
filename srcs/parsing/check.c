@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 09:24:55 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/11 18:41:40 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/15 16:41:36 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char	*ft_read(char *file, t_data *data)
 	int		fd;
 	char	*line;
 	int		i;
-	
+	char	*mok;
+		
 	i = 0;
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -53,7 +54,9 @@ char	*ft_read(char *file, t_data *data)
 		line = get_next_line(fd);
 		if (!line)
 			break;
-		data->all_split = add_str(data->all_split, ft_substr(line, 0, (ft_strlen(line) - 1)));
+		mok = ft_substr(line, 0, (ft_strlen(line) - 1));
+		data->all_split = add_str(data->all_split, mok);
+		free (mok);
 		data->all = ft_strjoin(data->all, line);
 		free(line);
 	}
@@ -63,12 +66,14 @@ char	*ft_read(char *file, t_data *data)
 int	ft_check_exist(char *line, char *find, char **txtr, int size)
 {
 	char	*tmp;
+	char	*mok;
 	
 	tmp = ft_strtrim(line, " \t");
 	if (!strncmp(tmp, find, size))
 	{
-			tmp = tmp + size;
-			tmp = ft_strtrim(tmp, " ");
+			mok = tmp + size;
+			free(tmp);
+			tmp = ft_strtrim(mok, " ");
 			*txtr = ft_strdup(tmp);
 			free(tmp);
 			return (0);
@@ -81,17 +86,20 @@ int	ft_check_exist_textures(char *line, char *find, char **txtr, int size)
 {
 	char	*tmp;
 	int fd;
+	char	*mok;
 	
 	tmp = ft_strtrim(line, " \t");
 	if (!strncmp(tmp, find, size))
 	{
-			tmp = tmp + size;
-			tmp = ft_strtrim(tmp, " ");
+			mok = tmp + size;
+			free(tmp);
+			tmp = ft_strtrim(mok, " ");
 			*txtr = ft_strdup(tmp);
 			fd = open(*txtr,O_RDONLY);
 			if (fd < 0)
 			{
 				ft_putstr_fd("Error : Textures files doesn't exist",2);
+				free(tmp);
 				exit(2);
 			}
 			free(tmp);
