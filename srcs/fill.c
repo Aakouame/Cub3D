@@ -1,22 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/15 15:07:53 by yaskour           #+#    #+#             */
+/*   Updated: 2022/12/15 15:12:43 by yaskour          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub.h"
 
-void fill_map(t_data *data)
+void	fill_map(t_data *data)
 {
-	int i = 6;
-	int k = 0;
+	int i;
+	int	k;
 	int	j;
 
-
-	while(data->all_splited[i])
+	i = 6;
+	k = 0;
+	while (data->all_splited[i])
 		i++;
 	data->my_map.map_splited = malloc(sizeof(char *) * i - 5);
 	i = 6;
-	while(data->all_splited[i])
+	while (data->all_splited[i])
 	{
 		j = 0;
-		while(data->all_splited[i][j])
+		while (data->all_splited[i][j])
 		{
-			if (!ft_search("WSNE",data->all_splited[i][j]))
+			if (!ft_search("WSNE", data->all_splited[i][j]))
 			{
 				data->all_splited[i][j] = '0';
 				data->player.pos_mp.y = i - 6;
@@ -29,28 +42,34 @@ void fill_map(t_data *data)
 		i++;
 	}
 	data->player.step_m = 3;
-// one
-	data->l_texture.img = mlx_xpm_file_to_image(data->my_map.init,data->txtrs.we,&data->l_texture.width,&data->l_texture.height);
+	data->l_texture.img = mlx_xpm_file_to_image(data->my_map.init, \
+			data->txtrs.we, &data->l_texture.width, &data->l_texture.height);
 	if (!data->l_texture.img)
 		exit(1);
-	data->l_texture.arr = (int *)mlx_get_data_addr(data->l_texture.img,&data->l_texture.bpp,&data->l_texture.line_length,&data->l_texture.endian);
-	// two
-	data->r_texture.img = mlx_xpm_file_to_image(data->my_map.init,data->txtrs.ea,&data->r_texture.width,&data->r_texture.height);
+	data->l_texture.arr = (int *)mlx_get_data_addr(data->l_texture.img, \
+			&data->l_texture.bpp, &data->l_texture.line_length, \
+			&data->l_texture.endian);
+	data->r_texture.img = mlx_xpm_file_to_image(data->my_map.init, \
+			data->txtrs.ea, &data->r_texture.width, &data->r_texture.height);
 	if (!data->r_texture.img)
 		exit(1);
-	data->r_texture.arr = (int *)mlx_get_data_addr(data->r_texture.img,&data->r_texture.bpp,&data->r_texture.line_length,&data->r_texture.endian);
-	// three
-	data->b_texture.img = mlx_xpm_file_to_image(data->my_map.init,data->txtrs.so,&data->b_texture.width,&data->b_texture.height);
+	data->r_texture.arr = (int *)mlx_get_data_addr(data->r_texture.img, \
+			&data->r_texture.bpp, &data->r_texture.line_length, \
+			&data->r_texture.endian);
+	data->b_texture.img = mlx_xpm_file_to_image(data->my_map.init, \
+			data->txtrs.so, &data->b_texture.width, &data->b_texture.height);
 	if (!data->b_texture.img)
 		exit(1);
-	data->b_texture.arr = (int *)mlx_get_data_addr(data->b_texture.img,&data->b_texture.bpp,&data->b_texture.line_length,&data->b_texture.endian);
-
-	// four
-	data->f_texture.img = mlx_xpm_file_to_image(data->my_map.init,data->txtrs.no,&data->f_texture.width,&data->f_texture.height);
+	data->b_texture.arr = (int *)mlx_get_data_addr(data->b_texture.img, \
+			&data->b_texture.bpp, &data->b_texture.line_length, \
+			&data->b_texture.endian);
+	data->f_texture.img = mlx_xpm_file_to_image(data->my_map.init, \
+			data->txtrs.no, &data->f_texture.width, &data->f_texture.height);
 	if (!data->f_texture.img)
 		exit(1);
-	data->f_texture.arr = (int *)mlx_get_data_addr(data->f_texture.img,&data->f_texture.bpp,&data->f_texture.line_length,&data->f_texture.endian);
-	data->player.step_r = M_PI/80;
+	data->f_texture.arr = (int *)mlx_get_data_addr(data->f_texture.img, \
+			&data->f_texture.bpp, &data->f_texture.line_length, \
+			&data->f_texture.endian);
+	data->player.step_r = M_PI / 80;
 	data->my_map.map_splited[k] = NULL;
 }
-
