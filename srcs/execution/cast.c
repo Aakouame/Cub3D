@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 19:22:39 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/15 21:58:06 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/15 22:03:28 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,26 @@ void	init_texture(t_text *txt, t_data *data, float wall_height)
 {
 	data->my_txt.wall_height = wall_height;
 	data->my_txt.txt = txt;
+}
+
+void	choose_distance(t_data *data, double *test, double *wall_height)
+{
+	if (data->player.ray.v_distance > data->player.ray.h_distance)
+	{
+		data->player.ray.h_distance \
+			*= cos(data->player.ray_angle - data->player.fi);
+		*test = data->player.ray.h_distance / data->my_cubs_len;
+		*wall_height = HEIGHT / (*test);
+		data->x_offset = fmod(data->player.ray.h_x, data->my_cubs_len);
+	}
+	else
+	{
+		data->player.ray.v_distance \
+			*= cos(data->player.ray_angle - data->player.fi);
+		*test = data->player.ray.v_distance / data->my_cubs_len;
+		*wall_height = HEIGHT / (*test);
+		data->x_offset = fmod(data->player.ray.v_y, data->my_cubs_len);
+	}
 }
 
 void	cast_all_rays(t_data	*data)
@@ -36,22 +56,7 @@ void	cast_all_rays(t_data	*data)
 		cast_horz(data);
 		cast_ver(data);
 		get_distance(data);
-		if (data->player.ray.v_distance > data->player.ray.h_distance)
-		{
-			data->player.ray.h_distance \
-				*= cos(data->player.ray_angle - data->player.fi);
-			test = data->player.ray.h_distance / data->my_cubs_len;
-			wall_height = HEIGHT / (test);
-			data->x_offset = fmod(data->player.ray.h_x, data->my_cubs_len);
-		}
-		else
-		{
-			data->player.ray.v_distance \
-				*= cos(data->player.ray_angle - data->player.fi);
-			test = data->player.ray.v_distance / data->my_cubs_len;
-			wall_height = HEIGHT / (test);
-			data->x_offset = fmod(data->player.ray.v_y, data->my_cubs_len);
-		}
+		choose_distance(data, &test, &wall_height);
 		start = (HEIGHT / 2) - (wall_height / 2);
 		end = (HEIGHT / 2) + (wall_height / 2);
 		if (start < 0)
