@@ -6,17 +6,17 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:07:53 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/15 21:14:02 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/15 21:16:34 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub.h"
 
-void load_textures(t_data *data)
+void	load_textures(t_data *data)
 {
-	int i;
-	t_text *txt[4];
-	char *ar[4];
+	int		i;
+	t_text	*txt[4];
+	char	*ar[4];
 
 	txt[0] = &data->l_texture;
 	txt[1] = &data->r_texture;
@@ -27,20 +27,21 @@ void load_textures(t_data *data)
 	ar[2] = data->txtrs.so;
 	ar[3] = data->txtrs.no;
 	i = 0;
-	while(i < 4)
+	while (i < 4)
 	{
-		txt[i]->img = mlx_xpm_file_to_image(data->my_map.init, ar[i], &txt[i]->width, &txt[i]->height);
+		txt[i]->img = mlx_xpm_file_to_image(data->my_map.init, \
+				ar[i], &txt[i]->width, &txt[i]->height);
 		if (!txt[i]->img)
 			exit(1);
-		txt[i]->arr = (int *)mlx_get_data_addr(txt[i]->img, &txt[i]->bpp, &txt[i]->line_length, &txt[i]->endian);
+		txt[i]->arr = (int *)mlx_get_data_addr(txt[i]->img, \
+				&txt[i]->bpp, &txt[i]->line_length, &txt[i]->endian);
 		i++;
 	}
-
 }
 
 void	fill_map(t_data *data)
 {
-	int i;
+	int	i;
 	int	k;
 	int	j;
 
@@ -59,7 +60,7 @@ void	fill_map(t_data *data)
 			{
 				data->all_splited[i][j] = '0';
 				data->player.pos_mp.y = i - 6;
- 				data->player.pos_mp.x = j;
+				data->player.pos_mp.x = j;
 			}
 			j++;
 		}
