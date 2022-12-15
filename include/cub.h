@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:02:50 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/15 21:09:36 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/15 21:14:51 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ typedef struct s_data
 	double		x_offset;
 	int			j;
 	int			i;
+	int			k;
 
 }	t_data;
 

@@ -1,3 +1,11 @@
-srcs/outils/outil_1.c: OK!
-srcs/outils/outil_2.c: OK!
-srcs/outils/outil_3.c: OK!
+srcs/main.c: Error!
+Error: TOO_MANY_LINES       (line: 117, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_LINES       (line: 169, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 171, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 176, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 185, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 194, col:   1):	Too many functions in file
+Error: TAB_INSTEAD_SPC      (line: 212, col:  33):	Found tab when expecting space
+Error: EMPTY_LINE_FUNCTION  (line: 221, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 221, col:   1):	Space on empty line
+Error: TOO_MANY_LINES       (line: 223, col:   1):	Function has more than 25 lines
