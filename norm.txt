@@ -1,0 +1,36 @@
+srcs/parsing/check.c: Error!
+Error: SPACE_EMPTY_LINE     (line:  36, col:   1):	Space on empty line
+Error: SPACE_AFTER_KW       (line:  56, col:  13):	Missing space after keyword
+Error: TOO_MANY_LINES       (line:  64, col:   1):	Function has more than 25 lines
+Error: SPACE_EMPTY_LINE     (line:  70, col:   1):	Space on empty line
+Error: TOO_MANY_TAB         (line:  75, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line:  78, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line:  79, col:   1):	Extra tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  88, col:   8):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  88, col:   9):	Misaligned variable declaration
+Error: SPACE_EMPTY_LINE     (line:  90, col:   1):	Space on empty line
+Error: TOO_MANY_TAB         (line:  95, col:   1):	Extra tabs for indent level
+Error: SPC_AFTER_OPERATOR   (line:  98, col:  28):	missing space after operator
+Error: TOO_MANY_TAB         (line:  99, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 100, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 101, col:   1):	Extra tabs for indent level
+Error: SPC_AFTER_OPERATOR   (line: 101, col:  68):	missing space after operator
+Error: TOO_MANY_TAB         (line: 102, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 103, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 104, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 105, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 106, col:   1):	Extra tabs for indent level
+Error: SPACE_BEFORE_FUNC    (line: 112, col:   4):	space before function name
+Error: SPACE_EMPTY_LINE     (line: 115, col:   1):	Space on empty line
+Error: LINE_TOO_LONG        (line: 127, col:  82):	line too long
+Error: LINE_TOO_LONG        (line: 129, col:  82):	line too long
+Error: LINE_TOO_LONG        (line: 131, col:  82):	line too long
+Error: TAB_INSTEAD_SPC      (line: 135, col:  75):	Found tab when expecting space
+Error: LINE_TOO_LONG        (line: 135, col:  85):	line too long
+Error: SPC_BFR_OPERATOR     (line: 135, col:  85):	missing space before operator
+Error: TOO_MANY_FUNCS       (line: 140, col:   1):	Too many functions in file
+Error: WRONG_SCOPE_COMMENT  (line: 150, col:  38):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 150, col:  38):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 156, col:  52):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 156, col:  52):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 173, col:   1):	Function has more than 25 lines
