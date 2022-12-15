@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:02:50 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/15 20:51:43 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/15 21:09:36 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,8 @@ void			get_distance(t_data	*data);
 void			init_texture(t_text *txt, t_data *data, float wall_height);
 void			cast_ver(t_data	*data);
 void			cast_horz(t_data	*data);
+char			**add_str(char **str, char *s);
+int				length_tab(char **str);
 char			**add_str(char **str, char *s);
 
 #endif
