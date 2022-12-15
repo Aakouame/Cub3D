@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:07:53 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/15 21:37:08 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/15 21:41:50 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	load_textures(t_data *data)
 	t_text	*txt[4];
 	char	*ar[4];
 
-	txt[0] = &data->l_texture;
-	txt[1] = &data->r_texture;
+	txt[0] = &data->r_texture;
+	txt[1] = &data->l_texture;
 	txt[2] = &data->b_texture;
 	txt[3] = &data->f_texture;
 	ar[0] = data->txtrs.we;
