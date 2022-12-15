@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:02:50 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/15 20:38:02 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/15 20:51:43 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,12 @@ typedef struct s_text
 	int		endian;
 }	t_text;
 
+typedef struct s_pixel
+{
+	float	wall_height;
+	t_text	*txt;
+}	t_pixel;
+
 typedef struct s_data
 {
 	t_player	player;
@@ -127,6 +133,7 @@ typedef struct s_data
 	t_text		l_texture;
 	t_text		f_texture;
 	t_text		b_texture;
+	t_pixel		my_txt;
 	char		*all;
 	char		**all_splited;
 	char		**all_split;
@@ -143,10 +150,10 @@ typedef struct s_data
 
 unsigned long	get_floor(t_data *data);
 unsigned long	get_cieling(t_data *data);
+unsigned int	get_pixel(int start, int y, int x, t_data *data);
 int				ft_check_exist(char *line, char *find, char **txtr, int size);
 int				ft_check(char *file, t_data *data);
 int				ft_search(char *str, int c);
-void			ft_er_msg(char *msg);
 int				check_color(char **splited, t_data *data);
 int				h_m_repeated(char	*str, int c);
 int				is_number(char *str);
@@ -154,12 +161,20 @@ int				check_map(char	**splited, t_data *data);
 int				ft_search_indice(char **str, char *s, int size);
 int				ft_indix_start(t_data *data);
 int				ft_check_map(t_data *data);
+int				check_wall(t_data *data, int x, int y);
+int				is_down(t_data	*data);
+int				is_up(t_data	*data);
+int				is_right(t_data	*data);
+int				is_left(t_data	*data);
+int				length_tab(char **str);
+int				is_wall(t_data *data, double y, double x);
+int				get_height(char **str);
+int				get_weight(char	**str);
 void			ft_add_spc(char **str, t_data *data);
+void			ft_er_msg(char *msg);
 void			fill_map(t_data *data);
 void			free_all(char **str);
 void			free_data(t_data *data);
-int				length_tab(char **str);
-char			**add_str(char **str, char *s);
 void			init_mlx(t_data *data);
 void			draw_map(t_data *data);
 void			init_player(t_data *data);
@@ -170,12 +185,17 @@ void			draw_ray_ver(t_data *data, int ang);
 void			draw_ray_hor(t_data *data, int ang);
 void			normalize_angle(t_data *data);
 void			cast_all_rays(t_data *data);
-int				check_wall(t_data *data, int x, int y);
 int				ft_check_exist_textures(char *line, char *find, \
 					char **txtr, int size);
-int				ft_check_exist(char *line, char *find, char **txtr, int size);
 void			ft_read_h(char *line, int fd, t_data *data, char *mok);
 void			ft_init(t_data *data);
 void			check_exist_map_h(char **splited, t_data *data);
+void			fill_horz_inter(t_data *data, double *x, double *y);
+void			normalize_rayangle(t_data *data);
+void			get_distance(t_data	*data);
+void			init_texture(t_text *txt, t_data *data, float wall_height);
+void			cast_ver(t_data	*data);
+void			cast_horz(t_data	*data);
+char			**add_str(char **str, char *s);
 
 #endif
