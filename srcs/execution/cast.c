@@ -6,7 +6,7 @@
 /*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 19:22:39 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/15 19:57:45 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/15 21:58:06 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	cast_all_rays(t_data	*data)
 				}
 				else if (is_left(data))
 				{
-					init_texture(&data->r_texture, data, wall_height);
+					init_texture(&data->l_texture, data, wall_height);
 					my_mlx_pixel_put(data, i, j, get_pixel(start, \
 								j, i, data));
 				}
