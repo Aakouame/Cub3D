@@ -6,11 +6,28 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:59:42 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/02 12:04:40 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/15 19:06:38 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub.h"
+
+void	check_range_color_h(int *tb, char **clr_splited, int *j)
+{
+	int	i;
+
+	i = 0;
+	while (clr_splited[i])
+	{
+		tb[i] = ft_atoi(clr_splited[i]);
+		if (is_number(clr_splited[i]))
+			*j = 1;
+		if (tb[i] > 255 || tb[i] < 0)
+			*j = 1;	
+		i++;
+	}
+	free_all(clr_splited);
+}
 
 int	check_range_color(char *color, int *tb)
 {
@@ -35,16 +52,7 @@ int	check_range_color(char *color, int *tb)
 		return (1);
 	}
 	i = 0;
-	while (clr_splited[i])
-	{
-		tb[i] = ft_atoi(clr_splited[i]);
-		if (is_number(clr_splited[i]))
-			j = 1;
-		if (tb[i] > 255 || tb[i] < 0)
-			j = 1;	
-		i++;
-	}
-	free_all(clr_splited);
+	check_range_color_h(tb, clr_splited, &j);
 	return (j);
 }
 
