@@ -6,7 +6,7 @@
 #    By: akouame <akouame@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 04:25:39 by akouame           #+#    #+#              #
-#    Updated: 2022/12/15 20:58:22 by akouame          ###   ########.fr        #
+#    Updated: 2022/12/16 16:13:18 by akouame          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 	
 $(NAME): $(LIB) $(OBJS)
-	@$(CC) $(OBJS) $(LIB) -lmlx -framework OpenGL -fno-omit-frame-pointer -framework AppKit -o $(NAME)
+	@$(CC) $(OBJS) $(LIB) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 	@/bin/echo  " ✔ "
 
 %.o: %.c $(HEADER) srcs/gnl/get_next_line.h srcs/libft/libft.h

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 19:22:39 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/15 21:58:06 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/16 16:01:54 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	cast_all_rays(t_data	*data)
 		if (start < 0)
 			start = 0;
 		if (end > HEIGHT)
-			end = HEIGHT - 1;
+			end = HEIGHT;
 		j = 0;
 		while (j < (HEIGHT / 2))
 			my_mlx_pixel_put(data, i, j++, get_cieling(data));
@@ -97,7 +97,7 @@ void	cast_all_rays(t_data	*data)
 			j++;
 		}
 		j = end;
-		while (j < HEIGHT - 1)
+		while (j < HEIGHT)
 			my_mlx_pixel_put(data, i, j++, get_floor(data));
 		data->player.ray_angle += inc_ang;
 		i++;

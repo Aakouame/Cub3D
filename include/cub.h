@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:02:50 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/16 15:13:23 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 16:12:11 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,7 @@ int				ft_check_exist_textures(char *line, char *find, \
 					char **txtr, int size);
 void			ft_read_h(char *line, int fd, t_data *data, char *mok);
 void			ft_init(t_data *data);
-void			check_exist_map_h(char **splited, t_data *data);
+// void			check_exist_map_h(char **splited, t_data *data);
 void			fill_horz_inter(t_data *data, double *x, double *y);
 void			normalize_rayangle(t_data *data);
 void			get_distance(t_data	*data);
@@ -201,4 +201,7 @@ char			**add_str(char **str, char *s);
 int				length_tab(char **str);
 char			**add_str(char **str, char *s);
 int	init_mlx(t_data *data);
+
+void	check_exist_map_h(char *splited, t_data *data);
+
 #endif

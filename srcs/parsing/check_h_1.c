@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:59:42 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/15 20:38:35 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 16:12:26 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,16 @@ int	check_color(char **splited, t_data *data)
 
 int	check_exist_map(char **splited, t_data *data)
 {
-	data->i = 6;
+	int	i;
+	
+	i = 6;
 	data->my_map.fr_space = 0;
 	data->my_map.wall = 0;
 	data->my_map.p = 0;
-	while (splited[data->i])
+	while (splited[i])
 	{
-		check_exist_map_h(splited, data);
-		data->i++;
+		check_exist_map_h(splited[i], data);
+		i++;
 	}
 	if ((data->my_map.wall > 0) && (data->my_map.p == 1))
 		return (0);
