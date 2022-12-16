@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 00:55:27 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/20 13:23:46 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:27:43 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	free((char *)s1);
-	j = 0;
-	while (s2[j])
-	{
+	j = -1;
+	while (s2[++j])
 		t[i++] = (char)s2[j];
-		j++;
-	}
 	t[i] = '\0';
 	return (t);
 }

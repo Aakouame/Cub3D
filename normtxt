@@ -1,11 +1,97 @@
+srcs/fill.c: OK!
+srcs/free.c: OK!
 srcs/main.c: Error!
-Error: TOO_MANY_LINES       (line: 117, col:   1):	Function has more than 25 lines
-Error: TOO_MANY_LINES       (line: 169, col:   1):	Function has more than 25 lines
-Error: TOO_MANY_FUNCS       (line: 171, col:   1):	Too many functions in file
-Error: TOO_MANY_FUNCS       (line: 176, col:   1):	Too many functions in file
-Error: TOO_MANY_FUNCS       (line: 185, col:   1):	Too many functions in file
-Error: TOO_MANY_FUNCS       (line: 194, col:   1):	Too many functions in file
-Error: TAB_INSTEAD_SPC      (line: 212, col:  33):	Found tab when expecting space
-Error: EMPTY_LINE_FUNCTION  (line: 221, col:   1):	Empty line in function
-Error: SPACE_EMPTY_LINE     (line: 221, col:   1):	Space on empty line
-Error: TOO_MANY_LINES       (line: 223, col:   1):	Function has more than 25 lines
+Error: CONSECUTIVE_SPC      (line:  72, col:  12):	Two or more consecutives spaces
+Error: CONSECUTIVE_SPC      (line:  75, col:  16):	Two or more consecutives spaces
+Error: CONSECUTIVE_SPC      (line:  77, col:  16):	Two or more consecutives spaces
+Error: CONSECUTIVE_SPC      (line:  82, col:  16):	Two or more consecutives spaces
+Error: CONSECUTIVE_SPC      (line:  84, col:  16):	Two or more consecutives spaces
+Error: CONSECUTIVE_SPC      (line:  89, col:  16):	Two or more consecutives spaces
+Error: CONSECUTIVE_SPC      (line:  91, col:  16):	Two or more consecutives spaces
+Error: CONSECUTIVE_SPC      (line:  96, col:  16):	Two or more consecutives spaces
+Error: NO_SPC_BFR_OPR       (line: 101, col:  34):	extra space before operator
+Error: NO_SPC_BFR_PAR       (line: 101, col:  44):	Extra space before parenthesis (brace/bracket)
+Error: CONSECUTIVE_SPC      (line: 103, col:  12):	Two or more consecutives spaces
+Error: CONSECUTIVE_SPC      (line: 104, col:  12):	Two or more consecutives spaces
+Error: NO_SPC_BFR_PAR       (line: 105, col:  42):	Extra space before parenthesis (brace/bracket)
+Error: NO_SPC_BFR_PAR       (line: 105, col:  52):	Extra space before parenthesis (brace/bracket)
+Error: TOO_MANY_LINES       (line: 108, col:   1):	Function has more than 25 lines
+Error: TOO_FEW_TAB          (line: 117, col:   1):	Missing tabs for indent level
+Error: TOO_FEW_TAB          (line: 120, col:   1):	Missing tabs for indent level
+Error: TOO_FEW_TAB          (line: 124, col:   1):	Missing tabs for indent level
+Error: TOO_FEW_TAB          (line: 127, col:   1):	Missing tabs for indent level
+Error: TOO_FEW_TAB          (line: 133, col:   1):	Missing tabs for indent level
+Error: TOO_FEW_TAB          (line: 136, col:   1):	Missing tabs for indent level
+Error: TOO_FEW_TAB          (line: 143, col:   1):	Missing tabs for indent level
+Error: TOO_FEW_TAB          (line: 146, col:   1):	Missing tabs for indent level
+Error: TOO_FEW_TAB          (line: 153, col:   1):	Missing tabs for indent level
+Error: TOO_FEW_TAB          (line: 156, col:   1):	Missing tabs for indent level
+Error: TOO_FEW_TAB          (line: 163, col:   1):	Missing tabs for indent level
+Error: TOO_FEW_TAB          (line: 166, col:   1):	Missing tabs for indent level
+Error: TOO_MANY_LINES       (line: 170, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_FUNCS       (line: 172, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 177, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 186, col:   1):	Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 195, col:   1):	Too many functions in file
+Error: TOO_FEW_TAB          (line: 205, col:   1):	Missing tabs for indent level
+Error: EMPTY_LINE_FUNCTION  (line: 206, col:   1):	Empty line in function
+Error: TAB_INSTEAD_SPC      (line: 218, col:  33):	Found tab when expecting space
+Error: TOO_FEW_TAB          (line: 219, col:   1):	Missing tabs for indent level
+Error: EMPTY_LINE_FUNCTION  (line: 229, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 229, col:   1):	Space on empty line
+Error: TOO_MANY_TAB         (line: 230, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_LINES       (line: 232, col:   1):	Function has more than 25 lines
+srcs/execution/cast.c: Error!
+Error: TOO_MANY_VARS_FUNC   (line:  28, col:   1):	Too many variables declarations in a function
+Error: TOO_MANY_VARS_FUNC   (line:  29, col:   1):	Too many variables declarations in a function
+Error: TOO_MANY_LINES       (line: 105, col:   1):	Function has more than 25 lines
+srcs/execution/direc.c: OK!
+srcs/execution/draw2d.c: OK!
+srcs/execution/horz.c: OK!
+srcs/execution/utils.c: OK!
+srcs/execution/ver.c: OK!
+srcs/gnl/get_next_line.c: OK!
+srcs/gnl/get_next_line.h: OK!
+srcs/gnl/get_next_line_utils.c: OK!
+srcs/libft/ft_atoi.c: OK!
+srcs/libft/ft_bzero.c: OK!
+srcs/libft/ft_calloc.c: OK!
+srcs/libft/ft_isalnum.c: OK!
+srcs/libft/ft_isalpha.c: OK!
+srcs/libft/ft_isascii.c: OK!
+srcs/libft/ft_isdigit.c: OK!
+srcs/libft/ft_isprint.c: OK!
+srcs/libft/ft_itoa.c: OK!
+srcs/libft/ft_memchr.c: OK!
+srcs/libft/ft_memcmp.c: OK!
+srcs/libft/ft_memcpy.c: OK!
+srcs/libft/ft_memmove.c: OK!
+srcs/libft/ft_memset.c: OK!
+srcs/libft/ft_putchar_fd.c: OK!
+srcs/libft/ft_putendl_fd.c: OK!
+srcs/libft/ft_putnbr_fd.c: OK!
+srcs/libft/ft_putstr_fd.c: OK!
+srcs/libft/ft_split.c: OK!
+srcs/libft/ft_strchr.c: OK!
+srcs/libft/ft_strdup.c: OK!
+srcs/libft/ft_striteri.c: OK!
+srcs/libft/ft_strjoin.c: OK!
+srcs/libft/ft_strlcat.c: OK!
+srcs/libft/ft_strlcpy.c: OK!
+srcs/libft/ft_strlen.c: OK!
+srcs/libft/ft_strmapi.c: OK!
+srcs/libft/ft_strncmp.c: OK!
+srcs/libft/ft_strnstr.c: OK!
+srcs/libft/ft_strrchr.c: OK!
+srcs/libft/ft_strtrim.c: OK!
+srcs/libft/ft_substr.c: OK!
+srcs/libft/ft_tolower.c: OK!
+srcs/libft/ft_toupper.c: OK!
+srcs/libft/libft.h: OK!
+srcs/outils/outil_1.c: OK!
+srcs/outils/outil_2.c: OK!
+srcs/outils/outil_3.c: OK!
+srcs/parsing/check.c: OK!
+srcs/parsing/check_h_1.c: OK!
+srcs/parsing/check_h_2.c: OK!
+srcs/parsing/check_h_3.c: OK!

@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:27:31 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/16 17:07:49 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:25:11 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,12 @@ void	ft_add_spc_h(char **str, t_data *data, int l)
 			data->j = ft_strlen(str[data->i]);
 			while (data->j != l)
 			{
-				// while (str[data->i][data->j])
-				// 	data->j++;
 				str[data->i] = ft_strjoin(str[data->i], " ");
 				data->j++;
 			}
 		}
 		data->i++;
 	}
-	data->j = 0;
-	// while (data->j < l)
-	// {
-	// 	str[data->i] = ft_strjoin(str[data->i], " ");
-	// 	data->j++;
-	// }
-	// str[data->i + 1] = NULL;
 }
 
 void	ft_add_spc(char **str, t_data *data)

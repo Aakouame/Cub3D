@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:02:50 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/16 16:12:11 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:23:10 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,6 @@ void			ft_er_msg(char *msg);
 void			fill_map(t_data *data);
 void			free_all(char **str);
 void			free_data(t_data *data);
-// void			init_mlx(t_data *data);
 void			draw_map(t_data *data);
 void			init_player(t_data *data);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -190,7 +189,6 @@ int				ft_check_exist_textures(char *line, char *find, \
 					char **txtr, int size);
 void			ft_read_h(char *line, int fd, t_data *data, char *mok);
 void			ft_init(t_data *data);
-// void			check_exist_map_h(char **splited, t_data *data);
 void			fill_horz_inter(t_data *data, double *x, double *y);
 void			normalize_rayangle(t_data *data);
 void			get_distance(t_data	*data);
@@ -199,9 +197,7 @@ void			cast_ver(t_data	*data);
 void			cast_horz(t_data	*data);
 char			**add_str(char **str, char *s);
 int				length_tab(char **str);
-char			**add_str(char **str, char *s);
-int	init_mlx(t_data *data);
-
-void	check_exist_map_h(char *splited, t_data *data);
+int				init_mlx(t_data *data);
+void			check_exist_map_h(char *splited, t_data *data);
 
 #endif
