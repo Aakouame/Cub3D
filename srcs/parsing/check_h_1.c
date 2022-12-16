@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:59:42 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/16 16:12:26 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 16:52:23 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int	check_exist_map(char **splited, t_data *data)
 	}
 	if ((data->my_map.wall > 0) && (data->my_map.p == 1))
 		return (0);
+		printf("check_exist_map\n");
 	return (1);
 }
 
@@ -108,18 +109,25 @@ int	check_map(char **splited, t_data *data)
 	if (check_exist_map(splited, data))
 		return (1);
 	i = 6;
+	
 	while (splited[i])
 	{
 		j = 0;
 		while (splited[i][j])
 		{
 			if (ft_search("01NSEW \n", splited[i][j]))
+			{
+				printf("2 \n");
 				return (1);
+			}
 			j++;
 		}	
 		i++;
 	}
 	if (ft_check_map(data))
+	{
+		printf("ft_check_map\n");
 		return (1);
+	}
 	return (0);
 }

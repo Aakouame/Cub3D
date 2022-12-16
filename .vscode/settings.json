@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "array": "c",
+        "iterator": "c",
+        "string": "c",
+        "string_view": "c",
+        "vector": "c",
+        "__hash_table": "c",
+        "__split_buffer": "c",
+        "bitset": "c",
+        "initializer_list": "c",
+        "unordered_map": "c",
+        "utility": "c"
+    }
+}

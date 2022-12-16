@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/16 15:36:18 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:15:16 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,50 +112,60 @@ int	ft_key_hook(int key_code, t_data *data)
 	data->key = key_code;
 	if (key_code == 53)
 		exit(0);
-	mlx_clear_window(data->my_map.init, data->my_map.win);
 	if (key_code == 124)
 	{
+	mlx_clear_window(data->my_map.init, data->my_map.win);
 		data->player.fi += data->player.step_r;
 		normalize_angle(data);
+	draw_map(data);
 	}
 	else if (key_code == 123)
 	{
+	mlx_clear_window(data->my_map.init, data->my_map.win);
 		data->player.fi -= data->player.step_r;
 		normalize_angle(data);
+	draw_map(data);
 	}
 	else if (key_code == 13)
 	{
 		if (!check_walls(data, 'W'))
 		{
+	mlx_clear_window(data->my_map.init, data->my_map.win);
 			data->player.pos_px.y += data->player.step_m * sin(data->player.fi);
 			data->player.pos_px.x += data->player.step_m * cos(data->player.fi);
+	draw_map(data);
 		}
 	}
 	else if (key_code == 1)
 	{
 		if (!check_walls(data, 'S'))
 		{
+	mlx_clear_window(data->my_map.init, data->my_map.win);
 		data->player.pos_px.y -= data->player.step_m * sin(data->player.fi);
 		data->player.pos_px.x -= data->player.step_m * cos(data->player.fi);
+	draw_map(data);
 		}
 	}
 	else if (key_code == 0)
 	{
 		if (!check_walls(data, 'A'))
 		{
+	mlx_clear_window(data->my_map.init, data->my_map.win);
 		data->player.pos_px.x += data->player.step_m * sin(data->player.fi);
 		data->player.pos_px.y -= data->player.step_m * cos(data->player.fi);
+	draw_map(data);
 		}
 	}
 	else if (key_code == 2)
 	{
 		if (!check_walls(data, 'D'))
 		{
+	mlx_clear_window(data->my_map.init, data->my_map.win);
 		data->player.pos_px.x -= data->player.step_m * sin(data->player.fi);
 		data->player.pos_px.y += data->player.step_m * cos(data->player.fi);
+	draw_map(data);
 		}
 	}
-	draw_map(data);
 	return (0);
 }
 

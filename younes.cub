@@ -1,7 +1,7 @@
-SO  textures/1.xpm
-WE  textures/119.xpm
-EA  textures/3.xpm
-NO  textures/4.xpm
+SO  textures/wall_1.xpm
+WE  textures/wall_2.xpm
+EA  textures/wall_3.xpm
+NO  textures/wall_4.xpm
 
 
 F 135,206,235
@@ -10,10 +10,10 @@ C 139,90,43
 
  
 11111111111
-10N110100001
-10010111111
+101110100001
+10000000111
 1001011111
- 100101
+100101
 111111
 101
 11111
