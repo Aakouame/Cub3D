@@ -1,5 +1,0 @@
-parsing:
-    Y- read all the file     
-    - split it with \n
-    - separate colors and map
-    - add map
