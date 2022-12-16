@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaskour <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 19:17:21 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/15 19:56:19 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/15 22:30:39 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ unsigned int	get_pixel(int start, int y, int x, t_data *data)
 	return ((unsigned int)color);
 }
 
-void	init_mlx(t_data *data)
+int	init_mlx(t_data *data)
 {
 	int	l;
 
@@ -54,6 +54,9 @@ void	init_mlx(t_data *data)
 	data->my_map.addr = mlx_get_data_addr(data->my_map.img, \
 			&data->my_map.bits_per_pixel, &data->my_map.line_length, \
 			&data->my_map.endian);
+	if (!data->my_map.addr)
+		return (1);
+	return (0);
 }
 
 int	get_height(char **str)

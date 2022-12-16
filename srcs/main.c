@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/15 21:36:52 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 15:36:18 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,12 @@ int	main(int ac, char **av)
 	{
 		if (!ft_check(av[1], &data))
 		{
-			init_mlx(&data);
+			if (init_mlx(&data))
+			{
+		system("leaks cub3D");
+
+				return (1);
+			}
 			fill_map(&data);
 			init_player(&data);
 			draw_map(&data);
@@ -201,14 +206,17 @@ int	main(int ac, char **av)
 		else
 		{
 			ft_er_msg(data.msg);		
+		system("leaks cub3D");
 			return (2);
 		}
 	}
 	else
 	{
 		ft_putstr_fd("Check ur number of arguments !\n", 2);
+		system("leaks cub3D");
 		return (1);
 	}
 			
+		system("leaks cub3D");
 	return (0);
 }

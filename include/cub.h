@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:02:50 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/15 21:14:51 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 15:13:23 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct s_text
 
 typedef struct s_pixel
 {
-	float	wall_height;
+	double	wall_height;
 	t_text	*txt;
 }	t_pixel;
 
@@ -176,7 +176,7 @@ void			ft_er_msg(char *msg);
 void			fill_map(t_data *data);
 void			free_all(char **str);
 void			free_data(t_data *data);
-void			init_mlx(t_data *data);
+// void			init_mlx(t_data *data);
 void			draw_map(t_data *data);
 void			init_player(t_data *data);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -200,5 +200,5 @@ void			cast_horz(t_data	*data);
 char			**add_str(char **str, char *s);
 int				length_tab(char **str);
 char			**add_str(char **str, char *s);
-
+int	init_mlx(t_data *data);
 #endif
