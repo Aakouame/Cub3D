@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/16 19:13:21 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 19:19:30 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,8 @@ int	ft_exit(t_data	data)
 	return (0);
 }
 
-int	ft_key_hook(int key_code, t_data *data)
+void	ft_key_hook_h_s(int key_code, t_data *data)
 {
-	data->key = key_code;
-	if (key_code == 53)
-		exit(0);
-	if (key_code == 124)
-	{
-		mlx_clear_window(data->my_map.init, data->my_map.win);
-		data->player.fi += data->player.step_r;
-		normalize_angle(data);
-		draw_map(data);
-	}
-	if (key_code == 123)
-	{
-		mlx_clear_window(data->my_map.init, data->my_map.win);
-		data->player.fi -= data->player.step_r;
-		normalize_angle(data);
-		draw_map(data);
-	}
 	if (key_code == 13)
 	{
 		if (!check_walls(data, 'W'))
@@ -58,6 +41,33 @@ int	ft_key_hook(int key_code, t_data *data)
 			draw_map(data);
 		}
 	}
+}
+
+void	ft_key_hook_h_f(int key_code, t_data *data)
+{
+	if (key_code == 53)
+		exit(0);
+	if (key_code == 124)
+	{
+		mlx_clear_window(data->my_map.init, data->my_map.win);
+		data->player.fi += data->player.step_r;
+		normalize_angle(data);
+		draw_map(data);
+	}
+	if (key_code == 123)
+	{
+		mlx_clear_window(data->my_map.init, data->my_map.win);
+		data->player.fi -= data->player.step_r;
+		normalize_angle(data);
+		draw_map(data);
+	}
+}
+
+int	ft_key_hook(int key_code, t_data *data)
+{
+	data->key = key_code;
+	ft_key_hook_h_f(key_code, data);
+	ft_key_hook_h_s(key_code, data);
 	if (key_code == 0)
 	{
 		if (!check_walls(data, 'A'))
@@ -90,10 +100,7 @@ int	main(int ac, char **av)
 		if (!ft_check(av[1], &data))
 		{
 			if (init_mlx(&data))
-			{
-		system("leaks cub3D");
 				return (1);
-			}
 			fill_map(&data);
 			init_player(&data);
 			draw_map(&data);
@@ -102,19 +109,12 @@ int	main(int ac, char **av)
 			mlx_loop(data.my_map.init);
 		}
 		else
-		{
-			ft_er_msg(data.msg);		
-		system("leaks cub3D");
-			return (2);
-		}
+			return (ft_er_msg(data.msg));
 	}
 	else
 	{
 		ft_putstr_fd("Check ur number of arguments !\n", 2);
-		system("leaks cub3D");
 		return (1);
 	}
-
-		system("leaks cub3D");
 	return (0);
 }

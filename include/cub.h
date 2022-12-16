@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:02:50 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/16 19:05:09 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 19:19:11 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,6 @@ int				is_wall(t_data *data, double y, double x);
 int				get_height(char **str);
 int				get_weight(char	**str);
 void			ft_add_spc(char **str, t_data *data);
-void			ft_er_msg(char *msg);
 void			fill_map(t_data *data);
 void			free_all(char **str);
 void			free_data(t_data *data);
@@ -212,5 +211,5 @@ unsigned long	get_floor(t_data *data);
 unsigned long	get_cieling(t_data *data);
 int				check_walls(t_data *data, char c);
 void			check_walls_hh(t_data *data, char c);
-
+int				ft_er_msg(char *msg);
 #endif

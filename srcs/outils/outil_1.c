@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 10:11:52 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/15 15:50:39 by yaskour          ###   ########.fr       */
+/*   Updated: 2022/12/16 19:18:49 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ int	ft_search(char	*str,	int c)
 	return (1);
 }
 
-void	ft_er_msg(char *msg)
+int	ft_er_msg(char *msg)
 {
 	ft_putstr_fd("Error ✗: ", 2);
 	if (msg)
 		ft_putendl_fd(msg, 2);
+	return (2);
 }
 
 int	ft_indix_start(t_data	*data)
