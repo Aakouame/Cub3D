@@ -6,14 +6,14 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 19:02:50 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/16 17:23:10 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 19:05:09 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_H
 # define CUB_H
-# define WIDTH 1100
-# define HEIGHT 800
+# define WIDTH 900
+# define HEIGHT 900
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -146,6 +146,11 @@ typedef struct s_data
 	int			j;
 	int			i;
 	int			k;
+	double		wall_height;
+	double		start;
+	double		end;
+	double		ic_ag;
+	double		d;
 
 }	t_data;
 
@@ -199,5 +204,13 @@ char			**add_str(char **str, char *s);
 int				length_tab(char **str);
 int				init_mlx(t_data *data);
 void			check_exist_map_h(char *splited, t_data *data);
+void			init_texture(t_text *txt, t_data *data, float wall_height);
+int				check_wall_h(t_data *data, int x, int y, t_cord r);
+int				check_wall(t_data *data, int x, int y);
+unsigned long	creatergb(int r, int g, int b);
+unsigned long	get_floor(t_data *data);
+unsigned long	get_cieling(t_data *data);
+int				check_walls(t_data *data, char c);
+void			check_walls_hh(t_data *data, char c);
 
 #endif

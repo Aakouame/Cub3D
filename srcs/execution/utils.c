@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 19:17:21 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/16 16:06:45 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 19:04:18 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,14 @@ unsigned int	get_pixel(int start, int y, int x, t_data *data)
 
 int	init_mlx(t_data *data)
 {
-	int	l;
-
-	if (HEIGHT >= WIDTH)
-		l = HEIGHT;
-	else
-		l = WIDTH;
-	if (data->max.x > data->max.y)
-		data->my_cubs_len = l / data->max.x;
-	else
-		data->my_cubs_len = l / data->max.y;
+	data->my_cubs_len = 32;
+	if (!data->my_cubs_len)
+	{
+		printf("map is too long\n");
+		exit(2);
+	}
+	if (HEIGHT < 0 || WIDTH < 0)
+		return (1);
 	data->my_map.init = mlx_init();
 	data->my_map.win = mlx_new_window(data->my_map.init, WIDTH, HEIGHT, \
 			"cub3d");

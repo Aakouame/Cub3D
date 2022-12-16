@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:07:53 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/16 15:14:07 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 19:14:05 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ void	fill_map(t_data *data)
 	fill_map_helper(data, &k);
 	load_textures(data);
 	data->player.step_m = 3;
-	data->player.step_r = M_PI / 60;
+	data->player.step_r = M_PI / 30;
 	data->my_map.map_splited[k] = NULL;
 }

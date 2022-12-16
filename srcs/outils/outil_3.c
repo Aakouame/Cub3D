@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 20:48:48 by akouame           #+#    #+#             */
-/*   Updated: 2022/12/15 21:10:11 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 18:14:29 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,10 @@ char	**add_str(char **str, char *s)
 	tmp[i + 1] = NULL;
 	free_all(str);
 	return (tmp);
+}
+
+void	init_texture(t_text *txt, t_data *data, float wall_height)
+{
+	data->my_txt.wall_height = wall_height;
+	data->my_txt.txt = txt;
 }
