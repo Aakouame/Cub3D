@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:04:35 by akouame           #+#    #+#             */
-/*   Updated: 2023/02/17 17:09:42 by akouame          ###   ########.fr       */
+/*   Updated: 2023/02/17 18:04:09 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	ft_check_exist_textures(char *line, char *find, char **txtr, int size)
 		if (fd < 0)
 		{
 			ft_putstr_fd("Error : Textures files doesn't exist", 2);
-			system("leaks cub3D");
 			exit(2);
 		}
 		return (0);
