@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:07:53 by yaskour           #+#    #+#             */
-/*   Updated: 2022/12/16 20:10:57 by yaskour          ###   ########.fr       */
+/*   Updated: 2023/02/17 14:16:21 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	load_textures(t_data *data)
 		txt[i]->img = mlx_xpm_file_to_image(data->my_map.init, \
 				ar[i], &txt[i]->width, &txt[i]->height);
 		if (!txt[i]->img)
-			exit(1);
+		{system("leaks cub3D");
+			exit(1);}
 		txt[i]->arr = (int *)mlx_get_data_addr(txt[i]->img, \
 				&txt[i]->bpp, &txt[i]->line_length, &txt[i]->endian);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 04:23:13 by akouame           #+#    #+#             */
-/*   Updated: 2023/02/17 12:49:06 by akouame          ###   ########.fr       */
+/*   Updated: 2023/02/17 14:17:05 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ft_exit(t_data	data)
 {	
 	(void) data;
+	system("leaks cub3D");
 	exit(0);
 	return (0);
 }
@@ -46,7 +47,8 @@ void	ft_key_hook_h_s(int key_code, t_data *data)
 void	ft_key_hook_h_f(int key_code, t_data *data)
 {
 	if (key_code == 53)
-		exit(0);
+	{system("leaks cub3D");
+		exit(0);}
 	if (key_code == 124)
 	{
 		mlx_clear_window(data->my_map.init, data->my_map.win);
