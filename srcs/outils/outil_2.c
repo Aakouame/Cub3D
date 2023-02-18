@@ -6,7 +6,7 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 12:27:31 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/30 14:11:26 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:25:11 by akouame          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	h_m_repeated(char	*str, int c)
 
 int	is_number(char *str)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (str[i])
 	{
@@ -44,80 +44,37 @@ int	is_number(char *str)
 	return (0);
 }
 
-void	ft_add_spc(char **str, t_data *data)
+void	ft_add_spc_h(char **str, t_data *data, int l)
 {
-	int i;
-	int	l;
-	int	j;
-	
-	i = 0;
-	l = ft_strlen(str[i]);
-	while (str[i])
+	while (str[data->i])
 	{
-		if(ft_strlen(str[i]) > l)
-			l = ft_strlen(str[i]);
-		i++;
-	}
-	data->max.x = l;
-	i = 0;
-	while (str[i])
-	{
-		if (ft_strlen(str[i]) < l)
+		if (ft_strlen(str[data->i]) < l)
 		{
-			j = 0;
-			while (j < l)
+			data->j = ft_strlen(str[data->i]);
+			while (data->j != l)
 			{
-				while (str[i][j])
-					j++;
-				str[i] = ft_strjoin(str[i], " ");
-				j++;
+				str[data->i] = ft_strjoin(str[data->i], " ");
+				data->j++;
 			}
 		}
-		i++;
+		data->i++;
 	}
-	j = 0;
-	while (j < l)
-	{
-		str[i] = ft_strjoin(str[i], " ");
-		j++;
-	}
-	str[i+1] = NULL;
 }
 
-int	length_tab(char **str)
+void	ft_add_spc(char **str, t_data *data)
 {
-	int i;
+	int	l;
 
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	**add_str(char **str, char *s)
-{
-	int		i;
-	char	**tmp;
-	
-	if (!s)
-		return (str);
-	i = length_tab(str);
-	tmp = malloc(sizeof(char *) * (i + 2));
-	if (!tmp)
-		return(NULL);
-	i = 0;
-	if (str)
+	data->i = 0;
+	data->j = 0;
+	l = ft_strlen(str[data->i]);
+	while (str[data->i])
 	{
-		while (str[i])
-		{
-			tmp[i] = ft_strdup(str[i]);
-			i++;
-		}
+		if (ft_strlen(str[data->i]) > l)
+			l = ft_strlen(str[data->i]);
+		data->i++;
 	}
-	tmp[i] = ft_strdup(s);
-	tmp[i + 1] = NULL;
-	free_all(str);
-	return (tmp);
+	data->max.x = l;
+	data->i = 0;
+	ft_add_spc_h(str, data, l);
 }

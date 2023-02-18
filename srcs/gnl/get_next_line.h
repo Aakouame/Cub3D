@@ -6,10 +6,9 @@
 /*   By: akouame <akouame@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/26 17:18:47 by akouame           #+#    #+#             */
-/*   Updated: 2022/11/29 13:01:59 by akouame          ###   ########.fr       */
+/*   Updated: 2022/12/15 15:23:42 by yaskour          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
