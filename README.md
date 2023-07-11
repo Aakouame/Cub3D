@@ -14,10 +14,10 @@ The project takes a .cub file as input, which contains a grid of characters repr
 
 ```
 C 225,255,0
-SO ./algo.txt
-EA ./algo.txt
-WE ./algo.txt  
-NO ./younes.txt                     
+SO ./s.txt
+EA ./e.txt
+WE ./w.txt  
+NO ./n.txt                     
 F 225,255,0
 
 11111111111111111
@@ -41,3 +41,5 @@ Once you have provided a .cub file as input, you can run the project to render t
 Screenshot of Cub3D with user input
 
 Overall, Cub3D is a well-implemented project that provides a working example of a raycasting algorithm in C using the minilibx library. The project is well-documented and easy to build and run, making it a useful resource for anyone interested in learning more about raycasting or implementing a similar algorithm.
+
+## Collaboration with @Y-askour
